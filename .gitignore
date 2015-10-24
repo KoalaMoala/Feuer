@@ -13,6 +13,7 @@
 ## IntelliJ Idea
 #################
 
+/*.iml
 /.idea/workspace.xml
 /.idea/libraries
 
