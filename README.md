@@ -22,6 +22,7 @@
 ###### Technologies utilisées ######
 
 - Android (API `v?`)
+- Gradle
 
 ### Récupérer les dernières versions du projet ###
 
