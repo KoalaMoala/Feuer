@@ -7,15 +7,12 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/**
- * Created by Tevainui on 18/10/2015.
- */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int WIDTH=856;
     public static final int HEIGHT=480;
 
-    private MainThread thread;
+    private GameThread thread;
     private Background bg;
 
     public GamePanel(Context context){
@@ -24,7 +21,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //add the callback to the surfaceHolder to intercept events
         getHolder().addCallback(this);
 
-        thread = new MainThread(getHolder(), this);
+        thread = new GameThread(getHolder(), this);
 
         //make panel focusable so it can handle events
         setFocusable(true);
@@ -69,6 +66,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         bg.update();
     }
 
+    //TODO Fix warning "Overriding method should call super.draw()"
     @Override
     public void draw(Canvas canvas){
         final float scaleFactorX =getWidth()/(WIDTH*1.f);
