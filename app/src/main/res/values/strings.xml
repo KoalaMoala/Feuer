@@ -1,6 +1,13 @@
 <resources>
-    <string name="app_name">MyFirstGame</string>
-
+    <string name="app_name">Keep it Cool</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="menu_settings">Settings</string>
+    <string name="menu_play">Play</string>
+    <string name="menu_score">High-Score</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_level_01">Level 01</string>
+    <string name="menu_level_02">Level 02</string>
+    <string name="menu_level_03">Level 03</string>
 </resources>
