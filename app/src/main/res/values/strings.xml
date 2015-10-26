@@ -8,6 +8,9 @@
     <string name="menu_score">High-Score</string>
     <string name="menu_share">Share</string>
     <string name="menu_level_01">Level 01</string>
+    <string name="menu_level_01_desc">Simple description of level 01</string>
     <string name="menu_level_02">Level 02</string>
+    <string name="menu_level_02_desc">Simple description of level 02</string>
     <string name="menu_level_03">Level 03</string>
+    <string name="menu_level_03_desc">Simple description of level 03</string>
 </resources>
