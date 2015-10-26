@@ -1,4 +1,4 @@
-package ca.uqac.myfirstgame;
+package com.miyou.myfirstgame;
 
 import android.app.VoiceInteractor;
 import android.content.Context;
@@ -6,23 +6,21 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-<<<<<<< HEAD:app/src/main/java/com/miyou/myfirstgame/GamePanel.java
 import java.util.ArrayList;
 
 /**
  * Created by Tevainui on 18/10/2015.
  */
-=======
->>>>>>> b02f1ce66ff2ed9b3448dd6df7f9999b95987e57:app/src/main/java/ca/uqac/myfirstgame/GamePanel.java
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static final int WIDTH=512;
     public static final int HEIGHT=512;
 
-    private GameThread thread;
+    private MainThread thread;
     private Background bg;
     private ArrayList<GameObject> gameObjects;
 
@@ -32,7 +30,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //add the callback to the surfaceHolder to intercept events
         getHolder().addCallback(this);
 
-        thread = new GameThread(getHolder(), this);
+        thread = new MainThread(getHolder(), this);
 
         //make panel focusable so it can handle events
         setFocusable(true);
@@ -86,7 +84,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         gameObjects.get(0).update();
     }
 
-    //TODO Fix warning "Overriding method should call super.draw()"
     @Override
     public void draw(Canvas canvas){
         final float scaleFactorX =getWidth()/(WIDTH*1.f);
