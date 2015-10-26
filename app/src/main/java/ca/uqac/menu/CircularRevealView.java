@@ -222,6 +222,7 @@ public class CircularRevealView extends ViewGroup {
         final float deltaX = centerX - x;
         final float deltaY = centerY - y;
         final float distance = (float) Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-        return 0.5f + (distance / maxDistance) * 0.5f;
+        final float scale = 0.5f + (distance / maxDistance) * 0.5f;
+        return scale;
     }
 }

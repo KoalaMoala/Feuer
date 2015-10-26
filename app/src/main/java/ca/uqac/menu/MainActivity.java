@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         getSupportActionBar().setTitle(this.getResources().getString(R.string.app_name));
 
         revealView = (CircularRevealView) findViewById(R.id.reveal);
-        backgroundColor = Color.parseColor("#303030");
+        backgroundColor = Color.parseColor("#11303030");
         playButton = (ImageView) findViewById(R.id.button);
         layout = (RelativeLayout) findViewById(R.id.layout);
 
