@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     private CircularRevealView revealView;
     private View selectedView;
     private int backgroundColor;
-    private ImageView button;
+    private ImageView playButton;
 
     RelativeLayout layout;
     LinearLayout settings, score, share;
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
         revealView = (CircularRevealView) findViewById(R.id.reveal);
         backgroundColor = Color.parseColor("#303030");
-        button = (ImageView) findViewById(R.id.button);
+        playButton = (ImageView) findViewById(R.id.button);
         layout = (RelativeLayout) findViewById(R.id.layout);
 
         settings = (LinearLayout) findViewById(R.id.source);
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         maxX = mdispSize.x;
         maxY = mdispSize.y;
 
-        button.setOnClickListener(new View.OnClickListener() {
+        playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final int color = Color.parseColor("#00bcd4");
@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     public void revealFromTop() {
         final int color = Color.parseColor("#ffffff");
         final Point p = new Point(maxX / 2, maxY / 2);
-        revealView.reveal(p.x, p.y, color, button.getHeight() / 2, 440, null);
+        revealView.reveal(p.x, p.y, color, playButton.getHeight() / 2, 440, null);
     }
 
     private void showPlayDialog() {
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     @Override
     public void onDismiss(final DialogInterface dialog) {
-        View v = button;
+        View v = playButton;
         final Point p = getLocationInView(revealView, v);
         handler = new Handler();
         handler.postDelayed(new Runnable() {
