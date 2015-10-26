@@ -3,11 +3,13 @@ package ca.uqac.menu;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
@@ -15,10 +17,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import ca.uqac.myfirstgame.Level;
+import ca.uqac.myfirstgame.Progress;
 import ca.uqac.myfirstgame.R;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
+
+    public static final String PREFS_NAME = "MyPrefsFile";
 
     private CircularRevealView revealView;
     private View selectedView;
@@ -35,7 +42,37 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Toast t = Toast.makeText(getApplicationContext(), "onCreate", Toast.LENGTH_SHORT);
+        //t.show();
         setContentView(R.layout.activity_main);
+
+        // Restore preferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String progressStr = preferences.getString("progress","");
+
+
+        if(progressStr.isEmpty())
+        {
+            Level l = new Level();
+            l.setIdLevel(1);
+            l.setName("Niveau 1");
+            l.setScore(0);
+            l.setDescription("Un niveau parmi tant d'autres");
+            Progress.getInstance().levels.add(l);
+            String p = Progress.getInstance().toString();
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("progress",p);
+            editor.commit();
+        }
+        else
+        {
+            Progress.fromString(progressStr);
+            Level levelPipo = Progress.getInstance().levels.get(0);
+            Toast t = Toast.makeText( getApplicationContext(), levelPipo.description ,Toast.LENGTH_LONG);
+            t.show();
+        }
+        //boolean silent = settings.getBoolean("silentMode", false);
+        //setSilent(silent);
 
         final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
@@ -106,6 +143,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 String sAux = "\nCheck out this beautiful app to get a better understanding on how to handle fire incidents.\n\n";
                 sAux = sAux + "<Insert cool URL here>\n\n";
                 i.putExtra(Intent.EXTRA_TEXT, sAux);
+
+                Toast t = Toast.makeText(getApplicationContext(), sAux, Toast.LENGTH_SHORT);
+                t.show();
+
                 startActivity(Intent.createChooser(i, "Choose one"));
             }
         });
