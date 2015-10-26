@@ -1,4 +1,4 @@
-package com.miyou.myfirstgame;
+package ca.uqac.myfirstgame;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;

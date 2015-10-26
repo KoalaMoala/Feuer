@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.0"
 
     defaultConfig {
-        applicationId "com.miyou.myfirstgame"
+        applicationId "ca.uqac.myfirstgame"
         minSdkVersion 8
         targetSdkVersion 23
         versionCode 1

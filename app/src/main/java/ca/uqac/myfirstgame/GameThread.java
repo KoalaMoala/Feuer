@@ -1,12 +1,9 @@
-package com.miyou.myfirstgame;
+package ca.uqac.myfirstgame;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-/**
- * Created by Tevainui on 18/10/2015.
- */
-public class MainThread extends Thread {
+public class GameThread extends Thread {
     private int FPS=30;
     private double averageFPS;
     private SurfaceHolder surfaceHolder;
@@ -14,7 +11,7 @@ public class MainThread extends Thread {
     private boolean running;
     private static Canvas canvas;
 
-    public MainThread(SurfaceHolder surfaceHolder, GamePanel gamePanel){
+    public GameThread(SurfaceHolder surfaceHolder, GamePanel gamePanel){
         super();
         this.surfaceHolder = surfaceHolder;
         this.gamePanel = gamePanel;
@@ -69,7 +66,7 @@ public class MainThread extends Thread {
                 averageFPS = 1000/((totalTime/frameCount)/1000000);
                 frameCount = 0;
                 totalTime = 0;
-                System.out.println(averageFPS);
+                System.out.println("Average FPS: " + averageFPS);
             }
         }
     }
