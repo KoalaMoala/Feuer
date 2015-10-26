@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Display;
 
-import ca.uqac.menu.CircularRevealView;
-import ca.uqac.menu.PlayDialog;
 import ca.uqac.myfirstgame.R;
 
 public class XposedMainActivity extends Activity implements DialogInterface.OnDismissListener {
@@ -47,12 +45,12 @@ public class XposedMainActivity extends Activity implements DialogInterface.OnDi
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                showPowerDialog();
+                showPlayDialog();
             }
         }, 800);
     }
 
-    private void showPowerDialog() {
+    private void showPlayDialog() {
         FragmentManager fm = getFragmentManager();
         PlayDialog playDialog = new PlayDialog();
         playDialog.setStyle(DialogFragment.STYLE_NO_TITLE, R.style.AppThemeDialog);
