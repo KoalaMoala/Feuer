@@ -14,19 +14,14 @@
         <meta-data android:name="xposeddescription" android:value="Serious Game about how to handle fires" />
         <meta-data android:name="xposedminversion" android:value="54" />
 
-        <activity android:screenOrientation="landscape" android:name=".Game" android:label="@string/app_name" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
         <activity android:name="com.miyou.menu.MainActivity" android:excludeFromRecents="true" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:screenOrientation="landscape" android:name=".Game" android:label="@string/app_name" />
 
     </application>
 
