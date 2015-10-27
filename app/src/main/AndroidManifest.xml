@@ -2,21 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.miyou.myfirstgame" >
 
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-        <activity
-            android:screenOrientation="landscape"
-            android:name=".Game"
-            android:label="@string/app_name" >
+
+        <meta-data android:name="xposedmodule" android:value="true" />
+        <meta-data android:name="xposeddescription" android:value="Serious Game about how to handle fires" />
+        <meta-data android:name="xposedminversion" android:value="54" />
+
+        <activity android:name="com.miyou.menu.MainActivity" android:excludeFromRecents="true" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:screenOrientation="landscape" android:name=".Game" android:label="@string/app_name" />
+
     </application>
 
 </manifest>
