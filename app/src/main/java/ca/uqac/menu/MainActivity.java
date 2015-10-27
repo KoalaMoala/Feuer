@@ -82,7 +82,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         backgroundColor = Color.parseColor("#11303030");
         playButton = (ImageView) findViewById(R.id.button);
         layout = (RelativeLayout) findViewById(R.id.layout);
-
         settings = (LinearLayout) findViewById(R.id.source);
         score = (LinearLayout) findViewById(R.id.rate);
         share = (LinearLayout) findViewById(R.id.share);
@@ -121,19 +120,29 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showPlayDialog();
+                        showSettingsDialog();
                     }
                 }, 50);
             }
         });
+
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(Urlrate));
-                startActivity(i);
+                final int color = Color.parseColor("#007F46");
+                final Point p = getLocationInView(revealView, v);
+                revealView.reveal(p.x / 2, p.y / 2, color, v.getHeight() / 2, 440, null);
+                selectedView = v;
+                handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        showScoreDialog();
+                    }
+                }, 50);
             }
         });
+
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -170,8 +179,20 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     private void showPlayDialog() {
         FragmentManager fm = getFragmentManager();
-        PlayDialog powerDialog = new PlayDialog();
-        powerDialog.show(fm, "fragment_play");
+        PlayDialog playDialog = new PlayDialog();
+        playDialog.show(fm, "fragment_play");
+    }
+
+    private void showSettingsDialog() {
+        FragmentManager fm = getFragmentManager();
+        SettingsDialog settingsDialog = new SettingsDialog();
+        settingsDialog.show(fm, "fragment_settings");
+    }
+
+    private void showScoreDialog() {
+        FragmentManager fm = getFragmentManager();
+        ScoreDialog scoreDialog = new ScoreDialog();
+        scoreDialog.show(fm, "fragment_score");
     }
 
     @Override
