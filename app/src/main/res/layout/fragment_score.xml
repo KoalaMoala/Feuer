@@ -34,14 +34,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="15dp"
-                    android:src="@drawable/placeholder" />
+                    android:src="@drawable/score_1st" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="Placeholder_01"
+                    android:text="John Doe\n25.000 points"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -59,14 +59,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="15dp"
-                    android:src="@drawable/placeholder" />
+                    android:src="@drawable/score_2nd" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="36dp"
+                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="Placeholder_02"
+                    android:text="Jane Roe\n23.400 points"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -84,40 +84,66 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="15dp"
-                    android:src="@drawable/placeholder" />
+                    android:src="@drawable/score_3rd" />
 
-                <LinearLayout
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="20dp"
+                    android:text="Thomas Anderson\n12.000 points"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="36dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="20dp"
-                        android:text="Placeholder_03"
-                        android:textColor="#000000"
-                        android:textSize="18sp" />
+            <LinearLayout
+                android:id="@+id/score_04"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layoutAnimation="@anim/layout_controller_push_up_in"
+                android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginTop="-9dp"
-                        android:layoutAnimation="@anim/layout_controller_push_up_in">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/score_4th" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:text="Simply restarts the Android UI by killing zygote process"
-                            android:textColor="#000000"
-                            android:textSize="9sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
-                </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="Joe Bloggs\n9.300 points"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/score_05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layoutAnimation="@anim/layout_controller_push_up_in"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/score_5th" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:text="M. Smith\n3.500 points"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
