@@ -1,4 +1,4 @@
-package ca.uqac.menu;
+package com.miyou.menu;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import ca.uqac.myfirstgame.R;
+import com.miyou.myfirstgame.R;
 
 public class SettingsDialog extends FragmentDialog {
 

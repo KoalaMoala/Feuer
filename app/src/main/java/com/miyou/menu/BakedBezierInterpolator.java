@@ -1,4 +1,4 @@
-package ca.uqac.menu;
+package com.miyou.menu;
 
 import android.view.animation.Interpolator;
 

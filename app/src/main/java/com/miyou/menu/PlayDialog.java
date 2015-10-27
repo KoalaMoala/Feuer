@@ -1,23 +1,16 @@
-package ca.uqac.menu;
+package com.miyou.menu;
 
-import android.app.Activity;
-import android.app.DialogFragment;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import ca.uqac.myfirstgame.Game;
-import ca.uqac.myfirstgame.R;
+import com.miyou.myfirstgame.Game;
+import com.miyou.myfirstgame.R;
 
 public class PlayDialog extends FragmentDialog {
 

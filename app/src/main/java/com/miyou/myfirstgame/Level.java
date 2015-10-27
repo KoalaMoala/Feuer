@@ -1,4 +1,4 @@
-package ca.uqac.myfirstgame;
+package com.miyou.myfirstgame;
 
 import java.io.Serializable;
 

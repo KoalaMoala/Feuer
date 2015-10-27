@@ -1,4 +1,4 @@
-package ca.uqac.menu;
+package com.miyou.menu;
 
 import android.app.FragmentManager;
 import android.content.DialogInterface;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -19,9 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import ca.uqac.myfirstgame.Level;
-import ca.uqac.myfirstgame.Progress;
-import ca.uqac.myfirstgame.R;
+import com.miyou.myfirstgame.Level;
+import com.miyou.myfirstgame.Progress;
+import com.miyou.myfirstgame.R;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
