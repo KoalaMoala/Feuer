@@ -17,7 +17,6 @@ public class MovingObject extends GameObject{
         super.update();
     }
 
-    @Override
     public void moveTowardPosition(int x,int y){
         Vector2 tmp = new Vector2(x - getX(),y - getY());
         float len = tmp.len();

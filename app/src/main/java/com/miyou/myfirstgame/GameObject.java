@@ -50,14 +50,11 @@ public class GameObject {
         return new Rect(x, y, x+width, y+height);
     }
 
-    public void moveTowardPosition(int x, int y){
-
-    }
-
     public  void update(){
 
     }
     public void draw(Canvas canvas){
 
     }
+
 }
