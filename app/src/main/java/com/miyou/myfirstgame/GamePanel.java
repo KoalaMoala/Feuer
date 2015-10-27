@@ -1,19 +1,28 @@
-package ca.uqac.myfirstgame;
+package com.miyou.myfirstgame;
 
+import android.app.VoiceInteractor;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.MotionEvent;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
+/**
+ * Created by Tevainui on 18/10/2015.
+ */
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
-    public static final int WIDTH=856;
-    public static final int HEIGHT=480;
+    public static final int WIDTH=512;
+    public static final int HEIGHT=512;
 
-    private GameThread thread;
+    private MainThread thread;
     private Background bg;
+    private ArrayList<GameObject> gameObjects;
 
     public GamePanel(Context context){
         super(context);
@@ -21,7 +30,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //add the callback to the surfaceHolder to intercept events
         getHolder().addCallback(this);
 
-        thread = new GameThread(getHolder(), this);
+        thread = new MainThread(getHolder(), this);
 
         //make panel focusable so it can handle events
         setFocusable(true);
@@ -50,8 +59,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void surfaceCreated(SurfaceHolder holder){
 
-        bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.grassbg1));
+        bg = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.tiles),32,32,64);
         bg.setVector(-5);
+
+        gameObjects = new ArrayList<>();
+        gameObjects.add(new Player(50, 50, 19, 19, 0,BitmapFactory.decodeResource(getResources(), R.drawable.square)));
         //we can safely start the gameloop
         thread.setRunning(true);
         thread.start();
@@ -59,14 +71,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event){
-        return super.onTouchEvent(event);
+        final float scaleFactorX =getWidth()/(WIDTH*1.f);
+        final float scaleFactorY =getHeight()/(HEIGHT*1.f);
+
+        gameObjects.get(0).moveTowardPosition((int)(event.getX()/scaleFactorX),(int)(event.getY()/scaleFactorY));
+        return true;
+        //return super.onTouchEvent(event);
     }
 
     public void update(){
         bg.update();
+        gameObjects.get(0).update();
     }
 
-    //TODO Fix warning "Overriding method should call super.draw()"
     @Override
     public void draw(Canvas canvas){
         final float scaleFactorX =getWidth()/(WIDTH*1.f);
@@ -75,6 +92,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             final int savedState = canvas.save();
             canvas.scale(scaleFactorX, scaleFactorY);
             bg.draw(canvas);
+            gameObjects.get(0).draw(canvas);
             canvas.restoreToCount(savedState);
         }
     }

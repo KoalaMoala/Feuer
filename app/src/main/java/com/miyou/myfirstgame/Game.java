@@ -1,6 +1,7 @@
-package ca.uqac.myfirstgame;
+package com.miyou.myfirstgame;
 
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;

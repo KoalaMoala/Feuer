@@ -1,4 +1,4 @@
-package ca.uqac.myfirstgame;
+package com.miyou.myfirstgame;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
