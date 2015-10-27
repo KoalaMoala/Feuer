@@ -13,14 +13,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Pomme on 10/26/2015.
- */
 public class Progress implements Serializable {
 
     public List<Level> levels = new ArrayList<Level>();
-    private Progress()
-    {}
+    private Progress() {}
 
     /** Instance unique pré-initialisée */
     private static Progress INSTANCE = new Progress();
