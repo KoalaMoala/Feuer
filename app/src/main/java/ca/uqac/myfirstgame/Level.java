@@ -2,14 +2,18 @@ package ca.uqac.myfirstgame;
 
 import java.io.Serializable;
 
-/**
- * Created by Pomme on 10/26/2015.
- */
 public class Level implements Serializable{
-    public int idLevel;
-    public String name;
-    public String description;
-    public int score;
+    private int idLevel;
+    private String name;
+    private String description;
+    private int score;
+
+    public Level(int idLevel, String name, String description) {
+        this.idLevel = idLevel;
+        this.name = name;
+        this.description = description;
+        this.score = 0;
+    }
 
     public int getIdLevel() {
         return idLevel;

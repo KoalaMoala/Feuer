@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     int maxX, maxY;
     android.os.Handler handler;
 
-    String Urlrate = "https://play.google.com/store/apps/details?id=com.naman14.powermenu";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,25 +48,18 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String progressStr = preferences.getString("progress","");
 
-
-        if(progressStr.isEmpty())
-        {
-            Level l = new Level();
-            l.setIdLevel(1);
-            l.setName("Niveau 1");
-            l.setScore(0);
-            l.setDescription("Un niveau parmi tant d'autres");
+        if(progressStr.isEmpty()) {
+            Level l = new Level(1, "Niveau 1", "Un niveau parmi tant d'autres");
             Progress.getInstance().levels.add(l);
             String p = Progress.getInstance().toString();
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("progress",p);
             editor.commit();
         }
-        else
-        {
+        else {
             Progress.fromString(progressStr);
             Level levelPipo = Progress.getInstance().levels.get(0);
-            Toast t = Toast.makeText( getApplicationContext(), levelPipo.description ,Toast.LENGTH_LONG);
+            Toast t = Toast.makeText( getApplicationContext(), levelPipo.getDescription() ,Toast.LENGTH_LONG);
             t.show();
         }
         //boolean silent = settings.getBoolean("silentMode", false);
