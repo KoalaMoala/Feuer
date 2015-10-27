@@ -1,4 +1,4 @@
-package ca.uqac.myfirstgame;
+package com.miyou.myfirstgame;
 
 import android.util.Base64;
 import android.util.Base64InputStream;

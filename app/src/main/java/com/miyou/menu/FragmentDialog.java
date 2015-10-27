@@ -1,4 +1,4 @@
-package ca.uqac.menu;
+package com.miyou.menu;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -10,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import ca.uqac.myfirstgame.R;
+import com.miyou.myfirstgame.R;
 
 public abstract class FragmentDialog extends DialogFragment {
 

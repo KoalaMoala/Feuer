@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme" >
 
         <meta-data android:name="xposedmodule" android:value="true" />
-        <meta-data android:name="xposeddescription" android:value="Material Power Menu with Reveal and other Animations" />
+        <meta-data android:name="xposeddescription" android:value="Serious Game about how to handle fires" />
         <meta-data android:name="xposedminversion" android:value="54" />
 
         <activity android:screenOrientation="landscape" android:name=".Game" android:label="@string/app_name" >
@@ -21,17 +21,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="ca.uqac.menu.MainActivity" android:excludeFromRecents="true" android:label="@string/app_name">
+        <activity android:name="com.miyou.menu.MainActivity" android:excludeFromRecents="true" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name="ca.uqac.menu.XposedMainActivity" android:excludeFromRecents="true" android:label="@string/app_name" android:theme="@android:style/Theme.Translucent.NoTitleBar">
-            <intent-filter>
-                <action android:name="android.intent.action.CREATE_SHORTCUT" />
-                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
 

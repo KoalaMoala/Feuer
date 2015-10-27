@@ -1,4 +1,4 @@
-package ca.uqac.menu;
+package com.miyou.menu;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 
-import ca.uqac.myfirstgame.R;
+import com.miyou.myfirstgame.R;
 
 public class CircularRevealView extends ViewGroup {
 
