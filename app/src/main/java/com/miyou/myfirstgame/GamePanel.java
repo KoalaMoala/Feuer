@@ -74,9 +74,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         final float scaleFactorX =getWidth()/(WIDTH*1.f);
         final float scaleFactorY =getHeight()/(HEIGHT*1.f);
 
-        gameObjects.get(0).moveTowardPosition((int)(event.getX()/scaleFactorX),(int)(event.getY()/scaleFactorY));
+        int action = event.getActionMasked();
+        Player player = (Player)gameObjects.get(0);
+        switch (action) {
+
+            case MotionEvent.ACTION_DOWN:
+                player.setMoving(true);
+                player.setDxy((int)(event.getX()/scaleFactorX),(int)(event.getY()/scaleFactorY));
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                player.setDxy((int)(event.getX()/scaleFactorX),(int)(event.getY()/scaleFactorY));
+                break;
+
+            case MotionEvent.ACTION_UP:
+                player.setMoving(false);
+                break;
+
+            case MotionEvent.ACTION_CANCEL:
+                break;
+
+            case MotionEvent.ACTION_OUTSIDE:
+                break;
+        }
         return true;
-        //return super.onTouchEvent(event);
     }
 
     public void update(){
