@@ -15,15 +15,21 @@ import java.util.List;
 
 public class Progress implements Serializable {
 
-    public List<Level> levels = new ArrayList<Level>();
+    private List<Level> levels = new ArrayList<Level>();
     private Progress() {}
 
     /** Instance unique pré-initialisée */
     private static Progress INSTANCE = new Progress();
 
     /** Point d'accès pour l'instance unique du singleton */
-    public static Progress getInstance()
-    {	return INSTANCE;
+    public static Progress getInstance() {	return INSTANCE; }
+
+    public void addLevel(Level level) {
+        levels.add(level);
+    }
+
+    public Level getLevel(int index) {
+        return this.levels.get(index);
     }
 
     public String toString() {
@@ -41,7 +47,7 @@ public class Progress implements Serializable {
         return null;
     }
 
-    public static void fromString(String str) {
+    public void fromString(String str) {
         try {
             INSTANCE = (Progress) new ObjectInputStream(new Base64InputStream(
                     new ByteArrayInputStream(str.getBytes()), Base64.NO_PADDING

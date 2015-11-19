@@ -3,9 +3,6 @@ package com.miyou.myfirstgame;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 
-/**
- * Created by Tevainui on 25/10/2015.
- */
 public class GameObject {
     protected  int id;
     protected int x;
