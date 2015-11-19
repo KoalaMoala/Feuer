@@ -45,19 +45,20 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
         // Restore preferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String progressStr = preferences.getString("progress","");
+        String progressStr = preferences.getString("progress", "");
 
+        Progress progress = Progress.getInstance();
         if(progressStr.isEmpty()) {
             Level l = new Level(1, "Niveau 1", "Un niveau parmi tant d'autres");
-            Progress.getInstance().levels.add(l);
-            String p = Progress.getInstance().toString();
+            progress.addLevel(l);
+            String p = progress.toString();
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString("progress",p);
             editor.commit();
         }
         else {
-            Progress.fromString(progressStr);
-            Level levelPipo = Progress.getInstance().levels.get(0);
+            progress.fromString(progressStr);
+            Level levelPipo = progress.getLevel(0);
             Toast t = Toast.makeText( getApplicationContext(), levelPipo.getDescription() ,Toast.LENGTH_LONG);
             t.show();
         }
