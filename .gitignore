@@ -23,6 +23,7 @@
 ########################################
 
 *.iml
+.idea
 .idea/
 .navigation/
 captures/
