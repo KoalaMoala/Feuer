@@ -46,22 +46,13 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         // Restore preferences
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String progressStr = preferences.getString("progress", "");
+        Progress progress = Progress.getInstance(progressStr);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("progress",progress.generateStringFromProgress());
+        editor.apply();
+        Toast t = Toast.makeText(getApplicationContext(), progress.getDescriptionFromCurrentLevel(), Toast.LENGTH_LONG);
+        t.show();
 
-        Progress progress = Progress.getInstance();
-        if(progressStr.isEmpty()) {
-            Level l = new Level(1, "Niveau 1", "Un niveau parmi tant d'autres");
-            progress.addLevel(l);
-            String p = progress.toString();
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString("progress",p);
-            editor.commit();
-        }
-        else {
-            progress.fromString(progressStr);
-            Level levelPipo = progress.getLevel(0);
-            Toast t = Toast.makeText( getApplicationContext(), levelPipo.getDescription() ,Toast.LENGTH_LONG);
-            t.show();
-        }
         //boolean silent = settings.getBoolean("silentMode", false);
         //setSilent(silent);
 
