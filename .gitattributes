@@ -1,0 +1,45 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Programming Languages
+*.cs     text diff=csharp
+*.java   text diff=java
+*.html   text diff=html
+*.css    text
+*.js     text
+*.sql    text
+
+# Custom for Visual Studio
+*.vbproj merge=union
+*.fsproj merge=union
+*.dbproj merge=union
+*.csproj text merge=union
+*.sln    text merge=union eol=crlf
+
+# Standard to msysgit
+*.doc    diff=astextplain
+*.DOC    diff=astextplain
+*.docx   diff=astextplain
+*.DOCX   diff=astextplain
+*.dot    diff=astextplain
+*.DOT    diff=astextplain
+*.pdf    diff=astextplain
+*.PDF    diff=astextplain
+*.rtf    diff=astextplain
+*.RTF    diff=astextplain
+
+# Binaries that should be left untouched
+# (binary is a macro for -text -diff)
+*.class  binary
+*.dll    binary
+*.ear    binary
+*.gif    binary
+*.ico    binary
+*.jar    binary
+*.jpg    binary
+*.jpeg   binary
+*.png    binary
+*.so     binary
+*.war    binary
+*.ttf    binary
+*.eot    binary
