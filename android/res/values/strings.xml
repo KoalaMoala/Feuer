@@ -18,4 +18,8 @@
     <string name="menu_settings_toggle_sound_description">You can toggle sound on and off by clicking this button</string>
     <string name="menu_settings_reset_progression">Reset game data</string>
     <string name="menu_settings_reset_progression_description">[WARNING] You\'ll lose your entire progression, allowing you to start over</string>
+
+    <string name="EXEMPLE">This is a placeholder question. It might be somewhat long to precisely describe the situation. Like a very long text for instance</string>
+    <string name="button_yes">YES</string>
+    <string name="button_no">NO</string>
 </resources>
