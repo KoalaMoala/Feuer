@@ -25,6 +25,7 @@
 *.iml
 .idea
 .idea/
+.idea/misc.xml
 .navigation/
 captures/
 
