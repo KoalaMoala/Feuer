@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.quizz;
+package ca.uqac.keepitcool.quizz.scenario;
 
 public final class Situation {
     private Trigger trigger;
@@ -7,13 +7,9 @@ public final class Situation {
     private Choice firstChoice = null;
     private Choice secondChoice = null;
 
-    public Situation(Integer duration, String description) {
-        this.duration = duration;
-        this.description = description;
-    }
-
     public Situation(Trigger trigger, String description) {
         this.trigger = trigger;
+        this.duration = trigger.getCountdownOnEasyDifficulty();
         this.description = description;
     }
 

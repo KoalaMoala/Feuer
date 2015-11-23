@@ -13,11 +13,14 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
-
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.menu.MainActivity;
+import ca.uqac.keepitcool.quizz.scenario.Choice;
+import ca.uqac.keepitcool.quizz.scenario.Scenario;
+import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
+import ca.uqac.keepitcool.quizz.scenario.Situation;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
 public class BranchingStoryActivity extends Activity implements CountDownListener {
@@ -46,7 +49,6 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		Situation s = scenario.getStartingSituation();
 		situationView.setTypeface(quandoFont);
 		this.updateTextFromSituation(s);
-		countDownAnimation.setCountDownListener(this);
 
 		noButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -69,15 +71,10 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 				startActivity(intent);
 			}
 		});
-
-		startCountDownAnimation("default");
 	}
 
 	private void updateTextFromSituation(Situation s) {
 		situationView.setText(s.getDescription());
-		if(s.countdownRequired()) {
-			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration());
-		}
 
 		Choice firstChoice = s.getFirstChoice();
 		Choice secondChoice = s.getSecondChoice();
@@ -97,7 +94,11 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			confirmButton.setVisibility(View.VISIBLE);
 		}
 
-
+		if(s.countdownRequired()) {
+			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration());
+			countDownAnimation.setCountDownListener(this);
+			startCountDownAnimation("default");
+		}
 	}
 
 	private void triggerNextScreen(Situation s) {

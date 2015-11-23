@@ -9,13 +9,14 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
+import ca.uqac.keepitcool.quizz.scenario.Scenario;
+import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
 
 public class QuizActivity extends Activity implements CountDownListener {
 

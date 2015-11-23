@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.quizz;
+package ca.uqac.keepitcool.quizz.scenario;
 
 // Unicode from http://fortawesome.github.io/Font-Awesome/cheatsheet/
 

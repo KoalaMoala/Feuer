@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.quizz;
+package ca.uqac.keepitcool.quizz.scenario;
 
 // http://www.binaryhexconverter.com/hex-to-decimal-converter
 
