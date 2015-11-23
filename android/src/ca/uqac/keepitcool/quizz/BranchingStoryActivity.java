@@ -1,6 +1,7 @@
 package ca.uqac.keepitcool.quizz;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -44,14 +45,14 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		noButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				triggerNextScreen(scenario.getNextSituation(Choice.FIRST));
+				triggerNextScreen(scenario.getNextSituation(UserChoice.FIRST));
 			}
 		});
 
 		yesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				triggerNextScreen(scenario.getNextSituation(Choice.SECOND));
+				triggerNextScreen(scenario.getNextSituation(UserChoice.SECOND));
 			}
 		});
 
@@ -63,8 +64,18 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		if(s.countdownRequired()) {
 			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration());
 		}
-		noButton.setText(s.getFirstChoice());
-		yesButton.setText(s.getSecondChoice());
+
+		Choice firstChoice = s.getFirstChoice();
+		noButton.setText(firstChoice.getLabel());
+		noButton.setIconResource(firstChoice.getIcon());
+		noButton.setBackgroundColor(Color.parseColor(firstChoice.getDefaultColor()));
+		noButton.setFocusBackgroundColor(Color.parseColor(firstChoice.getFocusColor()));
+
+		Choice secondChoice = s.getSecondChoice();
+		yesButton.setText(secondChoice.getLabel());
+		yesButton.setIconResource(secondChoice.getIcon());
+		yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
+		yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
 	}
 
 	private void triggerNextScreen(Situation s) {

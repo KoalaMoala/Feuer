@@ -11,15 +11,12 @@ public class Scenario {
         this.scenario = new ArrayList<Situation>();
     }
 
-    public void addStartingSituation(int duration, String text, String firstChoice, int firstChoiceFollowUp, String secondChoice, int secondChoiceFollowUp) {
-        this.currentSituation = this.addSituation(duration,text,firstChoice,firstChoiceFollowUp,secondChoice,secondChoiceFollowUp);
+    public void addStartingSituation(Situation s) {
+        this.currentSituation = this.addSituation(s);
     }
 
-    public int addSituation(int duration, String text, String firstChoice, int firstChoiceFollowUp, String secondChoice, int secondChoiceFollowUp) {
+    public int addSituation(Situation s) {
         int index = this.scenario.size();
-        Situation s = new Situation(duration, text)
-                .setFirstChoice(firstChoice, firstChoiceFollowUp)
-                .setSecondChoice(secondChoice, secondChoiceFollowUp);
         this.scenario.add(index, s);
         return index;
     }
@@ -34,11 +31,11 @@ public class Scenario {
         return this.scenario.get(this.currentSituation);
     }
 
-    public Situation getNextSituation(Choice choice) {
+    public Situation getNextSituation(UserChoice userChoice) {
         Integer followUp = null;
         Situation s = this.scenario.get(this.currentSituation);
 
-        if(Choice.FIRST == choice) {
+        if(UserChoice.FIRST == userChoice) {
             followUp = this.scenario.get(this.currentSituation).getFirstChoiceFollowUp();
         } else {
             followUp = this.scenario.get(this.currentSituation).getSecondChoiceFollowUp();
