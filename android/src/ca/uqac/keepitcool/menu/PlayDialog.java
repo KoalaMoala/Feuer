@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import ca.uqac.keepitcool.AndroidLauncher;
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.myfirstgame.Game;
+import ca.uqac.keepitcool.quizz.BranchingStoryActivity;
 import ca.uqac.keepitcool.quizz.QuizActivity;
 
 public class PlayDialog extends FragmentDialog {
@@ -66,7 +67,7 @@ public class PlayDialog extends FragmentDialog {
         placeholder_02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AndroidLauncher.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });

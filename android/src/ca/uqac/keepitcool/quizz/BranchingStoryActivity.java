@@ -9,17 +9,18 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
+import mehdi.sakout.fancybuttons.FancyButton;
 
-public class QuizActivity extends Activity implements CountDownListener {
+public class BranchingStoryActivity extends Activity implements CountDownListener {
 
-	private TextView textView;
+	private TextView countdownView;
+	private TextView situationView;
+	private FancyButton noButton;
+	private FancyButton yesButton;
 	private CountDownAnimation countDownAnimation;
 
 	@Override
@@ -27,33 +28,52 @@ public class QuizActivity extends Activity implements CountDownListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_quiz);
 
-		Scenario s = ScenarioBuilder.buildScenario(1);
+		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
+		final Scenario scenario = ScenarioBuilder.buildScenario(1);
 
-		LinearLayout yesButton = (LinearLayout) findViewById(R.id.yes);
-		yesButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startCountDownAnimation("default");
-			}
-		});
+		situationView = (TextView) findViewById(R.id.question);
+		countdownView = (TextView) findViewById(R.id.textView);
+		noButton = (FancyButton) findViewById(R.id.no);
+		yesButton = (FancyButton) findViewById(R.id.yes);
 
-		LinearLayout noButton = (LinearLayout) findViewById(R.id.no);
+		Situation s = scenario.getStartingSituation();
+		situationView.setTypeface(quandoFont);
+		this.updateTextFromSituation(s);
+		countDownAnimation.setCountDownListener(this);
+
 		noButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				cancelCountDownAnimation();
+				triggerNextScreen(scenario.getNextSituation(Choice.FIRST));
 			}
 		});
 
-		TextView question = (TextView) findViewById(R.id.question);
-		Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
-		question.setTypeface(quandoFont);
+		yesButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				triggerNextScreen(scenario.getNextSituation(Choice.SECOND));
+			}
+		});
 
-		textView = (TextView) findViewById(R.id.textView);
-		countDownAnimation = new CountDownAnimation(textView, getStartCount());
-		countDownAnimation.setCountDownListener(this);
+		startCountDownAnimation("default");
 	}
 
+	private void updateTextFromSituation(Situation s) {
+		situationView.setText(s.getDescription());
+		if(s.countdownRequired()) {
+			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration());
+		}
+		noButton.setText(s.getFirstChoice());
+		yesButton.setText(s.getSecondChoice());
+	}
+
+	private void triggerNextScreen(Situation s) {
+		cancelCountDownAnimation();
+		updateTextFromSituation(s);
+		if(s.countdownRequired()) {
+			startCountDownAnimation("default");
+		}
+	}
 
 	private void startCountDownAnimation(String animationStyle) {
 		// Customizable animation
@@ -76,7 +96,7 @@ public class QuizActivity extends Activity implements CountDownListener {
 		}
 
 		// Customizable start count
-		countDownAnimation.setStartCount(getStartCount());
+		//countDownAnimation.setStartCount(getStartCount());
 		countDownAnimation.start();
 	}
 
@@ -84,12 +104,8 @@ public class QuizActivity extends Activity implements CountDownListener {
 		countDownAnimation.cancel();
 	}
 
-	private int getStartCount() {
-		return 30;
-	}
-
 	@Override
 	public void onCountDownEnd(CountDownAnimation animation) {
-		Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
 	}
 }
