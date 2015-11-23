@@ -38,7 +38,8 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		setContentView(R.layout.activity_quiz);
 
 		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
-		final Scenario scenario = ScenarioBuilder.buildScenario(1);
+		//final Scenario scenario = ScenarioBuilder.buildScenario(1);
+		final Scenario scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
 
 		situationView = (TextView) findViewById(R.id.question);
 		countdownView = (TextView) findViewById(R.id.textView);
@@ -53,14 +54,14 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		noButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				triggerNextScreen(scenario.getNextSituation(UserChoice.FIRST));
+				triggerNextScreen(scenario.getNextSituation(UserDecision.FIRST));
 			}
 		});
 
 		yesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				triggerNextScreen(scenario.getNextSituation(UserChoice.SECOND));
+				triggerNextScreen(scenario.getNextSituation(UserDecision.SECOND));
 			}
 		});
 

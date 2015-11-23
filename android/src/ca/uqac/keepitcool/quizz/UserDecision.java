@@ -1,6 +1,6 @@
 package ca.uqac.keepitcool.quizz;
 
-public enum UserChoice {
+public enum UserDecision {
     FIRST,
     SECOND
 }
