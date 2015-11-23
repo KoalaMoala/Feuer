@@ -1,6 +1,7 @@
 package ca.uqac.keepitcool.quizz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -12,9 +13,12 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
-import ca.uqac.keepitcool.R;
-import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
+
 import mehdi.sakout.fancybuttons.FancyButton;
+
+import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.menu.MainActivity;
+import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
 public class BranchingStoryActivity extends Activity implements CountDownListener {
 
@@ -22,6 +26,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private TextView situationView;
 	private FancyButton noButton;
 	private FancyButton yesButton;
+	private FancyButton confirmButton;
 	private CountDownAnimation countDownAnimation;
 
 	@Override
@@ -36,6 +41,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		countdownView = (TextView) findViewById(R.id.textView);
 		noButton = (FancyButton) findViewById(R.id.no);
 		yesButton = (FancyButton) findViewById(R.id.yes);
+		confirmButton = (FancyButton) findViewById(R.id.confirm);
 
 		Situation s = scenario.getStartingSituation();
 		situationView.setTypeface(quandoFont);
@@ -56,6 +62,14 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			}
 		});
 
+		confirmButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(intent);
+			}
+		});
+
 		startCountDownAnimation("default");
 	}
 
@@ -66,16 +80,24 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		}
 
 		Choice firstChoice = s.getFirstChoice();
-		noButton.setText(firstChoice.getLabel());
-		noButton.setIconResource(firstChoice.getIcon());
-		noButton.setBackgroundColor(Color.parseColor(firstChoice.getDefaultColor()));
-		noButton.setFocusBackgroundColor(Color.parseColor(firstChoice.getFocusColor()));
-
 		Choice secondChoice = s.getSecondChoice();
-		yesButton.setText(secondChoice.getLabel());
-		yesButton.setIconResource(secondChoice.getIcon());
-		yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
-		yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
+		if(null != firstChoice && null != secondChoice) {
+			noButton.setText(firstChoice.getLabel());
+			noButton.setIconResource(firstChoice.getIcon());
+			noButton.setBackgroundColor(Color.parseColor(firstChoice.getDefaultColor()));
+			noButton.setFocusBackgroundColor(Color.parseColor(firstChoice.getFocusColor()));
+
+			yesButton.setText(secondChoice.getLabel());
+			yesButton.setIconResource(secondChoice.getIcon());
+			yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
+			yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
+		} else {
+			noButton.setVisibility(View.GONE);
+			yesButton.setVisibility(View.GONE);
+			confirmButton.setVisibility(View.VISIBLE);
+		}
+
+
 	}
 
 	private void triggerNextScreen(Situation s) {

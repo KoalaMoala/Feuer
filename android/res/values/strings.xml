@@ -20,6 +20,7 @@
     <string name="menu_settings_reset_progression_description">[WARNING] You\'ll lose your entire progression, allowing you to start over</string>
 
     <string name="placeholder">This is a placeholder</string>
+    <string name="button_confirm">Ok</string>
     <string name="button_yes">YES</string>
     <string name="button_no">NO</string>
 </resources>
