@@ -17,15 +17,14 @@ public enum Trigger {
         this.hardCountdown = hardCountdown;
     }
 
-    public Integer getCountdownOnEasyDifficulty() {
-        return this.easyCountdown;
-    }
-
-    public Integer getCountdownOnMediumDifficulty() {
-        return this.mediumCountdown;
-    }
-
-    public Integer getCountdownOnHardDifficulty() {
-        return this.hardCountdown;
+    public Integer getCountdown(Difficulty difficulty) {
+        switch (difficulty) {
+            case EASY:
+                return this.easyCountdown;
+            case HARD:
+                return this.hardCountdown;
+            default:
+                return this.mediumCountdown;
+        }
     }
 }

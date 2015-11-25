@@ -3,13 +3,11 @@ package ca.uqac.keepitcool.quizz.scenario;
 public final class Situation {
     private Trigger trigger;
     private String description;
-    private Integer duration = null;
     private Choice firstChoice = null;
     private Choice secondChoice = null;
 
     public Situation(Trigger trigger, String description) {
         this.trigger = trigger;
-        this.duration = trigger.getCountdownOnEasyDifficulty();
         this.description = description;
     }
 
@@ -17,12 +15,12 @@ public final class Situation {
         return this.description;
     }
 
-    public Integer getDuration() {
-        return this.duration;
+    public Integer getDuration(Difficulty difficulty) {
+        return this.trigger.getCountdown(difficulty);
     }
 
     public boolean countdownRequired() {
-        return this.duration != null;
+        return (this.trigger != Trigger.FAILURE && this.trigger != Trigger.SUCCESS);
     }
 
     public Choice getFirstChoice() {

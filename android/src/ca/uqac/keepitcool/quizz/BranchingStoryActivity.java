@@ -13,6 +13,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
+import ca.uqac.keepitcool.menu.Preferences;
+import ca.uqac.keepitcool.quizz.scenario.Difficulty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import ca.uqac.keepitcool.R;
@@ -31,6 +33,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private FancyButton yesButton;
 	private FancyButton confirmButton;
 	private CountDownAnimation countDownAnimation;
+	private Difficulty difficulty;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		//final Scenario scenario = ScenarioBuilder.buildScenario(1);
 		final Scenario scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
 
+		difficulty = Preferences.getDifficultySetting(getApplicationContext());
+		System.out.println(difficulty.toString());
 		situationView = (TextView) findViewById(R.id.question);
 		countdownView = (TextView) findViewById(R.id.textView);
 		noButton = (FancyButton) findViewById(R.id.no);
@@ -96,7 +101,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		}
 
 		if(s.countdownRequired()) {
-			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration());
+			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration(difficulty));
 			countDownAnimation.setCountDownListener(this);
 			startCountDownAnimation("default");
 		}

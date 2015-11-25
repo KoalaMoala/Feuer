@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import ca.uqac.keepitcool.quizz.UserDecision;
 
 public class ScenarioBuilder {
+
     public static Scenario buildDemoScenario() {
         Scenario scenario = new Scenario();
 
@@ -60,7 +61,7 @@ public class ScenarioBuilder {
                 Situation s = readSituation(obj);
                 JsonElement start = obj.get("start");
                 int id = obj.get("id").getAsInt();
-                if(null != start && start.getAsBoolean() == true) {
+                if(null != start && start.getAsBoolean()) {
                     scenario.addStartingSituation(id, s);
                 } else {
                     scenario.addSituation(id, s);
