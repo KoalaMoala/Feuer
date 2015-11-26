@@ -113,8 +113,8 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		this.updateTextFromSituation(s);
 	}
 
-	private void setEndingContainerVisibility(boolean visibile) {
-		if(visibile) {
+	private void setEndingContainerVisibility(boolean visible) {
+		if(visible) {
 			playVideo(R.raw.firespread_06);
 			this.noButton.setVisibility(View.GONE);
 			this.yesButton.setVisibility(View.GONE);
@@ -124,6 +124,24 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			this.noButton.setVisibility(View.VISIBLE);
 			this.yesButton.setVisibility(View.VISIBLE);
 			this.endingContainer.setVisibility(View.GONE);
+		}
+	}
+
+	private void setEndingContainerVisibility(boolean visible, String failureCause) {
+		if(!visible) {
+			this.setEndingContainerVisibility(false);
+		} else {
+			switch (failureCause) {
+				case "RanOutOfTime":
+					playVideo(R.raw.out_of_time_15);
+					break;
+				default:
+					playVideo(R.raw.firespread_06);
+					break;
+			}
+			this.noButton.setVisibility(View.GONE);
+			this.yesButton.setVisibility(View.GONE);
+			this.endingContainer.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -143,7 +161,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			this.yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
 			this.yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
 		} else {
-			setEndingContainerVisibility(true);
+			setEndingContainerVisibility(true, "Failure");
 		}
 
 		if(s.countdownRequired()) {
@@ -190,7 +208,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	@Override
 	public void onCountDownEnd(CountDownAnimation animation) {
 		this.situationView.setText(getResources().getString(R.string.time_run_out));
-		setEndingContainerVisibility(true);
+		setEndingContainerVisibility(true, "RanOutOfTime");
 	}
 
 	@Override
