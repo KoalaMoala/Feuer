@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">Keep it Cool</string>
+
+    <string name="placeholder">Ceci est un texte d\'exemple</string>
+
+    <!-- MAIN MENU -->
+    <string name="menu_settings">Paramètres</string>
+    <string name="menu_play">Jouer</string>
+    <string name="menu_score">Classement</string>
+    <string name="menu_share">Partager</string>
+
+    <!-- PLAY MENU -->
+    <string name="menu_level_01">Niveau 1</string>
+    <string name="menu_level_01_desc">Simple description du niveau 01</string>
+    <string name="menu_level_02">Niveau 02</string>
+    <string name="menu_level_02_desc">Simple description du niveau 02</string>
+    <string name="menu_level_03">Niveau 03</string>
+    <string name="menu_level_03_desc">Simple description du niveau 03</string>
+
+    <!-- SETTINGS MENU -->
+    <string name="menu_settings_difficulty">Changer la difficulté</string>
+    <string name="menu_settings_toggle_sound">Paramètrer le son</string>
+    <string name="menu_settings_toggle_sound_off_description">Le son est ACTIVÉ</string>
+    <string name="menu_settings_toggle_sound_on_description">Le son est DÉSACTIVÉ</string>
+    <string name="menu_settings_reset_progression">Ré-initialiser</string>
+    <string name="menu_settings_reset_progression_description">[ATTENTION] Vous perdrez toute votre progression, et recommencerze à zéro</string>
+
+    <!-- INGAME BUTTONS -->
+    <string name="button_restart">Réessayer</string>
+    <string name="button_confirm">Retourner au menu</string>
+    <string name="button_yes">OUI</string>
+    <string name="button_no">NON</string>
+    <string name="time_run_out">Dans une situation d\'urgence, chaque seconde compte. Les bons reflexes peuvent sauver votre vie alors certains comportement peut mettre votre vie en danger.</string>
+
+    <!-- DIFFICULTY ARRAYS (LABELS & VALUES) -->
+    <string-array name="difficulty_array">
+        <item>Facile</item>
+        <item>Intermédiaire</item>
+        <item>Difficile</item>
+    </string-array>
+
+    <string-array name="difficulty_array_values">
+        <item>EASY</item>
+        <item>MEDIUM</item>
+        <item>HARD</item>
+    </string-array>
+</resources>

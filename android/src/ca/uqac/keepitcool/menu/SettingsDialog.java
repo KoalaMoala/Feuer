@@ -121,8 +121,7 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-        String selected = (String) parent.getItemAtPosition(pos);
-        toggleDifficulty(selected.toUpperCase());
+        String selected = getResources().getStringArray(R.array.difficulty_array_values)[parent.getSelectedItemPosition()];
         Preferences.updateDifficultySetting(Difficulty.valueOf(selected.toUpperCase()), getContextFromActivity());
     }
 
