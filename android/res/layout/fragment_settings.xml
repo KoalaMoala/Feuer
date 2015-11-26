@@ -120,8 +120,6 @@
                             android:textSize="9sp"
                             android:textStyle="bold" />
                     </LinearLayout>
-
-
                 </LinearLayout>
             </LinearLayout>
 

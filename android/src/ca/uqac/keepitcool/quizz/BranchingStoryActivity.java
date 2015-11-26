@@ -11,6 +11,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import ca.uqac.keepitcool.menu.Preferences;
@@ -27,13 +28,12 @@ import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
 public class BranchingStoryActivity extends Activity implements CountDownListener {
 
-	private TextView countdownView;
-	private TextView situationView;
-	private FancyButton noButton;
-	private FancyButton yesButton;
-	private FancyButton confirmButton;
+	private LinearLayout endingContainer;
+	private TextView countdownView, situationView;
+	private FancyButton noButton, yesButton, confirmButton, restartButton;
 	private CountDownAnimation countDownAnimation;
 	private Difficulty difficulty;
+	private Scenario scenario;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,36 +41,41 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		setContentView(R.layout.activity_quiz);
 
 		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
-		//final Scenario scenario = ScenarioBuilder.buildScenario(1);
-		final Scenario scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
 
-		difficulty = Preferences.getDifficultySetting(getApplicationContext());
-		System.out.println(difficulty.toString());
-		situationView = (TextView) findViewById(R.id.question);
-		countdownView = (TextView) findViewById(R.id.textView);
-		noButton = (FancyButton) findViewById(R.id.no);
-		yesButton = (FancyButton) findViewById(R.id.yes);
-		confirmButton = (FancyButton) findViewById(R.id.confirm);
+		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
+		this.situationView = (TextView) findViewById(R.id.question);
+		this.countdownView = (TextView) findViewById(R.id.textView);
+		this.noButton = (FancyButton) findViewById(R.id.no);
+		this.yesButton = (FancyButton) findViewById(R.id.yes);
+		this.restartButton = (FancyButton) findViewById(R.id.restart);
+		this.confirmButton = (FancyButton) findViewById(R.id.confirm);
+		this.endingContainer = (LinearLayout) findViewById(R.id.endingContainer);
+		this.situationView.setTypeface(quandoFont);
 
-		Situation s = scenario.getStartingSituation();
-		situationView.setTypeface(quandoFont);
-		this.updateTextFromSituation(s);
+		loadScenario();
 
-		noButton.setOnClickListener(new OnClickListener() {
+		this.noButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				triggerNextScreen(scenario.getNextSituation(UserDecision.FIRST));
 			}
 		});
 
-		yesButton.setOnClickListener(new OnClickListener() {
+		this.yesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				triggerNextScreen(scenario.getNextSituation(UserDecision.SECOND));
 			}
 		});
 
-		confirmButton.setOnClickListener(new OnClickListener() {
+		this.restartButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				loadScenario();
+			}
+		});
+
+		this.confirmButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -79,30 +84,47 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		});
 	}
 
+	private void loadScenario() {
+		this.scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
+		Situation s = this.scenario.getStartingSituation();
+		setEndingContainerVisibility(false);
+		this.updateTextFromSituation(s);
+	}
+
+	private void setEndingContainerVisibility(boolean visibile) {
+		if(visibile) {
+			this.noButton.setVisibility(View.GONE);
+			this.yesButton.setVisibility(View.GONE);
+			this.endingContainer.setVisibility(View.VISIBLE);
+		} else {
+			this.noButton.setVisibility(View.VISIBLE);
+			this.yesButton.setVisibility(View.VISIBLE);
+			this.endingContainer.setVisibility(View.GONE);
+		}
+	}
+
 	private void updateTextFromSituation(Situation s) {
-		situationView.setText(s.getDescription());
+		this.situationView.setText(s.getDescription());
 
 		Choice firstChoice = s.getFirstChoice();
 		Choice secondChoice = s.getSecondChoice();
 		if(null != firstChoice && null != secondChoice) {
-			noButton.setText(firstChoice.getLabel());
-			noButton.setIconResource(firstChoice.getIcon());
-			noButton.setBackgroundColor(Color.parseColor(firstChoice.getDefaultColor()));
-			noButton.setFocusBackgroundColor(Color.parseColor(firstChoice.getFocusColor()));
+			this.noButton.setText(firstChoice.getLabel());
+			this.noButton.setIconResource(firstChoice.getIcon());
+			this.noButton.setBackgroundColor(Color.parseColor(firstChoice.getDefaultColor()));
+			this.noButton.setFocusBackgroundColor(Color.parseColor(firstChoice.getFocusColor()));
 
-			yesButton.setText(secondChoice.getLabel());
-			yesButton.setIconResource(secondChoice.getIcon());
-			yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
-			yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
+			this.yesButton.setText(secondChoice.getLabel());
+			this.yesButton.setIconResource(secondChoice.getIcon());
+			this.yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
+			this.yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
 		} else {
-			noButton.setVisibility(View.GONE);
-			yesButton.setVisibility(View.GONE);
-			confirmButton.setVisibility(View.VISIBLE);
+			setEndingContainerVisibility(true);
 		}
 
 		if(s.countdownRequired()) {
-			countDownAnimation = new CountDownAnimation(countdownView, s.getDuration(difficulty));
-			countDownAnimation.setCountDownListener(this);
+			this.countDownAnimation = new CountDownAnimation(this.countdownView, s.getDuration(this.difficulty));
+			this.countDownAnimation.setCountDownListener(this);
 			startCountDownAnimation("default");
 		}
 	}
@@ -121,7 +143,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		switch(animationStyle) {
 			case "scale":
 				scaleAnimation = new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-				countDownAnimation.setAnimation(scaleAnimation);
+				this.countDownAnimation.setAnimation(scaleAnimation);
 				break;
 			case "alpha":
 				scaleAnimation = new ScaleAnimation(1.0f, 0.0f, 1.0f, 0.0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -129,19 +151,17 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 				AnimationSet animationSet = new AnimationSet(false);
 				animationSet.addAnimation(scaleAnimation);
 				animationSet.addAnimation(alphaAnimation);
-				countDownAnimation.setAnimation(animationSet);
+				this.countDownAnimation.setAnimation(animationSet);
 				break;
 			default:
 				break;
 		}
 
-		// Customizable start count
-		//countDownAnimation.setStartCount(getStartCount());
-		countDownAnimation.start();
+		this.countDownAnimation.start();
 	}
 
 	private void cancelCountDownAnimation() {
-		countDownAnimation.cancel();
+		this.countDownAnimation.cancel();
 	}
 
 	@Override

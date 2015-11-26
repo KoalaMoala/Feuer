@@ -16,7 +16,8 @@ public enum Icon {
     ENTER("\uf062"),
     EXIT("\uf08e"),
     HAND("\uf256"),
-    UNLOCK("\uf09c");
+    UNLOCK("\uf09c"),
+    RESTART("\uf021");
 
     private String unicode;
 

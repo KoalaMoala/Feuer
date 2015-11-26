@@ -22,8 +22,8 @@
     <string name="menu_settings_reset_progression">Reset game data</string>
     <string name="menu_settings_reset_progression_description">[WARNING] You\'ll lose your entire progression, allowing you to start over</string>
 
-
-    <string name="button_confirm">Ok</string>
+    <string name="button_restart">Restart</string>
+    <string name="button_confirm">Return to menu</string>
     <string name="button_yes">YES</string>
     <string name="button_no">NO</string>
 

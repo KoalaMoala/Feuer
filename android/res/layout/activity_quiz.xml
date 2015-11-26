@@ -38,26 +38,54 @@
         android:text="30"
         android:layout_marginTop="40dp" />
 
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/confirm"
+    <LinearLayout
+        android:id="@+id/endingContainer"
         android:visibility="gone"
-        android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:paddingTop="10dp"
-        fancy:fb_borderColor="#FFFFFF"
-        fancy:fb_borderWidth="1dp"
-        fancy:fb_defaultColor="#7ab800"
-        fancy:fb_focusColor="#9bd823"
-        fancy:fb_fontIconResource="&#xf05d;"
-        fancy:fb_iconPosition="left"
-        fancy:fb_radius="30dp"
-        fancy:fb_text="@string/button_confirm"
-        fancy:fb_textColor="#FFFFFF"
-        android:layout_marginTop="60dp" />
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:layout_marginTop="60dp" >
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/restart"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="10dp"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_defaultColor="#7ab800"
+            fancy:fb_focusColor="#9bd823"
+            fancy:fb_fontIconResource="&#xf021;"
+            fancy:fb_iconPosition="left"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="@string/button_restart"
+            fancy:fb_textColor="#FFFFFF" />
+
+        <mehdi.sakout.fancybuttons.FancyButton
+            android:id="@+id/confirm"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:paddingTop="10dp"
+            fancy:fb_borderColor="#FFFFFF"
+            fancy:fb_borderWidth="1dp"
+            fancy:fb_defaultColor="#3b5998"
+            fancy:fb_focusColor="#5474b8"
+            fancy:fb_fontIconResource="&#xf05d;"
+            fancy:fb_iconPosition="left"
+            fancy:fb_radius="30dp"
+            fancy:fb_text="@string/button_confirm"
+            fancy:fb_textColor="#FFFFFF" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
