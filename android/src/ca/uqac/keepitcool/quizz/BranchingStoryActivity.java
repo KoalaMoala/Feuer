@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnPreparedListener;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +17,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import ca.uqac.keepitcool.menu.Preferences;
 import ca.uqac.keepitcool.quizz.scenario.Difficulty;
@@ -26,14 +31,16 @@ import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
 import ca.uqac.keepitcool.quizz.scenario.Situation;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
-public class BranchingStoryActivity extends Activity implements CountDownListener {
+public class BranchingStoryActivity extends Activity implements CountDownListener, OnPreparedListener, OnCompletionListener {
 
+	private int currentSource;
 	private LinearLayout endingContainer;
 	private TextView countdownView, situationView;
 	private FancyButton noButton, yesButton, confirmButton, restartButton;
 	private CountDownAnimation countDownAnimation;
 	private Difficulty difficulty;
 	private Scenario scenario;
+	private VideoView videoView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,10 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		this.confirmButton = (FancyButton) findViewById(R.id.confirm);
 		this.endingContainer = (LinearLayout) findViewById(R.id.endingContainer);
 		this.situationView.setTypeface(quandoFont);
+		this.videoView = (VideoView)findViewById(R.id.videoView);
+
+		this.videoView.setOnPreparedListener(this);
+		this.videoView.setOnCompletionListener(this);
 
 		loadScenario();
 
@@ -84,6 +95,17 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		});
 	}
 
+	private Uri getUriFromAsset(int asset) {
+		String path = "android.resource://" + getPackageName() + "/" + asset;
+		return Uri.parse(path);
+	}
+
+	private void playVideo(int asset) {
+		this.currentSource = asset;
+		this.videoView.setVideoURI(this.getUriFromAsset(this.currentSource));
+		this.videoView.start();
+	}
+
 	private void loadScenario() {
 		this.scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
 		Situation s = this.scenario.getStartingSituation();
@@ -93,10 +115,12 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 
 	private void setEndingContainerVisibility(boolean visibile) {
 		if(visibile) {
+			playVideo(R.raw.firespread_06);
 			this.noButton.setVisibility(View.GONE);
 			this.yesButton.setVisibility(View.GONE);
 			this.endingContainer.setVisibility(View.VISIBLE);
 		} else {
+			playVideo(R.raw.embers_23);
 			this.noButton.setVisibility(View.VISIBLE);
 			this.yesButton.setVisibility(View.VISIBLE);
 			this.endingContainer.setVisibility(View.GONE);
@@ -138,7 +162,6 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	}
 
 	private void startCountDownAnimation(String animationStyle) {
-		// Customizable animation
 		Animation scaleAnimation = null;
 		switch(animationStyle) {
 			case "scale":
@@ -168,6 +191,25 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	public void onCountDownEnd(CountDownAnimation animation) {
 		this.situationView.setText(getResources().getString(R.string.time_run_out));
 		setEndingContainerVisibility(true);
-		//Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onCompletion(MediaPlayer mp) {
+		//TODO: figure out a better way to handle this
+		if(this.currentSource == R.raw.firespread_06) {
+			playVideo(R.raw.fire_08);
+		} else {
+			mp.setLooping(true);
+		}
+	}
+
+	@Override
+	public void onPrepared(MediaPlayer mp) {
+		//TODO: figure out a better way to handle this
+		if(this.currentSource == R.raw.firespread_06) {
+			mp.setLooping(true);
+		} else {
+			mp.setLooping(true);
+		}
 	}
 }
