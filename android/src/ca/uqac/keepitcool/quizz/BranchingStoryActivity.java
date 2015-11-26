@@ -166,6 +166,8 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 
 	@Override
 	public void onCountDownEnd(CountDownAnimation animation) {
+		this.situationView.setText(getResources().getString(R.string.time_run_out));
+		setEndingContainerVisibility(true);
 		//Toast.makeText(this, "Done!", Toast.LENGTH_SHORT).show();
 	}
 }
