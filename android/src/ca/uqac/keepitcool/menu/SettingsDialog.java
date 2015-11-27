@@ -109,7 +109,7 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_custom);
         this.difficultySpinner.setAdapter(adapter);
 
-        int spinnerPosition = difficulty.equals("MEDIUM") ? 1 : difficulty.equals("HARD") ? 2 : 0;
+        int spinnerPosition = difficulty.equals("MEDIUM") ? Difficulty.MEDIUM.ordinal() : difficulty.equals("HARD") ? Difficulty.HARD.ordinal() : Difficulty.EASY.ordinal();
         this.difficultySpinner.setSelection(spinnerPosition);
         this.difficultySpinner.setOnItemSelectedListener(this);
 
