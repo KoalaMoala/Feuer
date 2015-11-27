@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.quizz.scenario.Difficulty;
@@ -97,25 +98,30 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.difficulty_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_custom);
         this.difficultySpinner.setAdapter(adapter);
-        int spinnerPosition = adapter.getPosition(difficulty);
+
+        int spinnerPosition = difficulty.equals("MEDIUM") ? 1 : difficulty.equals("HARD") ? 2 : 0;
         this.difficultySpinner.setSelection(spinnerPosition);
         this.difficultySpinner.setOnItemSelectedListener(this);
 
-        toggleDifficulty(difficulty);
+        toggleDifficulty(difficulty, context);
     }
 
-    private void toggleDifficulty(String difficulty) {
+    private void toggleDifficulty(String difficulty, Context context) {
         switch (difficulty) {
             case "EASY":
                 difficultyImage.setImageResource(R.drawable.difficulty_easy);
+                Preferences.updateDifficultySetting(Difficulty.EASY, context);
                 break;
             case "HARD":
                 difficultyImage.setImageResource(R.drawable.difficulty_hard);
+                Preferences.updateDifficultySetting(Difficulty.HARD, context);
                 break;
             default:
                 difficultyImage.setImageResource(R.drawable.difficulty_medium);
+                Preferences.updateDifficultySetting(Difficulty.MEDIUM, context);
                 break;
         }
+
     }
 
 
@@ -123,7 +129,7 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String selected = getResources().getStringArray(R.array.difficulty_array_values)[parent.getSelectedItemPosition()];
         Preferences.updateDifficultySetting(Difficulty.valueOf(selected.toUpperCase()), getContextFromActivity());
-        toggleDifficulty(selected);
+        toggleDifficulty(selected, getContextFromActivity());
     }
 
     @Override
