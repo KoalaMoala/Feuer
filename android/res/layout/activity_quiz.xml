@@ -5,7 +5,10 @@
     <VideoView
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:id="@+id/videoView" />
+        android:id="@+id/videoView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="-2dp" />
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:fancy="http://schemas.android.com/apk/res-auto"
