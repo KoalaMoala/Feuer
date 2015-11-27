@@ -2,19 +2,19 @@
 	{
 		"id": 1,
 		"trigger": "SUCCESS",
-		"text": "Ne pas oublier de composer le 911 (US/Canada) ou le 18 (France)"
+		"text": "Bravo, vous êtes sorti du bâtiment sans encombre ! N'oubliez pas de contacter les services d'urgences (le 911 au Canada/US et le 18 en France) pour les avertir."
 	}, {
 		"id": 2,
 		"trigger": "FAILURE",
-		"text": "Si l'incendie n'est pas maîtrisé, le feu se propage vers le haut"
+		"text": "[NE JAMAIS] Monter dans les étages supérieurs : si l'incendie n'est pas maîtisé, le feu se propage vers le haut."
 	}, {
 		"id": 3,
 		"trigger": "FAILURE",
-		"text": "Les serviettes n'étant pas ignifugées (ou humides), elles ne pourront pas étouffer l'incendie et risquent même de prendre feu"
+		"text": "[NE JAMAIS] Utiliser de serviettes n'étant pas ignifugées (ou non mouillées) : elles ne pourront pas étouffer l'incendie et risquent même de prendre feu."
 	}, {
 		"id": 4,
 		"trigger": "FAILURE",
-		"text": "Lorsqu'une alarme incendie sonne, il est capital d'évacuer le bâtiment en raison de la propagation du feu et de la fumée"
+		"text": "[NE JAMAIS] Ignorer une alarme alarme incendie qui sonne, il est capital d'évacuer le bâtiment en raison de la propagation du feu et de la fumée."
 	}, {
 		"id": 5,
 		"trigger": "MEDIUM",
@@ -24,7 +24,7 @@
 			"followUp": 2,
 			"color": "RED",
 			"icon": "UP"
-		}, 
+		},
 		"secondChoice": {
 			"text": "Descendre",
 			"followUp": 1,
@@ -40,7 +40,7 @@
 			"followUp": 3,
 			"color": "RED",
 			"icon": "HAND"
-		}, 
+		},
 		"secondChoice": {
 			"text": "Se diriger vers la sortie",
 			"followUp": 5,
@@ -56,7 +56,7 @@
 			"followUp": 6,
 			"color": "RED",
 			"icon": "EYE"
-		}, 
+		},
 		"secondChoice": {
 			"text": "Se diriger vers la sortie",
 			"followUp": 5,
@@ -72,7 +72,7 @@
 			"followUp": 7,
 			"color": "RED",
 			"icon": "ENTER"
-		}, 
+		},
 		"secondChoice": {
 			"text": "Se diriger vers la sortie",
 			"followUp": 5,
@@ -88,7 +88,7 @@
 			"followUp": 8,
 			"color": "RED",
 			"icon": "EYE"
-		}, 
+		},
 		"secondChoice": {
 			"text": "Se diriger vers la sortie",
 			"followUp": 5,
@@ -105,7 +105,7 @@
 			"followUp": 4,
 			"color": "RED",
 			"icon": "SLEEP"
-		}, 
+		},
 		"secondChoice": {
 			"text": "Se lever",
 			"followUp": 9,

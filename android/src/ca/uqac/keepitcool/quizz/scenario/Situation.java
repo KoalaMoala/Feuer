@@ -49,7 +49,7 @@ public final class Situation {
         return this;
     }
 
-    public Trigger getTrigger() {
-        return trigger;
+    public String getEndingType() {
+        return this.trigger.name();
     }
 }

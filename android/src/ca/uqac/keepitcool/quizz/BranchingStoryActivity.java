@@ -118,43 +118,38 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private void loadScenario() {
 		this.scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
 		Situation s = this.scenario.getStartingSituation();
-		setEndingContainerVisibility(false);
+		initializeControls();
 		this.updateTextFromSituation(s);
-
 		this.startTime =  elapsedRealtime();
-		Toast.makeText(getApplicationContext(), "startTime : " + startTime, Toast.LENGTH_SHORT).show();
 	}
 
-	private void setEndingContainerVisibility(boolean visible) {
-		if(visible) {
-			playVideo(R.raw.firespread_06);
-			this.noButton.setVisibility(View.GONE);
-			this.yesButton.setVisibility(View.GONE);
-			this.endingContainer.setVisibility(View.VISIBLE);
-		} else {
-			playVideo(R.raw.embers_23);
-			this.noButton.setVisibility(View.VISIBLE);
-			this.yesButton.setVisibility(View.VISIBLE);
-			this.endingContainer.setVisibility(View.GONE);
-		}
+	private void initializeControls() {
+		playVideo(R.raw.embers_23);
+		this.noButton.setVisibility(View.VISIBLE);
+		this.yesButton.setVisibility(View.VISIBLE);
+		this.endingContainer.setVisibility(View.GONE);
 	}
 
-	private void setEndingContainerVisibility(boolean visible, String failureCause) {
-		if(!visible) {
-			this.setEndingContainerVisibility(false);
-		} else {
-			switch (failureCause) {
-				case "RanOutOfTime":
-					playVideo(R.raw.out_of_time_15);
-					break;
-				default:
-					playVideo(R.raw.firespread_06);
-					break;
-			}
-			this.noButton.setVisibility(View.GONE);
-			this.yesButton.setVisibility(View.GONE);
-			this.endingContainer.setVisibility(View.VISIBLE);
+	private void updateEndingControls(String failureCause) {
+		switch (failureCause) {
+			case "RAN_OUT_OF_TIME":
+				playVideo(R.raw.out_of_time_15);
+				break;
+			case "FAILURE":
+				playVideo(R.raw.firespread_06);
+				break;
+			case "SUCCESS":
+				this.localScore = ( (double) (elapsedRealtime() - this.startTime) ) /  (double) 1000;
+				Toast.makeText(getApplicationContext(), "score : " + localScore , Toast.LENGTH_SHORT).show();
+				playVideo(R.raw.clouds_13);
+				break;
+			default:
+				playVideo(R.raw.clouds_13);
+				break;
 		}
+		this.noButton.setVisibility(View.GONE);
+		this.yesButton.setVisibility(View.GONE);
+		this.endingContainer.setVisibility(View.VISIBLE);
 	}
 
 	private void updateTextFromSituation(Situation s) {
@@ -173,7 +168,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			this.yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
 			this.yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
 		} else {
-			setEndingContainerVisibility(true, "Failure");
+			updateEndingControls(s.getEndingType());
 		}
 
 		if(s.countdownRequired()) {
@@ -188,12 +183,6 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		updateTextFromSituation(s);
 		if(s.countdownRequired()) {
 			startCountDownAnimation("default");
-		}
-
-		if(s.getTrigger().equals(Trigger.SUCCESS))
-		{
-			this.localScore = ( (double) (elapsedRealtime() - this.startTime) ) /  (double) 1000;
-			//Toast.makeText(getApplicationContext(), "score : " + localScore , Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -226,7 +215,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	@Override
 	public void onCountDownEnd(CountDownAnimation animation) {
 		this.situationView.setText(getResources().getString(R.string.time_run_out));
-		setEndingContainerVisibility(true, "RanOutOfTime");
+		updateEndingControls("RAN_OUT_OF_TIME");
 	}
 
 	@Override
