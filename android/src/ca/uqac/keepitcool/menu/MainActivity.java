@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         editor.putString("progress",progress.generateStringFromProgress());
         editor.apply();
         Toast t = Toast.makeText(getApplicationContext(), progress.getDescriptionFromCurrentLevel(), Toast.LENGTH_LONG);
-        t.show();
+        //t.show();
 
         //boolean silent = settings.getBoolean("silentMode", false);
         //setSilent(silent);
