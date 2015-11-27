@@ -30,6 +30,7 @@
             android:clickable="false"
             android:gravity="center"
             android:textStyle="bold"
+            android:textSize="16sp"
             android:textIsSelectable="false"
             android:layout_marginTop="20dp"/>
 
@@ -46,9 +47,9 @@
             android:shadowDy="0"
             android:shadowRadius="8"
             android:textColor="#cc7e00"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:textStyle="bold"
-            android:text="30"
+            android:text="@string/placeholder"
             android:layout_marginTop="40dp" />
 
         <LinearLayout
