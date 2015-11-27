@@ -85,10 +85,10 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
     private void setupSoundToggle() {
         if(soundIsOn) {
             toggleSoundImage.setImageResource(R.drawable.sound_on);
-            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_toggle_sound_on_description));
+            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_sound_on));
         } else {
             toggleSoundImage.setImageResource(R.drawable.sound_off);
-            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_toggle_sound_off_description));
+            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_sound_off));
         }
     }
 
@@ -121,7 +121,6 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
                 Preferences.updateDifficultySetting(Difficulty.MEDIUM, context);
                 break;
         }
-
     }
 
 
