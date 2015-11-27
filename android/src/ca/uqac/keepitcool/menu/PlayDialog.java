@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import ca.uqac.keepitcool.AndroidLauncher;
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.myfirstgame.Game;
+import ca.uqac.keepitcool.quizz.BranchingStoryActivity;
 
 public class PlayDialog extends FragmentDialog {
 
@@ -33,7 +34,7 @@ public class PlayDialog extends FragmentDialog {
         level_01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Game.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +42,7 @@ public class PlayDialog extends FragmentDialog {
         level_02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Game.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -49,7 +50,7 @@ public class PlayDialog extends FragmentDialog {
         level_03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Game.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -57,7 +58,7 @@ public class PlayDialog extends FragmentDialog {
         placeholder_01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AndroidLauncher.class);
+                Intent intent = new Intent(getActivity(), Game.class);
                 startActivity(intent);
             }
         });

@@ -19,7 +19,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
-import ca.uqac.keepitcool.myfirstgame.Level;
 import ca.uqac.keepitcool.myfirstgame.Progress;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {

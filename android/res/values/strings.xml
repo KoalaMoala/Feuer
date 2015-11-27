@@ -1,21 +1,47 @@
 <resources>
     <string name="app_name">Keep it Cool</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
 
+    <string name="placeholder">This is a placeholder</string>
+
+    <!-- MAIN MENU -->
     <string name="menu_settings">Settings</string>
     <string name="menu_play">Play</string>
     <string name="menu_score">High-Score</string>
     <string name="menu_share">Share</string>
+
+    <!-- PLAY MENU -->
     <string name="menu_level_01">[DONE] Level 01</string>
     <string name="menu_level_01_desc">Simple description of level 01</string>
     <string name="menu_level_02">Level 02</string>
     <string name="menu_level_02_desc">Simple description of level 02</string>
     <string name="menu_level_03">Level 03</string>
     <string name="menu_level_03_desc">Simple description of level 03</string>
-    <string name="menu_settings_toggle_sound_off">Toggle sound off</string>
-    <string name="menu_settings_toggle_sound_on">Toggle sound on</string>
-    <string name="menu_settings_toggle_sound_description">You can toggle sound on and off by clicking this button</string>
+
+    <!-- SETTINGS MENU -->
+    <string name="menu_settings_difficulty">Change difficulty</string>
+    <string name="menu_settings_toggle_sound">Click to toggle sound</string>
+    <string name="menu_settings_toggle_sound_off_description">Sound is currently DISABLED</string>
+    <string name="menu_settings_toggle_sound_on_description">Sound is currently ACTIVED</string>
     <string name="menu_settings_reset_progression">Reset game data</string>
     <string name="menu_settings_reset_progression_description">[WARNING] You\'ll lose your entire progression, allowing you to start over</string>
+
+    <!-- INGAME BUTTONS -->
+    <string name="button_restart">Restart</string>
+    <string name="button_confirm">Return to menu</string>
+    <string name="button_yes">YES</string>
+    <string name="button_no">NO</string>
+    <string name="time_run_out">In case of emergency, every second counts. Good habits can save your life while certain behaviours can put your life at risk.</string>
+
+    <!-- DIFFICULTY ARRAYS (LABELS & VALUES) -->
+    <string-array name="difficulty_array">
+        <item>Easy</item>
+        <item>Medium</item>
+        <item>Hard</item>
+    </string-array>
+
+    <string-array name="difficulty_array_values">
+        <item>EASY</item>
+        <item>MEDIUM</item>
+        <item>HARD</item>
+    </string-array>
 </resources>
