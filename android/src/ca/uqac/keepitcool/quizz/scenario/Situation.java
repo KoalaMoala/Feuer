@@ -48,4 +48,8 @@ public final class Situation {
         this.secondChoice = new Choice(label, followUp, color, icon);
         return this;
     }
+
+    public Trigger getTrigger() {
+        return trigger;
+    }
 }

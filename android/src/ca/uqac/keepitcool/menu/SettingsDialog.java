@@ -100,6 +100,8 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
             toggleSoundImage.setImageResource(R.drawable.sound_off);
             toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_toggle_sound_off_description));
         }
+
+        //Toast.makeText(getActivity().getApplicationContext(),"soundIsOn : " + soundIsOn, Toast.LENGTH_SHORT).show();
     }
 
     private void setupDifficultySpinner(Context context) {
