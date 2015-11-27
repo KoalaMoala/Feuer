@@ -6,7 +6,7 @@
 	}, {
 		"id": 2,
 		"trigger": "FAILURE",
-		"text": "Si l'incendie n'est pas maîtisé, le feu se propage vers le haut"
+		"text": "Si l'incendie n'est pas maîtrisé, le feu se propage vers le haut"
 	}, {
 		"id": 3,
 		"trigger": "FAILURE",
@@ -84,7 +84,7 @@
 		"trigger": "MEDIUM",
 		"text": "Vous êtes dans le couloir et ne voyez rien d'alarmant",
 		"firstChoice": {
-			"text": "Investiger",
+			"text": "Investiguer",
 			"followUp": 8,
 			"color": "RED",
 			"icon": "EYE"

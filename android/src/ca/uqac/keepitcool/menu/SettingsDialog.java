@@ -1,7 +1,9 @@
 package ca.uqac.keepitcool.menu;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +66,15 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         this.reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                //Delete progress & settings
+                Context context = getActivity().getApplicationContext();
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                prefs.edit().clear().apply();
+
+                //Refresh view
+                soundIsOn = Preferences.getSoundSetting(context);
+                setupSoundToggle();
+                setupDifficultySpinner(context);
             }
         });
 
