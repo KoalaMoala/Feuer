@@ -49,9 +49,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("progress",progress.generateStringFromProgress());
         editor.apply();
-        Toast t = Toast.makeText(getApplicationContext(), progress.getDescriptionFromCurrentLevel(), Toast.LENGTH_LONG);
-        t.show();
 
+        //Toast t = Toast.makeText(getApplicationContext(), progress.getDescriptionFromCurrentLevel(), Toast.LENGTH_LONG);
+        //t.show();
         //boolean silent = settings.getBoolean("silentMode", false);
         //setSilent(silent);
 
@@ -134,8 +134,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 sAux = sAux + "<Insert cool URL here>\n\n";
                 i.putExtra(Intent.EXTRA_TEXT, sAux);
 
-                //Toast t = Toast.makeText(getApplicationContext(), sAux, Toast.LENGTH_SHORT);
-                //t.show();
+                Toast t = Toast.makeText(getApplicationContext(), sAux, Toast.LENGTH_SHORT);
+                t.show();
 
                 startActivity(Intent.createChooser(i, "Choose one"));
             }
