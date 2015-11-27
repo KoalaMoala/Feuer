@@ -19,12 +19,15 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.util.Random;
+import java.text.DecimalFormat;
 
 import ca.uqac.keepitcool.menu.Preferences;
 import ca.uqac.keepitcool.quizz.scenario.Difficulty;
+import ca.uqac.keepitcool.quizz.scenario.Trigger;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import ca.uqac.keepitcool.R;
@@ -35,9 +38,13 @@ import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
 import ca.uqac.keepitcool.quizz.scenario.Situation;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
+import static android.os.SystemClock.elapsedRealtime;
+
 public class BranchingStoryActivity extends Activity implements CountDownListener, OnPreparedListener, OnCompletionListener {
 
 	private int currentSource;
+	private long startTime;
+	private double localScore;
 	private LinearLayout endingContainer;
 	private TextView countdownView, situationView;
 	private FancyButton noButton, yesButton, confirmButton, restartButton;
@@ -53,6 +60,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 
 		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
 
+		this.localScore = 0;
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
 		this.situationView = (TextView) findViewById(R.id.question);
 		this.countdownView = (TextView) findViewById(R.id.textView);
@@ -115,6 +123,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		Situation s = this.scenario.getStartingSituation();
 		initializeControls();
 		this.updateTextFromSituation(s);
+		this.startTime =  elapsedRealtime();
 	}
 
 	private void initializeControls() {
@@ -131,6 +140,11 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 				break;
 			case "FAILURE":
 				playVideo(getRandomVideoFromType("FAILURE"));
+				break;
+			case "SUCCESS":
+				this.localScore = ( (double) (elapsedRealtime() - this.startTime) ) /  (double) 1000;
+				Toast.makeText(getApplicationContext(), "score : " + localScore , Toast.LENGTH_SHORT).show();
+				playVideo(R.raw.clouds_13);
 				break;
 			default:
 				playVideo(getRandomVideoFromType("SUCCESS"));
