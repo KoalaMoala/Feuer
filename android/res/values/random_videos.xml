@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="VIDEO_MAIN">
+        <item>@raw/embers_04</item>
+        <item>@raw/embers_23</item>
+    </array>
+
+    <array name="VIDEO_SUCCESS">
+        <item>@raw/clouds_13</item>
+    </array>
+
+    <array name="VIDEO_RAN_OUT_OF_TIME">
+        <item>@raw/out_of_time_15</item>
+    </array>
+
+    <array name="VIDEO_FAILURE">
+        <item>@raw/firespread_02</item>
+        <item>@raw/firespread_06</item>
+        <item>@raw/firespread_12</item>
+    </array>
+
+    <array name="VIDEO_FAILURE_LOOP">
+        <item>@raw/fire_08</item>
+    </array>
+
+</resources>

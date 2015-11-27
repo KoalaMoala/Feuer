@@ -2,6 +2,8 @@ package ca.uqac.keepitcool.quizz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -18,6 +20,8 @@ import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import java.util.Random;
 
 import ca.uqac.keepitcool.menu.Preferences;
 import ca.uqac.keepitcool.quizz.scenario.Difficulty;
@@ -114,7 +118,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	}
 
 	private void initializeControls() {
-		playVideo(R.raw.embers_23);
+		playVideo(getRandomVideoFromType("MAIN"));
 		this.noButton.setVisibility(View.VISIBLE);
 		this.yesButton.setVisibility(View.VISIBLE);
 		this.endingContainer.setVisibility(View.GONE);
@@ -123,13 +127,13 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private void updateEndingControls(String failureCause) {
 		switch (failureCause) {
 			case "RAN_OUT_OF_TIME":
-				playVideo(R.raw.out_of_time_15);
+				playVideo(getRandomVideoFromType("RAN_OUT_OF_TIME"));
 				break;
 			case "FAILURE":
-				playVideo(R.raw.firespread_06);
+				playVideo(getRandomVideoFromType("FAILURE"));
 				break;
 			default:
-				playVideo(R.raw.clouds_13);
+				playVideo(getRandomVideoFromType("SUCCESS"));
 				break;
 		}
 		this.noButton.setVisibility(View.GONE);
@@ -206,8 +210,8 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	@Override
 	public void onCompletion(MediaPlayer mp) {
 		//TODO: figure out a better way to handle this
-		if(this.currentSource == R.raw.firespread_06) {
-			playVideo(R.raw.fire_08);
+		if(this.currentSource == R.raw.firespread_06 || this.currentSource == R.raw.firespread_02 || this.currentSource == R.raw.firespread_12) {
+			playVideo(getRandomVideoFromType("FAILURE_LOOP"));
 		} else {
 			mp.setLooping(true);
 		}
@@ -216,10 +220,36 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	@Override
 	public void onPrepared(MediaPlayer mp) {
 		//TODO: figure out a better way to handle this
-		if(this.currentSource == R.raw.firespread_06) {
+		if(this.currentSource == R.raw.firespread_06 || this.currentSource == R.raw.firespread_02 || this.currentSource == R.raw.firespread_12) {
 			mp.setLooping(true);
 		} else {
 			mp.setLooping(true);
 		}
+	}
+
+	private int getRandomVideoFromType(String type) {
+		final Resources resources = getResources();
+		TypedArray videos = null;
+		switch(type) {
+			case "SUCCESS":
+				videos = resources.obtainTypedArray(R.array.VIDEO_SUCCESS);
+				break;
+			case "FAILURE":
+				videos = resources.obtainTypedArray(R.array.VIDEO_FAILURE);
+				break;
+			case "FAILURE_LOOP":
+				videos = resources.obtainTypedArray(R.array.VIDEO_FAILURE_LOOP);
+				break;
+			case "RAN_OUT_OF_TIME":
+				videos = resources.obtainTypedArray(R.array.VIDEO_RAN_OUT_OF_TIME);
+				break;
+			default:
+				videos = resources.obtainTypedArray(R.array.VIDEO_MAIN);
+				break;
+		}
+
+		final Random rand = new Random();
+		final int rndInt = rand.nextInt(videos.length());
+		return videos.getResourceId(rndInt, 0);
 	}
 }
