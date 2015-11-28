@@ -122,7 +122,6 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	}
 
 	private void loadScenario(int levelId) {
-		Toast.makeText(BranchingStoryActivity.this, "levelId :" + levelId, Toast.LENGTH_SHORT).show();
 		this.scenario = ScenarioBuilder.buildFromFile("level" + levelId + ".json", getAssets());
 		Situation s = this.scenario.getStartingSituation();
 		initializeControls();
