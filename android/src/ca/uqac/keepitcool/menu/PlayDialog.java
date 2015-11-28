@@ -35,6 +35,9 @@ public class PlayDialog extends FragmentDialog {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("levelId", 1); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
@@ -43,6 +46,9 @@ public class PlayDialog extends FragmentDialog {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("levelId", 2); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
             }
         });
@@ -51,6 +57,9 @@ public class PlayDialog extends FragmentDialog {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("levelId", 3); //Your id
+                intent.putExtras(b); //Put your id to your next Intent
                 startActivity(intent);
             }
         });

@@ -43,6 +43,7 @@ import static android.os.SystemClock.elapsedRealtime;
 public class BranchingStoryActivity extends Activity implements CountDownListener, OnPreparedListener, OnCompletionListener {
 
 	private int currentSource;
+	private int levelId;
 	private long startTime;
 	private double localScore;
 	private LinearLayout endingContainer;
@@ -75,7 +76,9 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		this.videoView.setOnPreparedListener(this);
 		this.videoView.setOnCompletionListener(this);
 
-		loadScenario();
+		Bundle b = getIntent().getExtras();
+		this.levelId = b.getInt("levelId");
+		loadScenario(levelId);
 
 		this.noButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -94,7 +97,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		this.restartButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				loadScenario();
+				loadScenario(levelId);
 			}
 		});
 
@@ -118,8 +121,9 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		this.videoView.start();
 	}
 
-	private void loadScenario() {
-		this.scenario = ScenarioBuilder.buildFromFile("levels.json", getAssets());
+	private void loadScenario(int levelId) {
+		Toast.makeText(BranchingStoryActivity.this, "levelId :" + levelId, Toast.LENGTH_SHORT).show();
+		this.scenario = ScenarioBuilder.buildFromFile("level" + levelId + ".json", getAssets());
 		Situation s = this.scenario.getStartingSituation();
 		initializeControls();
 		this.updateTextFromSituation(s);
