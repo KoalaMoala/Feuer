@@ -1,7 +1,8 @@
 {
-  "description" : [
-
-  ],
+  "description" : {
+    "name" : "Alerte incendie à l'hôtel",
+    "shortDescription" : "Une alarme se déclenche au milieu de la nuit."
+  },
   "scenario" : [
     {
       "id": 1,
