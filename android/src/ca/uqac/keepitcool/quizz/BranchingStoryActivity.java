@@ -2,6 +2,7 @@ package ca.uqac.keepitcool.quizz;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -23,11 +25,9 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import java.util.Random;
-import java.text.DecimalFormat;
 
 import ca.uqac.keepitcool.menu.Preferences;
 import ca.uqac.keepitcool.quizz.scenario.Difficulty;
-import ca.uqac.keepitcool.quizz.scenario.Trigger;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import ca.uqac.keepitcool.R;
@@ -45,7 +45,8 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private int currentSource;
 	private int levelId;
 	private long startTime;
-	private double localScore;
+	private float topScore;
+    private String scoreKey;
 	private LinearLayout endingContainer;
 	private TextView countdownView, situationView;
 	private FancyButton noButton, yesButton, confirmButton, restartButton;
@@ -61,7 +62,6 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 
 		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
 
-		this.localScore = 0;
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
 		this.situationView = (TextView) findViewById(R.id.question);
 		this.countdownView = (TextView) findViewById(R.id.textView);
@@ -76,9 +76,15 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		this.videoView.setOnPreparedListener(this);
 		this.videoView.setOnCompletionListener(this);
 
+		//Getting levelId from Menu fragment
 		Bundle b = getIntent().getExtras();
 		this.levelId = b.getInt("levelId");
 		loadScenario(levelId);
+
+		//Loading score
+		final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        this.scoreKey = "scoreLevel" + levelId;
+		this.topScore = prefs.getFloat(this.scoreKey, 0);
 
 		this.noButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -145,8 +151,12 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 				playVideo(getRandomVideoFromType("FAILURE"));
 				break;
 			case "SUCCESS":
-				this.localScore = ( (double) (elapsedRealtime() - this.startTime) ) /  (double) 1000;
-				Toast.makeText(getApplicationContext(), "score : " + localScore , Toast.LENGTH_SHORT).show();
+				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
+				this.topScore = score < this.topScore ? score : this.topScore;
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                prefs.edit().putFloat(this.scoreKey, this.topScore).apply();
+
+				Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
 				playVideo(R.raw.clouds_13);
 				break;
 			default:
