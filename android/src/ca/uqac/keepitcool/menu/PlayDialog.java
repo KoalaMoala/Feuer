@@ -21,9 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ca.uqac.keepitcool.AndroidLauncher;
 import ca.uqac.keepitcool.R;
-import ca.uqac.keepitcool.myfirstgame.Game;
 import ca.uqac.keepitcool.quizz.BranchingStoryActivity;
 import ca.uqac.keepitcool.quizz.scenario.Situation;
 
@@ -84,7 +82,7 @@ public class PlayDialog extends FragmentDialog {
         placeholder_01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Game.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -92,7 +90,7 @@ public class PlayDialog extends FragmentDialog {
         placeholder_02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AndroidLauncher.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -100,7 +98,7 @@ public class PlayDialog extends FragmentDialog {
         placeholder_03.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AndroidLauncher.class);
+                Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
         });

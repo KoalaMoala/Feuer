@@ -3,12 +3,10 @@ package ca.uqac.keepitcool.menu;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
@@ -19,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
-import ca.uqac.keepitcool.myfirstgame.Progress;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
@@ -38,22 +35,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Toast t = Toast.makeText(getApplicationContext(), "onCreate", Toast.LENGTH_SHORT);
-        //t.show();
         setContentView(R.layout.activity_main);
-
-        // Restore preferences
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String progressStr = preferences.getString("progress", "");
-        Progress progress = Progress.getInstance(progressStr);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("progress",progress.generateStringFromProgress());
-        editor.apply();
-
-        //Toast t = Toast.makeText(getApplicationContext(), progress.getDescriptionFromCurrentLevel(), Toast.LENGTH_LONG);
-        //t.show();
-        //boolean silent = settings.getBoolean("silentMode", false);
-        //setSilent(silent);
 
         final Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);

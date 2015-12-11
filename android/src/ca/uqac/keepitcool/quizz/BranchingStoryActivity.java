@@ -23,22 +23,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+import static android.os.SystemClock.elapsedRealtime;
 
 import java.util.Random;
-
-import ca.uqac.keepitcool.menu.Preferences;
-import ca.uqac.keepitcool.quizz.scenario.Difficulty;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.menu.Preferences;
 import ca.uqac.keepitcool.menu.MainActivity;
 import ca.uqac.keepitcool.quizz.scenario.Choice;
+import ca.uqac.keepitcool.quizz.scenario.Difficulty;
 import ca.uqac.keepitcool.quizz.scenario.Scenario;
 import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
 import ca.uqac.keepitcool.quizz.scenario.Situation;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
-
-import static android.os.SystemClock.elapsedRealtime;
 
 public class BranchingStoryActivity extends Activity implements CountDownListener, OnPreparedListener, OnCompletionListener {
 
