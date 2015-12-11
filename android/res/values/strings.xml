@@ -20,8 +20,8 @@
     <!-- SETTINGS MENU -->
     <string name="menu_settings_difficulty">Change difficulty</string>
     <string name="menu_settings_toggle_sound">Click to toggle sound</string>
-    <string name="menu_settings_toggle_sound_off_description">Sound is currently DISABLED</string>
-    <string name="menu_settings_toggle_sound_on_description">Sound is currently ACTIVED</string>
+    <string name="menu_settings_sound_on">Sound is currently ACTIVED</string>
+    <string name="menu_settings_sound_off">Sound is currently DISABLED</string>
     <string name="menu_settings_reset_progression">Reset game data</string>
     <string name="menu_settings_reset_progression_description">[WARNING] You\'ll lose your entire progression, allowing you to start over</string>
 

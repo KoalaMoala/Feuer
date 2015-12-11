@@ -1,7 +1,9 @@
 package ca.uqac.keepitcool.menu;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.quizz.scenario.Difficulty;
@@ -63,7 +66,15 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         this.reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                //Delete progress & settings
+                Context context = getActivity().getApplicationContext();
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+                prefs.edit().clear().apply();
+
+                //Refresh view
+                soundIsOn = Preferences.getSoundSetting(context);
+                setupSoundToggle();
+                setupDifficultySpinner(context);
             }
         });
 
@@ -84,10 +95,10 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
     private void setupSoundToggle() {
         if(soundIsOn) {
             toggleSoundImage.setImageResource(R.drawable.sound_on);
-            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_toggle_sound_on_description));
+            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_sound_on));
         } else {
             toggleSoundImage.setImageResource(R.drawable.sound_off);
-            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_toggle_sound_off_description));
+            toggleSoundDescription.setText(getResources().getString(R.string.menu_settings_sound_off));
         }
     }
 
@@ -97,23 +108,27 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context, R.array.difficulty_array, R.layout.spinner_custom);
         adapter.setDropDownViewResource(R.layout.spinner_dropdown_custom);
         this.difficultySpinner.setAdapter(adapter);
-        int spinnerPosition = adapter.getPosition(difficulty);
+
+        int spinnerPosition = difficulty.equals("MEDIUM") ? Difficulty.MEDIUM.ordinal() : difficulty.equals("HARD") ? Difficulty.HARD.ordinal() : Difficulty.EASY.ordinal();
         this.difficultySpinner.setSelection(spinnerPosition);
         this.difficultySpinner.setOnItemSelectedListener(this);
 
-        toggleDifficulty(difficulty);
+        toggleDifficulty(difficulty, context);
     }
 
-    private void toggleDifficulty(String difficulty) {
+    private void toggleDifficulty(String difficulty, Context context) {
         switch (difficulty) {
             case "EASY":
                 difficultyImage.setImageResource(R.drawable.difficulty_easy);
+                Preferences.updateDifficultySetting(Difficulty.EASY, context);
                 break;
             case "HARD":
                 difficultyImage.setImageResource(R.drawable.difficulty_hard);
+                Preferences.updateDifficultySetting(Difficulty.HARD, context);
                 break;
             default:
                 difficultyImage.setImageResource(R.drawable.difficulty_medium);
+                Preferences.updateDifficultySetting(Difficulty.MEDIUM, context);
                 break;
         }
     }
@@ -123,7 +138,7 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         String selected = getResources().getStringArray(R.array.difficulty_array_values)[parent.getSelectedItemPosition()];
         Preferences.updateDifficultySetting(Difficulty.valueOf(selected.toUpperCase()), getContextFromActivity());
-        toggleDifficulty(selected);
+        toggleDifficulty(selected, getContextFromActivity());
     }
 
     @Override

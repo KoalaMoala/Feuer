@@ -37,36 +37,12 @@ project(":android") {
     configurations { natives }
 
     dependencies {
-        compile project(":core")
         compile fileTree(dir: 'libs', include: ['*.jar'])
-        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-armeabi-v7a"
-        natives "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-x86"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile 'com.android.support:appcompat-v7:23.1.0'
         compile 'eu.chainfire:libsuperuser:1.0.0.+'
         compile 'com.android.support:design:23.1.0+'
         compile 'com.github.medyo:fancybuttons:1.5@aar'
         compile 'com.google.code.gson:gson:2.4'
-    }
-}
-
-project(":core") {
-    apply plugin: "java"
-
-    dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
-        compile "com.badlogicgames.box2dlights:box2dlights:$box2DLightsVersion"
-        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils:0.13.2"
-        compile "net.dermetfan.libgdx-utils:libgdx-utils-box2d:0.13.2"
     }
 }
 

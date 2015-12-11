@@ -2,6 +2,7 @@ package ca.uqac.keepitcool.quizz.scenario;
 
 import android.content.res.AssetManager;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -53,9 +54,13 @@ public class ScenarioBuilder {
 
     public static Scenario buildFromFile(String asset, AssetManager assetManager) {
         Scenario scenario = new Scenario();
+
         try(JsonReader reader = new JsonReader(new InputStreamReader(assetManager.open(asset)))) {
             JsonParser parser = new JsonParser();
-            JsonArray array = parser.parse(reader).getAsJsonArray();
+
+            JsonObject level = parser.parse(reader).getAsJsonObject();
+            JsonArray array = level.getAsJsonArray("scenario");
+
             for(JsonElement elem : array) {
                 JsonObject obj = elem.getAsJsonObject();
                 Situation s = readSituation(obj);

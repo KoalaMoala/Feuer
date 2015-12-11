@@ -27,11 +27,11 @@ public class Preferences {
         Difficulty difficulty = getDifficultySetting(context);
         switch (difficulty) {
             case EASY:
-                return "Easy";
+                return "EASY";
             case HARD:
-                return "Hard";
+                return "HARD";
             default:
-                return "Medium";
+                return "MEDIUM";
         }
     }
 
