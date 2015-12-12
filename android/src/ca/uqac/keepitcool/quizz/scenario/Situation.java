@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import ca.uqac.keepitcool.quizz.utils.Difficulty;
-import ca.uqac.keepitcool.quizz.utils.FancyColor;
 import ca.uqac.keepitcool.quizz.utils.Icon;
 import ca.uqac.keepitcool.quizz.utils.Trigger;
 import ca.uqac.keepitcool.quizz.utils.UserDecision;
@@ -54,8 +53,8 @@ public final class Situation {
         return this.choices.get(index).getFollowUp();
     }
 
-    public Situation addChoice(UserDecision userDecision, String label, Integer followUp, FancyColor color, Icon icon) {
-        this.choices.put(userDecision, new Choice(label, followUp, userDecision, color, icon));
+    public Situation addChoice(UserDecision userDecision, String label, Integer followUp, Icon icon) {
+        this.choices.put(userDecision, new Choice(label, followUp, userDecision, icon));
         return this;
     }
 

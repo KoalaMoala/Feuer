@@ -3,7 +3,6 @@ package ca.uqac.keepitcool.quizz.scenario;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.uqac.keepitcool.quizz.utils.FancyColor;
 import ca.uqac.keepitcool.quizz.utils.Icon;
 import ca.uqac.keepitcool.quizz.utils.Trigger;
 import ca.uqac.keepitcool.quizz.utils.UserDecision;
@@ -35,8 +34,8 @@ public class Scenario {
         return this.addSituation(key, new Situation(trigger, text));
     }
 
-    Scenario addChoiceToSituation(int key, UserDecision userDecision, String label, int followUp, FancyColor color, Icon icon) {
-        this.scenario.get(key).addChoice(userDecision, label, followUp, color, icon);
+    Scenario addChoiceToSituation(int key, UserDecision userDecision, String label, int followUp, Icon icon) {
+        this.scenario.get(key).addChoice(userDecision, label, followUp, icon);
         return this;
     }
 
