@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.os.SystemClock.elapsedRealtime;
@@ -34,10 +35,10 @@ public class BranchingStoryActivity extends Activity {
 	private Scenario scenario;
 	private Difficulty difficulty;
 	private TextView situationView;
-	private LinearLayout endingContainer;
 	private BackgroundPlayer backgroundPlayer;
 	private AnimatedCountdown animatedCountdown;
-	private DynamicButton firstButton, secondButton;
+	private List<DynamicButton> dynamicButtons;
+	private LinearLayout endingContainer, firstRow, secondRow;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +47,18 @@ public class BranchingStoryActivity extends Activity {
 
 		this.situationView = (TextView) findViewById(R.id.question);
 		this.endingContainer = (LinearLayout) findViewById(R.id.endingContainer);
+		this.firstRow = (LinearLayout) findViewById(R.id.firstRow);
+		this.secondRow = (LinearLayout) findViewById(R.id.secondRow);
 
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
 		this.backgroundPlayer = new BackgroundPlayer((VideoView)findViewById(R.id.videoView), getPackageName(), getApplicationContext());
 		this.animatedCountdown = new AnimatedCountdown((TextView) findViewById(R.id.textView), this);
-		this.firstButton = new DynamicButton((FancyButton) findViewById(R.id.firstButton), UserDecision.FIRST, this);
-		this.secondButton = new DynamicButton((FancyButton) findViewById(R.id.secondButton), UserDecision.SECOND, this);
+
+		this.dynamicButtons = new ArrayList<DynamicButton>();
+		dynamicButtons.add(new DynamicButton((FancyButton) findViewById(R.id.firstButton), this));
+		dynamicButtons.add(new DynamicButton((FancyButton) findViewById(R.id.secondButton), this));
+		dynamicButtons.add(new DynamicButton((FancyButton) findViewById(R.id.thirdButton), this));
+		dynamicButtons.add(new DynamicButton((FancyButton) findViewById(R.id.fourthButton), this));
 		this.situationView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf"));
 
 		//Getting levelId from Menu fragment
@@ -84,16 +91,10 @@ public class BranchingStoryActivity extends Activity {
 	private void loadScenario(int levelId) {
 		this.scenario = ScenarioBuilder.buildFromFile("level" + levelId + ".json", getAssets());
 		Situation s = this.scenario.getStartingSituation();
-		initializeControls();
+		this.backgroundPlayer.playVideo("MAIN");
+		this.displayEndingContainer(false);
 		this.updateIntefaceFromSituation(s);
 		this.startTime =  elapsedRealtime();
-	}
-
-	private void initializeControls() {
-		this.backgroundPlayer.playVideo("MAIN");
-		this.firstButton.setVisibility(View.VISIBLE);
-		this.secondButton.setVisibility(View.VISIBLE);
-		this.endingContainer.setVisibility(View.GONE);
 	}
 
 	// ============================================================
@@ -113,8 +114,14 @@ public class BranchingStoryActivity extends Activity {
 		if(0 < choicesCount) {
 			List<Choice> choices = s.getChoicesInRandomOrder();
 			List<FancyColor> colors = FancyColor.getRandomColors(choicesCount);
-			this.firstButton.update(choices.get(0), colors.get(0));
-			this.secondButton.update(choices.get(1), colors.get(1));
+			for(int count=0; count < choicesCount; count++) {
+				DynamicButton current = this.dynamicButtons.get(count);
+				current.update(choices.get(count), colors.get(count));
+				current.setVisibility(View.VISIBLE);
+			}
+			for(int undefinedChoices=choicesCount; undefinedChoices < 4; undefinedChoices++) {
+				this.dynamicButtons.get(undefinedChoices).setVisibility(View.GONE);
+			}
 		} else {
 			updateEndingControls(s.getEndingType());
 		}
@@ -140,8 +147,18 @@ public class BranchingStoryActivity extends Activity {
 				this.backgroundPlayer.playVideo("SUCCESS");
 				break;
 		}
-		this.firstButton.setVisibility(View.GONE);
-		this.secondButton.setVisibility(View.GONE);
-		this.endingContainer.setVisibility(View.VISIBLE);
+		this.displayEndingContainer(true);
+	}
+
+	private void displayEndingContainer(boolean shouldBeDisplayed) {
+		if(shouldBeDisplayed) {
+			this.endingContainer.setVisibility(View.VISIBLE);
+			this.firstRow.setVisibility(View.GONE);
+			this.secondRow.setVisibility(View.GONE);
+		} else {
+			this.endingContainer.setVisibility(View.GONE);
+			this.firstRow.setVisibility(View.VISIBLE);
+			this.secondRow.setVisibility(View.VISIBLE);
+		}
 	}
 }

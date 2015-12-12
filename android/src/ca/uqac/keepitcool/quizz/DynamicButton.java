@@ -13,9 +13,8 @@ public class DynamicButton implements View.OnClickListener {
     private final FancyButton control;
     private UserDecision userDecision;
 
-    public DynamicButton(FancyButton control, UserDecision userDecision, BranchingStoryActivity parent) {
+    public DynamicButton(FancyButton control, BranchingStoryActivity parent) {
         this.control = control;
-        this.userDecision = userDecision;
         this.parent = parent;
         this.control.setOnClickListener(this);
     }
