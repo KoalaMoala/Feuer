@@ -37,6 +37,7 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
 
     private void loadVideo(int asset) {
         this.currentSource = asset;
+        this.videoView.stopPlayback();
         this.videoView.setVideoURI(this.getUriFromAsset(this.currentSource));
         this.videoView.start();
     }
