@@ -32,7 +32,6 @@ import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
 public class BranchingStoryActivity extends Activity implements CountDownListener {
 
-
 	private int levelId;
 	private long startTime;
 	private LinearLayout endingContainer;
@@ -116,7 +115,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			case "RAN_OUT_OF_TIME":
 				this.backgroundPlayer.playVideo("RAN_OUT_OF_TIME");
 				break;
-			case "":
+			case "FAILURE":
 				this.backgroundPlayer.playVideo("FAILURE");
 				break;
 			default:
