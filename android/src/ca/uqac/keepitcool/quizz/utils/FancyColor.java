@@ -1,11 +1,18 @@
 package ca.uqac.keepitcool.quizz.utils;
 
-// http://www.binaryhexconverter.com/hex-to-decimal-converter
+import java.util.Arrays;
+import java.util.Random;
 
 public enum FancyColor {
-    GREEN("#7ab800", "#9bd823"),
-    RED("#b80600", "#d83e23");
+    BLUE("#3B5998", "#5474B8"),
+    GREEN("#7AB800", "#9BD823"),
+    GREY("#3B414F", "#667189"),
+    LIGHTBLUE("#55ACEE", "#83CAFF"),
+    ORANGE("#FF8800", "#FFA641"),
+    PURPLE("#712FF0","#9F71F9"),
+    RED("#B80600", "#D83E23");
 
+    private static final Random RANDOM = new Random();
     private String defaultColor;
     private String focusColor;
 
@@ -20,5 +27,26 @@ public enum FancyColor {
 
     public String getFocusColor() {
         return this.focusColor;
+    }
+
+    public static FancyColor getRandomColor() {
+        FancyColor[] constants = FancyColor.class.getEnumConstants();
+        int x = RANDOM.nextInt(constants.length);
+        return constants[x];
+    }
+
+    public static FancyColor[] getRandomColors(int size) {
+        FancyColor[] constants = FancyColor.class.getEnumConstants();
+        FancyColor[] results = new FancyColor[2];
+
+        for(int count=0; count < size; count++) {
+            FancyColor currentColor = constants[RANDOM.nextInt(constants.length)];
+            while (Arrays.asList(results).contains(currentColor)) {
+                currentColor = constants[RANDOM.nextInt(constants.length)];
+            }
+            results[count] = currentColor;
+        }
+
+        return results;
     }
 }

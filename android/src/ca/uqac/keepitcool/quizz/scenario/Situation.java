@@ -28,6 +28,10 @@ public final class Situation {
         return (this.trigger != Trigger.FAILURE && this.trigger != Trigger.SUCCESS);
     }
 
+    public boolean hasChoices() {
+        return this.countdownRequired();
+    }
+
     public Choice getFirstChoice() {
         return this.firstChoice;
     }

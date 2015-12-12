@@ -27,6 +27,7 @@ import static android.os.SystemClock.elapsedRealtime;
 
 import java.util.Random;
 
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
 import ca.uqac.keepitcool.quizz.utils.UserDecision;
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -170,18 +171,10 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private void updateTextFromSituation(Situation s) {
 		this.situationView.setText(s.getDescription());
 
-		Choice firstChoice = s.getFirstChoice();
-		Choice secondChoice = s.getSecondChoice();
-		if(null != firstChoice && null != secondChoice) {
-			this.noButton.setText(firstChoice.getLabel());
-			this.noButton.setIconResource(firstChoice.getIcon());
-			this.noButton.setBackgroundColor(Color.parseColor(firstChoice.getDefaultColor()));
-			this.noButton.setFocusBackgroundColor(Color.parseColor(firstChoice.getFocusColor()));
-
-			this.yesButton.setText(secondChoice.getLabel());
-			this.yesButton.setIconResource(secondChoice.getIcon());
-			this.yesButton.setBackgroundColor(Color.parseColor(secondChoice.getDefaultColor()));
-			this.yesButton.setFocusBackgroundColor(Color.parseColor(secondChoice.getFocusColor()));
+		FancyColor[] colors = FancyColor.getRandomColors(2);
+		if(s.hasChoices()) {
+			this.updateChoiceButton(this.noButton, s.getFirstChoice(), colors[0]);
+			this.updateChoiceButton(this.yesButton, s.getSecondChoice(), colors[1]);
 		} else {
 			updateEndingControls(s.getEndingType());
 		}
@@ -191,6 +184,13 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			this.countDownAnimation.setCountDownListener(this);
 			startCountDownAnimation("default");
 		}
+	}
+
+	private void updateChoiceButton(FancyButton control, Choice choice, FancyColor color) {
+		control.setText(choice.getLabel());
+		control.setIconResource(choice.getIcon());
+		control.setBackgroundColor(Color.parseColor(color.getDefaultColor()));
+		control.setFocusBackgroundColor(Color.parseColor(color.getFocusColor()));
 	}
 
 	private void triggerNextScreen(Situation s) {
