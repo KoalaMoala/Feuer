@@ -47,7 +47,9 @@ public class AnimatedCountdown implements CountDownListener {
     }
 
     public void cancelCountdown() {
-        this.countDownAnimation.cancel();
+        if(null != this.countDownAnimation) {
+            this.countDownAnimation.cancel();
+        }
     }
 
     @Override

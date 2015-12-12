@@ -1,6 +1,8 @@
 package ca.uqac.keepitcool.quizz.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public enum FancyColor {
@@ -35,16 +37,16 @@ public enum FancyColor {
         return constants[x];
     }
 
-    public static FancyColor[] getRandomColors(int size) {
+    public static List<FancyColor> getRandomColors(int size) {
         FancyColor[] constants = FancyColor.class.getEnumConstants();
-        FancyColor[] results = new FancyColor[size];
+        List<FancyColor> results = new ArrayList<FancyColor>();
 
         for(int count=0; count < size; count++) {
             FancyColor currentColor = constants[RANDOM.nextInt(constants.length)];
-            while (Arrays.asList(results).contains(currentColor)) {
+            while (results.contains(currentColor)) {
                 currentColor = constants[RANDOM.nextInt(constants.length)];
             }
-            results[count] = currentColor;
+            results.add(currentColor);
         }
 
         return results;

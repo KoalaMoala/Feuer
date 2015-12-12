@@ -100,19 +100,41 @@ public class ScenarioBuilder {
         FancyColor color = null;
         Icon icon = null;
 
-        JsonObject firstChoice = elem.get("firstChoice").getAsJsonObject();
-        text = firstChoice.get("text").getAsString();
-        followUp = firstChoice.get("followUp").getAsInt();
-        color = FancyColor.valueOf(firstChoice.get("color").getAsString());
-        icon = Icon.valueOf(firstChoice.get("icon").getAsString());
-        s.setFirstChoice(text, followUp, color, icon);
+        if(elem.has("firstChoice")) {
+            JsonObject firstChoice = elem.get("firstChoice").getAsJsonObject();
+            text = firstChoice.get("text").getAsString();
+            followUp = firstChoice.get("followUp").getAsInt();
+            color = FancyColor.valueOf(firstChoice.get("color").getAsString());
+            icon = Icon.valueOf(firstChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.FIRST, text, followUp, color, icon);
+        }
 
-        JsonObject secondChoice = elem.getAsJsonObject("secondChoice");
-        text = secondChoice.get("text").getAsString();
-        followUp = secondChoice.get("followUp").getAsInt();
-        color = FancyColor.valueOf(secondChoice.get("color").getAsString());
-        icon = Icon.valueOf(secondChoice.get("icon").getAsString());
-        s.setSecondChoice(text, followUp, color, icon);
+        if(elem.has("secondChoice")) {
+            JsonObject secondChoice = elem.getAsJsonObject("secondChoice");
+            text = secondChoice.get("text").getAsString();
+            followUp = secondChoice.get("followUp").getAsInt();
+            color = FancyColor.valueOf(secondChoice.get("color").getAsString());
+            icon = Icon.valueOf(secondChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.SECOND, text, followUp, color, icon);
+        }
+
+        if(elem.has("thirdChoice")) {
+            JsonObject thirdChoice = elem.getAsJsonObject("thirdChoice");
+            text = thirdChoice.get("text").getAsString();
+            followUp = thirdChoice.get("followUp").getAsInt();
+            color = FancyColor.valueOf(thirdChoice.get("color").getAsString());
+            icon = Icon.valueOf(thirdChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.THIRD, text, followUp, color, icon);
+        }
+
+        if(elem.has("fourthChoice")) {
+            JsonObject fourthChoice = elem.getAsJsonObject("fourthChoice");
+            text = fourthChoice.get("text").getAsString();
+            followUp = fourthChoice.get("followUp").getAsInt();
+            color = FancyColor.valueOf(fourthChoice.get("color").getAsString());
+            icon = Icon.valueOf(fourthChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.FOURTH, text, followUp, color, icon);
+        }
 
         return s;
     }

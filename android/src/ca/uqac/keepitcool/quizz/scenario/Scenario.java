@@ -35,12 +35,8 @@ public class Scenario {
         return this.addSituation(key, new Situation(trigger, text));
     }
 
-    Scenario addChoiceToSituation(int key, UserDecision choice, String label, int followUp, FancyColor color, Icon icon) {
-        if(UserDecision.FIRST == choice) {
-            this.scenario.get(key).setFirstChoice(label, followUp, color, icon);
-        } else {
-            this.scenario.get(key).setSecondChoice(label, followUp, color, icon);
-        }
+    Scenario addChoiceToSituation(int key, UserDecision userDecision, String label, int followUp, FancyColor color, Icon icon) {
+        this.scenario.get(key).addChoice(userDecision, label, followUp, color, icon);
         return this;
     }
 
@@ -51,13 +47,7 @@ public class Scenario {
     public Situation getNextSituation(UserDecision userDecision) {
         Integer followUp = null;
         Situation s = this.scenario.get(this.currentSituation);
-
-        if(UserDecision.FIRST == userDecision) {
-            followUp = this.scenario.get(this.currentSituation).getFirstChoiceFollowUp();
-        } else {
-            followUp = this.scenario.get(this.currentSituation).getSecondChoiceFollowUp();
-        }
-
+        followUp = s.getFollowUpFrom(userDecision);
         this.currentSituation = followUp;
         return this.scenario.get(followUp);
     }

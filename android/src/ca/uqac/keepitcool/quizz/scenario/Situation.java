@@ -1,19 +1,26 @@
 package ca.uqac.keepitcool.quizz.scenario;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import ca.uqac.keepitcool.quizz.utils.Difficulty;
 import ca.uqac.keepitcool.quizz.utils.FancyColor;
 import ca.uqac.keepitcool.quizz.utils.Icon;
 import ca.uqac.keepitcool.quizz.utils.Trigger;
+import ca.uqac.keepitcool.quizz.utils.UserDecision;
 
 public final class Situation {
     private Trigger trigger;
     private String description;
-    private Choice firstChoice = null;
-    private Choice secondChoice = null;
+    private Map<UserDecision, Choice> choices;
 
     public Situation(Trigger trigger, String description) {
         this.trigger = trigger;
         this.description = description;
+        this.choices = new HashMap<UserDecision, Choice>();
     }
 
     public String getDescription() {
@@ -28,37 +35,35 @@ public final class Situation {
         return (this.trigger != Trigger.FAILURE && this.trigger != Trigger.SUCCESS);
     }
 
-    public boolean hasChoices() {
-        return this.countdownRequired();
+    public int getChoicesCount() {
+        return this.choices.size();
     }
 
-    public Choice getFirstChoice() {
-        return this.firstChoice;
+    public List<Choice> getChoicesInRandomOrder() {
+        Choice[] availableChoices = (Choice[]) this.choices.values().toArray(new Choice[choices.size()]);
+        List<Choice> choiceList = Arrays.asList(availableChoices);
+        Collections.shuffle(choiceList);
+        return choiceList;
     }
 
-    public int getFirstChoiceFollowUp() {
-        return this.firstChoice.getFollowUp();
+    public Choice getNthChoice(int index) {
+        return this.choices.get(index);
     }
 
-    public Situation setFirstChoice(String label, Integer followUp, FancyColor color, Icon icon) {
-        this.firstChoice = new Choice(label, followUp, color, icon);
-        return this;
+    public int getNthChoiceFollowUp(int index) {
+        return this.choices.get(index).getFollowUp();
     }
 
-    public Choice getSecondChoice() {
-        return this.secondChoice;
-    }
-
-    public int getSecondChoiceFollowUp() {
-        return this.secondChoice.getFollowUp();
-    }
-
-    public Situation setSecondChoice(String label, Integer followUp, FancyColor color, Icon icon) {
-        this.secondChoice = new Choice(label, followUp, color, icon);
+    public Situation addChoice(UserDecision userDecision, String label, Integer followUp, FancyColor color, Icon icon) {
+        this.choices.put(userDecision, new Choice(label, followUp, userDecision, color, icon));
         return this;
     }
 
     public String getEndingType() {
         return this.trigger.name();
+    }
+
+    public Integer getFollowUpFrom(UserDecision userDecision) {
+        return this.choices.get(userDecision).getFollowUp();
     }
 }

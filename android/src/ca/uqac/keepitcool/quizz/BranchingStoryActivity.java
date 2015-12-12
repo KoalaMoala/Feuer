@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
+
+import java.util.List;
+
 import static android.os.SystemClock.elapsedRealtime;
 
 import ca.uqac.keepitcool.quizz.utils.FancyColor;
@@ -33,44 +36,29 @@ public class BranchingStoryActivity extends Activity {
 	private Difficulty difficulty;
 	private TextView situationView;
 	private LinearLayout endingContainer;
-	private FancyButton noButton, yesButton;
 	private BackgroundPlayer backgroundPlayer;
 	private AnimatedCountdown animatedCountdown;
+	private DynamicButton firstButton, secondButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_quiz);
+		setContentView(R.layout.activity_branching_story);
 
-		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
+		this.situationView = (TextView) findViewById(R.id.question);
+		this.endingContainer = (LinearLayout) findViewById(R.id.endingContainer);
 
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
-		this.situationView = (TextView) findViewById(R.id.question);
 		this.backgroundPlayer = new BackgroundPlayer((VideoView)findViewById(R.id.videoView), getPackageName(), getApplicationContext());
 		this.animatedCountdown = new AnimatedCountdown((TextView) findViewById(R.id.textView), this);
-		this.noButton = (FancyButton) findViewById(R.id.no);
-		this.yesButton = (FancyButton) findViewById(R.id.yes);
-		this.endingContainer = (LinearLayout) findViewById(R.id.endingContainer);
-		this.situationView.setTypeface(quandoFont);
+		this.firstButton = new DynamicButton((FancyButton) findViewById(R.id.firstButton), UserDecision.FIRST, this);
+		this.secondButton = new DynamicButton((FancyButton) findViewById(R.id.secondButton), UserDecision.SECOND, this);
+		this.situationView.setTypeface(Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf"));
 
 		//Getting levelId from Menu fragment
 		Bundle b = getIntent().getExtras();
 		this.levelId = b.getInt("levelId");
 		loadScenario(levelId);
-
-		this.noButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				triggerNextScreen(scenario.getNextSituation(UserDecision.FIRST));
-			}
-		});
-
-		this.yesButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				triggerNextScreen(scenario.getNextSituation(UserDecision.SECOND));
-			}
-		});
 
 		final FancyButton restartButton = (FancyButton) findViewById(R.id.restart);
 		restartButton.setOnClickListener(new OnClickListener() {
@@ -98,14 +86,14 @@ public class BranchingStoryActivity extends Activity {
 		this.scenario = ScenarioBuilder.buildFromFile("level" + levelId + ".json", getAssets());
 		Situation s = this.scenario.getStartingSituation();
 		initializeControls();
-		this.updateTextFromSituation(s);
+		this.updateIntefaceFromSituation(s);
 		this.startTime =  elapsedRealtime();
 	}
 
 	private void initializeControls() {
 		this.backgroundPlayer.playVideo("MAIN");
-		this.noButton.setVisibility(View.VISIBLE);
-		this.yesButton.setVisibility(View.VISIBLE);
+		this.firstButton.setVisibility(View.VISIBLE);
+		this.secondButton.setVisibility(View.VISIBLE);
 		this.endingContainer.setVisibility(View.GONE);
 	}
 
@@ -113,21 +101,21 @@ public class BranchingStoryActivity extends Activity {
 	//                       DYNAMIC UPDATES
 	// ============================================================
 
-	private void triggerNextScreen(Situation s) {
-		this.animatedCountdown.cancelCountdown();
-		updateTextFromSituation(s);
-		if(s.countdownRequired()) {
-			this.animatedCountdown.startCountdown("default", s.getDuration(this.difficulty));
-		}
+	public void handleUserChoice(UserDecision userDecision) {
+		Situation s = scenario.getNextSituation(userDecision);
+		updateIntefaceFromSituation(s);
 	}
 
-	private void updateTextFromSituation(Situation s) {
+	private void updateIntefaceFromSituation(Situation s) {
+		this.animatedCountdown.cancelCountdown();
 		this.situationView.setText(s.getDescription());
+		int choicesCount = s.getChoicesCount();
 
-		FancyColor[] colors = FancyColor.getRandomColors(2);
-		if(s.hasChoices()) {
-			this.updateChoiceButton(this.noButton, s.getFirstChoice(), colors[0]);
-			this.updateChoiceButton(this.yesButton, s.getSecondChoice(), colors[1]);
+		if(0 < choicesCount) {
+			List<Choice> choices = s.getChoicesInRandomOrder();
+			List<FancyColor> colors = FancyColor.getRandomColors(choicesCount);
+			this.firstButton.update(choices.get(0), colors.get(0));
+			this.secondButton.update(choices.get(1), colors.get(1));
 		} else {
 			updateEndingControls(s.getEndingType());
 		}
@@ -135,13 +123,6 @@ public class BranchingStoryActivity extends Activity {
 		if(s.countdownRequired()) {
 			this.animatedCountdown.startCountdown("default", s.getDuration(this.difficulty));
 		}
-	}
-
-	private void updateChoiceButton(FancyButton control, Choice choice, FancyColor color) {
-		control.setText(choice.getLabel());
-		control.setIconResource(choice.getIcon());
-		control.setBackgroundColor(Color.parseColor(color.getDefaultColor()));
-		control.setFocusBackgroundColor(Color.parseColor(color.getFocusColor()));
 	}
 
 	void updateEndingControls(String failureCause) {
@@ -160,8 +141,8 @@ public class BranchingStoryActivity extends Activity {
 				this.backgroundPlayer.playVideo("SUCCESS");
 				break;
 		}
-		this.noButton.setVisibility(View.GONE);
-		this.yesButton.setVisibility(View.GONE);
+		this.firstButton.setVisibility(View.GONE);
+		this.secondButton.setVisibility(View.GONE);
 		this.endingContainer.setVisibility(View.VISIBLE);
 	}
 }

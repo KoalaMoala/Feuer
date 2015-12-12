@@ -65,7 +65,7 @@ public class Preferences {
         prefs.edit().putString(nameKey, alias).apply();
     }
 
-    public final static String getNameSetting(Context context) {
+    public static String getNameSetting(Context context) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(nameKey, "DefaultUsername");
     }
