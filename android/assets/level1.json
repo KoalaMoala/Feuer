@@ -27,13 +27,11 @@
       "firstChoice": {
         "text": "Monter",
         "followUp": 2,
-        "color": "RED",
         "icon": "UP"
       },
       "secondChoice": {
         "text": "Descendre",
         "followUp": 1,
-        "color": "GREEN",
         "icon": "DOWN"
       }
     }, {
@@ -43,13 +41,11 @@
       "firstChoice": {
         "text": "Etouffer le feu",
         "followUp": 3,
-        "color": "RED",
         "icon": "HAND"
       },
       "secondChoice": {
         "text": "Se diriger vers la sortie",
         "followUp": 5,
-        "color": "GREEN",
         "icon": "EXIT"
       }
     }, {
@@ -59,13 +55,11 @@
       "firstChoice": {
         "text": "Evaluer l'incendie",
         "followUp": 6,
-        "color": "RED",
         "icon": "EYE"
       },
       "secondChoice": {
         "text": "Se diriger vers la sortie",
         "followUp": 5,
-        "color": "GREEN",
         "icon": "EXIT"
       }
     }, {
@@ -75,13 +69,11 @@
       "firstChoice": {
         "text": "Ouvrir la porte",
         "followUp": 7,
-        "color": "RED",
         "icon": "ENTER"
       },
       "secondChoice": {
         "text": "Se diriger vers la sortie",
         "followUp": 5,
-        "color": "GREEN",
         "icon": "EXIT"
       }
     }, {
@@ -91,13 +83,11 @@
       "firstChoice": {
         "text": "Investiguer",
         "followUp": 8,
-        "color": "RED",
         "icon": "EYE"
       },
       "secondChoice": {
         "text": "Se diriger vers la sortie",
         "followUp": 5,
-        "color": "GREEN",
         "icon": "EXIT"
       }
     }, {
@@ -108,13 +98,11 @@
       "firstChoice": {
         "text": "Se rendormir",
         "followUp": 4,
-        "color": "RED",
         "icon": "SLEEP"
       },
       "secondChoice": {
         "text": "Se lever",
         "followUp": 9,
-        "color": "GREEN",
         "icon": "STANDUP"
       }
     }
