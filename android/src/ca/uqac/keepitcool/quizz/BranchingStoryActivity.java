@@ -2,14 +2,8 @@ package ca.uqac.keepitcool.quizz;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
-import android.media.MediaPlayer.OnPreparedListener;
-import android.media.MediaPlayer.OnCompletionListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,8 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 import static android.os.SystemClock.elapsedRealtime;
-
-import java.util.Random;
 
 import ca.uqac.keepitcool.quizz.utils.FancyColor;
 import ca.uqac.keepitcool.quizz.utils.UserDecision;
@@ -38,19 +30,18 @@ import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
 import ca.uqac.keepitcool.quizz.scenario.Situation;
 import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
 
-public class BranchingStoryActivity extends Activity implements CountDownListener, OnPreparedListener, OnCompletionListener {
+public class BranchingStoryActivity extends Activity implements CountDownListener {
 
-	private int currentSource;
+
 	private int levelId;
 	private long startTime;
-	private float topScore;
 	private LinearLayout endingContainer;
 	private TextView countdownView, situationView;
-	private FancyButton noButton, yesButton, confirmButton, restartButton;
+	private FancyButton noButton, yesButton;
 	private CountDownAnimation countDownAnimation;
 	private Difficulty difficulty;
 	private Scenario scenario;
-	private VideoView videoView;
+	private BackgroundPlayer backgroundPlayer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +51,13 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 		final Typeface quandoFont = Typeface.createFromAsset(getAssets(), "fonts/Quando.ttf");
 
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
+		this.backgroundPlayer = new BackgroundPlayer((VideoView)findViewById(R.id.videoView), getPackageName(), getApplicationContext());
 		this.situationView = (TextView) findViewById(R.id.question);
 		this.countdownView = (TextView) findViewById(R.id.textView);
 		this.noButton = (FancyButton) findViewById(R.id.no);
 		this.yesButton = (FancyButton) findViewById(R.id.yes);
-		this.restartButton = (FancyButton) findViewById(R.id.restart);
-		this.confirmButton = (FancyButton) findViewById(R.id.confirm);
 		this.endingContainer = (LinearLayout) findViewById(R.id.endingContainer);
 		this.situationView.setTypeface(quandoFont);
-		this.videoView = (VideoView)findViewById(R.id.videoView);
-
-		this.videoView.setOnPreparedListener(this);
-		this.videoView.setOnCompletionListener(this);
 
 		//Getting levelId from Menu fragment
 		Bundle b = getIntent().getExtras();
@@ -92,31 +78,22 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 			}
 		});
 
-		this.restartButton.setOnClickListener(new OnClickListener() {
+		final FancyButton restartButton = (FancyButton) findViewById(R.id.restart);
+		restartButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				loadScenario(levelId);
 			}
 		});
 
-		this.confirmButton.setOnClickListener(new OnClickListener() {
+		final FancyButton confirmButton = (FancyButton) findViewById(R.id.confirm);
+		confirmButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 				startActivity(intent);
 			}
 		});
-	}
-
-	private Uri getUriFromAsset(int asset) {
-		String path = "android.resource://" + getPackageName() + "/" + asset;
-		return Uri.parse(path);
-	}
-
-	private void playVideo(int asset) {
-		this.currentSource = asset;
-		this.videoView.setVideoURI(this.getUriFromAsset(this.currentSource));
-		this.videoView.start();
 	}
 
 	private void loadScenario(int levelId) {
@@ -128,7 +105,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	}
 
 	private void initializeControls() {
-		playVideo(getRandomVideoFromType("MAIN"));
+		this.backgroundPlayer.playVideo("MAIN");
 		this.noButton.setVisibility(View.VISIBLE);
 		this.yesButton.setVisibility(View.VISIBLE);
 		this.endingContainer.setVisibility(View.GONE);
@@ -137,19 +114,16 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	private void updateEndingControls(String failureCause) {
 		switch (failureCause) {
 			case "RAN_OUT_OF_TIME":
-				playVideo(getRandomVideoFromType("RAN_OUT_OF_TIME"));
+				this.backgroundPlayer.playVideo("RAN_OUT_OF_TIME");
 				break;
-			case "FAILURE":
-				playVideo(getRandomVideoFromType("FAILURE"));
+			case "":
+				this.backgroundPlayer.playVideo("FAILURE");
 				break;
-			case "SUCCESS":
+			default:
 				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
 				Preferences.updateLevelScore(levelId, score, getApplicationContext());
 				Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
-				playVideo(R.raw.clouds_13);
-				break;
-			default:
-				playVideo(getRandomVideoFromType("SUCCESS"));
+				this.backgroundPlayer.playVideo("SUCCESS");
 				break;
 		}
 		this.noButton.setVisibility(View.GONE);
@@ -220,51 +194,5 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	public void onCountDownEnd(CountDownAnimation animation) {
 		this.situationView.setText(getResources().getString(R.string.time_run_out));
 		updateEndingControls("RAN_OUT_OF_TIME");
-	}
-
-	@Override
-	public void onCompletion(MediaPlayer mp) {
-		//TODO: figure out a better way to handle this
-		if(this.currentSource == R.raw.firespread_06 || this.currentSource == R.raw.firespread_02 || this.currentSource == R.raw.firespread_12) {
-			playVideo(getRandomVideoFromType("FAILURE_LOOP"));
-		} else {
-			mp.setLooping(true);
-		}
-	}
-
-	@Override
-	public void onPrepared(MediaPlayer mp) {
-		//TODO: figure out a better way to handle this
-		if(this.currentSource == R.raw.firespread_06 || this.currentSource == R.raw.firespread_02 || this.currentSource == R.raw.firespread_12) {
-			mp.setLooping(true);
-		} else {
-			mp.setLooping(true);
-		}
-	}
-
-	private int getRandomVideoFromType(String type) {
-		final Resources resources = getResources();
-		TypedArray videos = null;
-		switch(type) {
-			case "SUCCESS":
-				videos = resources.obtainTypedArray(R.array.VIDEO_SUCCESS);
-				break;
-			case "FAILURE":
-				videos = resources.obtainTypedArray(R.array.VIDEO_FAILURE);
-				break;
-			case "FAILURE_LOOP":
-				videos = resources.obtainTypedArray(R.array.VIDEO_FAILURE_LOOP);
-				break;
-			case "RAN_OUT_OF_TIME":
-				videos = resources.obtainTypedArray(R.array.VIDEO_RAN_OUT_OF_TIME);
-				break;
-			default:
-				videos = resources.obtainTypedArray(R.array.VIDEO_MAIN);
-				break;
-		}
-
-		final Random rand = new Random();
-		final int rndInt = rand.nextInt(videos.length());
-		return videos.getResourceId(rndInt, 0);
 	}
 }
