@@ -1,5 +1,10 @@
 package ca.uqac.keepitcool.quizz.scenario;
 
+import ca.uqac.keepitcool.quizz.utils.Difficulty;
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
+import ca.uqac.keepitcool.quizz.utils.Icon;
+import ca.uqac.keepitcool.quizz.utils.Trigger;
+
 public final class Situation {
     private Trigger trigger;
     private String description;

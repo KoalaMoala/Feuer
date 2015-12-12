@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.menu.revealview;
 
 import android.animation.Animator;
 import android.content.Context;

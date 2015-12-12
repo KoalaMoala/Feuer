@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.menu.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,10 +16,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
-import ca.uqac.keepitcool.quizz.scenario.Difficulty;
+import ca.uqac.keepitcool.quizz.Preferences;
+import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
+import ca.uqac.keepitcool.quizz.utils.Difficulty;
 
 public class SettingsDialog extends FragmentDialog implements OnItemSelectedListener {
 

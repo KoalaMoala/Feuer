@@ -3,7 +3,10 @@ package ca.uqac.keepitcool.quizz.scenario;
 import java.util.HashMap;
 import java.util.Map;
 
-import ca.uqac.keepitcool.quizz.UserDecision;
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
+import ca.uqac.keepitcool.quizz.utils.Icon;
+import ca.uqac.keepitcool.quizz.utils.Trigger;
+import ca.uqac.keepitcool.quizz.utils.UserDecision;
 
 public class Scenario {
     private Map<Integer,Situation> scenario;

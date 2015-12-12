@@ -17,6 +17,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.menu.fragments.PlayDialog;
+import ca.uqac.keepitcool.menu.fragments.ScoreDialog;
+import ca.uqac.keepitcool.menu.fragments.SettingsDialog;
+import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 

@@ -1,5 +1,8 @@
 package ca.uqac.keepitcool.quizz.scenario;
 
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
+import ca.uqac.keepitcool.quizz.utils.Icon;
+
 public class Choice {
     private String label;
     private Icon icon;

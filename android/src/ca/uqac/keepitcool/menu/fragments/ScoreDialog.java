@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.menu.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
 
 public class ScoreDialog extends FragmentDialog {
 

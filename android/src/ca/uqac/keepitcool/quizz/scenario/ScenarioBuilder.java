@@ -2,7 +2,6 @@ package ca.uqac.keepitcool.quizz.scenario;
 
 import android.content.res.AssetManager;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,7 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ca.uqac.keepitcool.quizz.UserDecision;
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
+import ca.uqac.keepitcool.quizz.utils.Icon;
+import ca.uqac.keepitcool.quizz.utils.Trigger;
+import ca.uqac.keepitcool.quizz.utils.UserDecision;
 
 public class ScenarioBuilder {
 

@@ -1,10 +1,10 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.quizz;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import ca.uqac.keepitcool.quizz.scenario.Difficulty;
+import ca.uqac.keepitcool.quizz.utils.Difficulty;
 
 public class Preferences {
 
