@@ -37,7 +37,7 @@ public enum FancyColor {
 
     public static FancyColor[] getRandomColors(int size) {
         FancyColor[] constants = FancyColor.class.getEnumConstants();
-        FancyColor[] results = new FancyColor[2];
+        FancyColor[] results = new FancyColor[size];
 
         for(int count=0; count < size; count++) {
             FancyColor currentColor = constants[RANDOM.nextInt(constants.length)];
