@@ -105,8 +105,6 @@
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center"
             android:layout_marginTop="60dp" >
 
             <RelativeLayout
@@ -122,6 +120,7 @@
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:paddingTop="10dp"
+                android:layout_centerHorizontal="true"
                 fancy:fb_borderColor="#FFFFFF"
                 fancy:fb_borderWidth="1dp"
                 fancy:fb_defaultColor="#b80600"
@@ -148,6 +147,7 @@
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
                 android:paddingTop="10dp"
+                android:layout_centerHorizontal="true"
                 fancy:fb_textFont="Quando"
                 fancy:fb_borderColor="#FFFFFF"
                 fancy:fb_borderWidth="1dp"
