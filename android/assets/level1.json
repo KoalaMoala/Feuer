@@ -19,7 +19,7 @@
     }, {
       "id": 4,
       "trigger": "FAILURE",
-      "text": "[NE JAMAIS] Ignorer une alarme alarme incendie qui sonne, il est capital d'évacuer le bâtiment en raison de la propagation du feu et de la fumée."
+      "text": "[NE JAMAIS] Ignorer une alarme incendie qui sonne, il est capital d'évacuer le bâtiment en raison de la propagation du feu et de la fumée."
     }, {
       "id": 5,
       "trigger": "MEDIUM",
