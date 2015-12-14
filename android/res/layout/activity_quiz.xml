@@ -103,11 +103,16 @@
 
         <LinearLayout
             android:orientation="horizontal"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:layout_marginTop="60dp" >
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5">
 
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/no"
@@ -127,6 +132,14 @@
                 fancy:fb_text="@string/button_no"
                 fancy:fb_textColor="#FFFFFF" />
 
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="0.5">
+
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/yes"
                 android:layout_width="wrap_content"
@@ -145,6 +158,9 @@
                 fancy:fb_radius="30dp"
                 fancy:fb_text="@string/button_yes"
                 fancy:fb_textColor="#FFFFFF" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
     </LinearLayout>

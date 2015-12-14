@@ -13,6 +13,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -169,7 +170,7 @@ public class BranchingStoryActivity extends Activity implements CountDownListene
 	}
 
 	private void updateTextFromSituation(Situation s) {
-		this.situationView.setText(s.getDescription());
+		this.situationView.setText(Html.fromHtml(s.getDescription()));
 
 		Choice firstChoice = s.getFirstChoice();
 		Choice secondChoice = s.getSecondChoice();
