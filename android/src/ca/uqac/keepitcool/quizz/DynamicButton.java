@@ -3,6 +3,7 @@ package ca.uqac.keepitcool.quizz;
 import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.quizz.scenario.Choice;
@@ -34,6 +35,16 @@ public class DynamicButton implements View.OnClickListener {
 
     public void setVisibility(int visibility) {
         this.control.setVisibility(visibility);
+    }
+
+    public void setWeight(float weight)
+    {
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                weight
+                );
+        control.setLayoutParams(params);
     }
 
     @Override

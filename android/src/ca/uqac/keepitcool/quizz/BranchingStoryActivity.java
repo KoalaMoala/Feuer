@@ -1,5 +1,6 @@
 package ca.uqac.keepitcool.quizz;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +10,7 @@ import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -163,6 +165,7 @@ public class BranchingStoryActivity extends Activity {
 			for(int count=0; count < choicesCount; count++) {
 				DynamicButton current = this.dynamicButtons.get(count);
 				current.update(choices.get(count), colors.get(count));
+                current.setWeight( (float) 1/choicesCount);
 				current.setVisibility(View.VISIBLE);
 			}
 			for(int undefinedChoices=choicesCount; undefinedChoices < 4; undefinedChoices++) {
