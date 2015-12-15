@@ -25,26 +25,17 @@ public class DynamicButton implements View.OnClickListener {
         buttonChoice1 = MediaPlayer.create(parent, R.raw.goodbutton);
     }
 
-    public void update(Choice choice, FancyColor color) {
+    public void update(Choice choice, FancyColor color, int choiceCount) {
         this.userDecision = choice.getUserDecision();
         this.control.setText(choice.getLabel());
         this.control.setIconResource(choice.getIcon());
         this.control.setBackgroundColor(Color.parseColor(color.getDefaultColor()));
         this.control.setFocusBackgroundColor(Color.parseColor(color.getFocusColor()));
+        this.setWeight(choiceCount);
     }
 
     public void setVisibility(int visibility) {
         this.control.setVisibility(visibility);
-    }
-
-    public void setWeight(float weight)
-    {
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                weight
-                );
-        control.setLayoutParams(params);
     }
 
     @Override
@@ -52,5 +43,15 @@ public class DynamicButton implements View.OnClickListener {
         this.parent.handleUserChoice(this.userDecision);
         if(Preferences.getSoundSetting(parent.getBaseContext()))
             buttonChoice1.start();
+    }
+
+    private void setWeight(int choiceCount) {
+        float weight = (float) 1/choiceCount;
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                weight
+        );
+        control.setLayoutParams(params);
     }
 }

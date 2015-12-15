@@ -19,13 +19,11 @@
       "firstChoice": {
         "text": "Je préviens les pompiers",
         "followUp": 4,
-        "color": "RED",
         "icon": "UP"
       },
       "secondChoice": {
         "text": "Je protège la porte",
         "followUp": 5,
-        "color": "GREEN",
         "icon": "DOWN"
       }
     }, {
@@ -35,13 +33,11 @@
       "firstChoice": {
         "text": "Je leur raccroche au nez et je me précipite vers la porte",
         "followUp": 6,
-        "color": "RED",
         "icon": "UP"
       },
       "secondChoice": {
         "text": "Vous écoutez calmement leurs instructions",
         "followUp": 7,
-        "color": "GREEN",
         "icon": "DOWN"
       }
     }, {
@@ -51,13 +47,11 @@
       "firstChoice": {
         "text": "Je mets un linge humide sous la porte",
         "followUp": 8,
-        "color": "RED",
         "icon": "UP"
       },
       "secondChoice": {
         "text": "J'attends qu'on vienne me chercher",
         "followUp": 9,
-        "color": "GREEN",
         "icon": "DOWN"
       }
     }, {
@@ -103,7 +97,6 @@
       "firstChoice": {
         "text": "Je préviens les pompiers.",
         "followUp": 1,
-        "color": "RED",
         "icon": "ENTER"
       }
     }, {
@@ -142,13 +135,11 @@
       "firstChoice": {
         "text": "J'ouvre la porte",
         "followUp": 2,
-        "color": "RED",
         "icon": "SLEEP"
       },
       "secondChoice": {
         "text": "Je reste dans mon appartement",
         "followUp": 3,
-        "color": "GREEN",
         "icon": "STANDUP"
       }
     }

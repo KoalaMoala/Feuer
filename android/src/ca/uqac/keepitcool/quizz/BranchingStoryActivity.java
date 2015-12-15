@@ -1,6 +1,5 @@
 package ca.uqac.keepitcool.quizz;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,7 +9,6 @@ import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -47,9 +45,10 @@ public class BranchingStoryActivity extends Activity {
 
 	private MediaPlayer song1;
 	private MediaPlayer fire;
-	private  MediaPlayer badChoice;
-	private  MediaPlayer goodChoice;
-	private  MediaPlayer tictac;
+	private MediaPlayer badChoice;
+	private MediaPlayer goodChoice;
+	private MediaPlayer tictac;
+	private boolean soundActivated;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +60,7 @@ public class BranchingStoryActivity extends Activity {
 		this.firstRow = (LinearLayout) findViewById(R.id.firstRow);
 		this.secondRow = (LinearLayout) findViewById(R.id.secondRow);
 
+		this.soundActivated = Preferences.getSoundSetting(getBaseContext());
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
 		this.backgroundPlayer = new BackgroundPlayer((VideoView)findViewById(R.id.videoView), getPackageName(), getApplicationContext());
 		this.animatedCountdown = new AnimatedCountdown((TextView) findViewById(R.id.textView), this);
@@ -110,8 +110,7 @@ public class BranchingStoryActivity extends Activity {
 	@Override
 	public void onStart(){
 		super.onStart();
-
-		if(Preferences.getSoundSetting(getBaseContext())) {
+		if(soundActivated) {
 			song1.start();
 			fire.start();
 		}
@@ -120,14 +119,16 @@ public class BranchingStoryActivity extends Activity {
 	@Override
 	public void onPause(){
 		super.onPause();
-		song1.pause();
-		fire.pause();
+		if(soundActivated) {
+			song1.pause();
+			fire.pause();
+		}
 	}
 
 	@Override
 	public void onResume(){
 		super.onResume();
-		if(Preferences.getSoundSetting(getBaseContext())) {
+		if(soundActivated) {
 			song1.start();
 			fire.start();
 		}
@@ -167,8 +168,7 @@ public class BranchingStoryActivity extends Activity {
 			List<FancyColor> colors = FancyColor.getRandomColors(choicesCount);
 			for(int count=0; count < choicesCount; count++) {
 				DynamicButton current = this.dynamicButtons.get(count);
-				current.update(choices.get(count), colors.get(count));
-                current.setWeight( (float) 1/choicesCount);
+				current.update(choices.get(count), colors.get(count), choicesCount);
 				current.setVisibility(View.VISIBLE);
 			}
 			for(int undefinedChoices=choicesCount; undefinedChoices < 4; undefinedChoices++) {
@@ -188,28 +188,24 @@ public class BranchingStoryActivity extends Activity {
 			case "RAN_OUT_OF_TIME":
 				this.situationView.setText(getResources().getString(R.string.time_run_out));
 				this.backgroundPlayer.playVideo("RAN_OUT_OF_TIME");
-				if(Preferences.getSoundSetting(getBaseContext()))
-					tictac.start();
+				if(soundActivated) {
+					badChoice.start();
+				}
 				break;
 			case "FAILURE":
 				this.backgroundPlayer.playVideo("FAILURE");
-				if(Preferences.getSoundSetting(getBaseContext()))
+				if(soundActivated) {
 					badChoice.start();
+				}
 				break;
 			default:
-                if(validScore)
-                {
-                    float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
-                    Preferences.updateLevelScore(levelId, score, getApplicationContext());
-                    Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(getApplicationContext(), "Vous n'avez pas pris que des bonnes décisions, pas de score cette fois-ci !" , Toast.LENGTH_SHORT).show();
-                }
+				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
+				Preferences.updateLevelScore(levelId, score, getApplicationContext());
+				Toast.makeText(getApplicationContext(), "Score : " + score , Toast.LENGTH_SHORT).show();
 				this.backgroundPlayer.playVideo("SUCCESS");
-				if(Preferences.getSoundSetting(getBaseContext()))
+				if (soundActivated) {
 					goodChoice.start();
+				}
 				break;
 		}
 		this.displayEndingContainer(true);
