@@ -17,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/score_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -37,11 +38,12 @@
                     android:src="@drawable/score_1st" />
 
                 <TextView
+                    android:id="@+id/score_01_text"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="John Doe\n25.000 points"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -62,11 +64,12 @@
                     android:src="@drawable/score_2nd" />
 
                 <TextView
+                    android:id="@+id/score_02_text"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="Jane Roe\n23.400 points"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -87,11 +90,12 @@
                     android:src="@drawable/score_3rd" />
 
                 <TextView
+                    android:id="@+id/score_03_text"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="Thomas Anderson\n12.000 points"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -112,11 +116,12 @@
                     android:src="@drawable/score_4th" />
 
                 <TextView
+                    android:id="@+id/score_04_text"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="Joe Bloggs\n9.300 points"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -137,11 +142,12 @@
                     android:src="@drawable/score_5th" />
 
                 <TextView
+                    android:id="@+id/score_05_text"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text="M. Smith\n3.500 points"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
