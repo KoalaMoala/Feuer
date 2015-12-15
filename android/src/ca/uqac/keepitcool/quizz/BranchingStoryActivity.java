@@ -199,9 +199,17 @@ public class BranchingStoryActivity extends Activity {
 				}
 				break;
 			default:
-				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
-				Preferences.updateLevelScore(levelId, score, getApplicationContext());
-				Toast.makeText(getApplicationContext(), "Score : " + score , Toast.LENGTH_SHORT).show();
+				if(validScore)
+				{
+					float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
+					Preferences.updateLevelScore(levelId, score, getApplicationContext());
+					Toast.makeText(getApplicationContext(), "Score : " + score , Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+					Toast.makeText(getApplicationContext(), "Vous avez pris de mauvaises décisions, vous n'aurez pas de score cette fois-ci !", Toast.LENGTH_LONG).show();
+				}
+
 				this.backgroundPlayer.playVideo("SUCCESS");
 				if (soundActivated) {
 					goodChoice.start();
