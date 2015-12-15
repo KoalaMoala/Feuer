@@ -43,6 +43,11 @@ public class PlayDialog extends FragmentDialog {
         TextView nameView1 = (TextView) view.findViewById(R.id.level_01_name);
         TextView descriptionView1 = (TextView) view.findViewById(R.id.level_01_description);
         loadDescriptionFromJson(1, nameView1, descriptionView1);
+        
+        TextView nameView2 = (TextView) view.findViewById(R.id.level_02_name);
+        TextView descriptionView2 = (TextView) view.findViewById(R.id.level_02_description);
+        loadDescriptionFromJson(2, nameView2, descriptionView2);
+
 
         level_01.setOnClickListener(new View.OnClickListener() {
             @Override

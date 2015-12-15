@@ -1,149 +1,509 @@
 {
-  "description" : {
-    "name" : "Un feu dans ma résidence",
-    "shortDescription" : "Que faire en cas d'incendie dans mon immeuble ?"
+  "description": {
+    "name": "Alerte incendie naturelle",
+    "shortDescription": "Un coup de foudre s'abat dans la région."
   },
-  "scenario" : [
+  "scenario": [
     {
       "id": 1,
       "trigger": "SUCCESS",
-      "text": "Prévenir les pompiers de votre présence est essentiel afin qu'ils viennent à votre secours."
-    }, {
+      "text": "Vous vous échappez de cette fournaise"
+    },
+    {
       "id": 2,
       "trigger": "FAILURE",
-      "text": "[NE JAMAIS] Ouvrir une porte dont la poignée est chaude dans une situation d'incendie."
-    }, {
+      "text": "Sans préparation, l'homme composé principalement de carbone, prend feu très facilement. Ne jouez pas au héros sans savoir faire!"
+    },
+    {
       "id": 3,
-      "trigger": "MEDIUM",
-      "text": "Que dois-je faire en premier ?",
-      "firstChoice": {
-        "text": "Je préviens les pompiers",
-        "followUp": 4,
-        "color": "RED",
-        "icon": "UP"
-      },
-      "secondChoice": {
-        "text": "Je protège la porte",
-        "followUp": 5,
-        "color": "GREEN",
-        "icon": "DOWN"
-      }
-    }, {
+      "trigger": "FAILURE",
+      "text": "La fumée est un gaz très redoutable et toxique pour l'homme. Il ne faut pas se déplacer sans savoir où aller dans une situation d'urgence!"
+    },
+    {
       "id": 4,
-      "trigger": "MEDIUM",
-      "text": "Les pompiers vous expliquent au téléphone que vous devez humidifier la porte",
+      "trigger": "SUCCESS",
+      "text": "Vous parvenez à convaincre la dame de partir avec vous. Le tonerre peut être une cause d'incendie naturelle"
+    },
+    {
+      "id": 22,
+      "trigger": "FAILURE",
+      "text": "Vous confiez l'enfant à la dame qui parvient à fuir les lieux. Avant d'entrer dans une maison en feu, prévoyez une sortie de secours"
+    },
+    {
+      "id": 23,
+      "trigger": "FAILURE",
+      "text": "Avec votre jambe blessé, vous n'arrivez pas à faire un pas. Avant d'entrer dans une maison en feu, prévoyez une sortie de secours"
+    },
+    {
+      "id": 34,
+      "trigger": "SUCCESS",
+      "text": "Vous avez atterri sur le matelas et vous avez pu sauver la dame et son enfant. Bien joué!"
+    },
+    {
+      "id": 35,
+      "trigger": "FAILURE",
+      "text": "Dans une atmosphère sèche, un coup de tonerre peut facilement générer un feu de bois"
+    },
+    {
+      "id": 36,
+      "trigger": "SUCCESS",
+      "text": "Vous avez quitté les lieux."
+    },
+    {
+      "id": 17,
+      "trigger": "SHORT",
+      "text": "Vous sortez de la maison de justesse, la porte d'entrée s'écroule, le feu de bois devient alarmant",
       "firstChoice": {
-        "text": "Je leur raccroche au nez et je me précipite vers la porte",
-        "followUp": 6,
-        "color": "RED",
+        "text": "S'enfuir",
+        "followUp": 1,
         "icon": "UP"
       },
       "secondChoice": {
-        "text": "Vous écoutez calmement leurs instructions",
-        "followUp": 7,
-        "color": "GREEN",
+        "text": "Évacuer la dame",
+        "followUp": 4,
         "icon": "DOWN"
       }
-    }, {
+    },
+    {
+      "id": 16,
+      "trigger": "SHORT",
+      "text": "Vous avancez à l'aveuglette mais n'apercevez pas les escaliers. Vous sentez que le feu devient plus intense",
+      "firstChoice": {
+        "text": "Avancer",
+        "followUp": 3,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Sortir",
+        "followUp": 17,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 21,
+      "trigger": "SHORT",
+      "text": "Après une chute de 5 mètres, vous vous blessez à la jambe droite. Le nourisson est sain et sauf mais le feu de bois se propage",
+      "firstChoice": {
+        "text": "Confier l'enfant",
+        "followUp": 22,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Marcher",
+        "followUp": 23,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 24,
+      "trigger": "SHORT",
+      "text": "Vous entrez dans l'autre chambre, les meubles sont en feu. Vous appercevez une fenêtre décorée",
+      "firstChoice": {
+        "text": "Sauter",
+        "followUp": 21,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Reculer",
+        "followUp": 3,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 20,
+      "trigger": "SHORT",
+      "text": "Vous trouvez un nourisson en pleur, vous le prenez avec vous. Vous voyez une fenêtre sans ornements",
+      "firstChoice": {
+        "text": "Sauter",
+        "followUp": 26,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Reculer",
+        "followUp": 24,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 26,
+      "trigger": "SHORT",
+      "text": "Vous sauter par la fenêtre et vous vous blessé à la jambe gauche, la porte d'entrée s'écroule, le feu de bois devient alarmant",
+      "firstChoice": {
+        "text": "S'enfuir",
+        "followUp": 23,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Évacuer la dame",
+        "followUp": 4,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 25,
+      "trigger": "SHORT",
+      "text": "Vous entrez dans une chambre, les meubles sont en feu. Vous appercevez une fenêtre décorée",
+      "firstChoice": {
+        "text": "Sauter",
+        "followUp": 26,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Reculer",
+        "followUp": 20,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 19,
+      "trigger": "SHORT",
+      "text": "Vous êtes au premier étage, les escaliers ne sont plus utilisables, le feu se propage. Vous entendez un cri vers la porte gauche",
+      "firstChoice": {
+        "text": "Allez à gauche",
+        "followUp": 20,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Allez à droite",
+        "followUp": 25,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 18,
+      "trigger": "MEDIUM",
+      "text": "En utilisant l'extincteur, vous parvenez à voir les escaliers",
+      "firstChoice": {
+        "text": "Monter",
+        "followUp": 19,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Sortir",
+        "followUp": 17,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 15,
+      "trigger": "SHORT",
+      "text": "La fumée obstrue votre vision et l'eau vous protège tant bien que mal du feu",
+      "firstChoice": {
+        "text": "Avancer",
+        "followUp": 16,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Utiliser l'extincteur",
+        "followUp": 18,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 14,
+      "trigger": "MEDIUM",
+      "text": "Vous appercevez un matelas derrière la maison",
+      "firstChoice": {
+        "text": "Entrer dans la maison",
+        "followUp": 15,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Le déplacer",
+        "followUp": 27,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 27,
+      "trigger": "MEDIUM",
+      "text": "Vous déplacez le matelas vers la maison, en dessous d'une fenêtre décorée",
+      "firstChoice": {
+        "text": "Entrer dans la maison",
+        "followUp": 28,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Fuir",
+        "followUp": 1,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 28,
+      "trigger": "SHORT",
+      "text": "Vous renversez votre gourde sur vous. La fumée obstrue votre vision et l'eau vous protège tant bien que mal du feu",
+      "firstChoice": {
+        "text": "Avancer",
+        "followUp": 16,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Utiliser l'extincteur",
+        "followUp": 29,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 29,
+      "trigger": "MEDIUM",
+      "text": "En utilisant l'extincteur, vous parvenez à voir les escaliers",
+      "firstChoice": {
+        "text": "Monter",
+        "followUp": 30,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Sortir",
+        "followUp": 17,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 30,
+      "trigger": "SHORT",
+      "text": "Vous êtes au premier étage, les escaliers ne sont plus utilisables, le feu se propage. Vous entendez un cri vers la porte gauche",
+      "firstChoice": {
+        "text": "Allez à gauche",
+        "followUp": 31,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Allez à droite",
+        "followUp": 32,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 31,
+      "trigger": "SHORT",
+      "text": "Vous prenez la porte gauche. Vous trouvez un nourisson en pleur, vous le prenez, vous voyez une fenêtre sans ornements",
+      "firstChoice": {
+        "text": "Sauter",
+        "followUp": 26,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Reculer",
+        "followUp": 33,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 33,
+      "trigger": "SHORT",
+      "text": "Vous entrez dans une chambre, les meubles sont en feu. Vous appercevez une fenêtre décorée",
+      "firstChoice": {
+        "text": "Sauter",
+        "followUp": 34,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Reculer",
+        "followUp": 3,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 32,
+      "trigger": "SHORT",
+      "text": "Vous entrez dans une chambre, les meubles sont en feu. Vous appercevez une fenêtre décorée",
+      "firstChoice": {
+        "text": "Sauter",
+        "followUp": 26,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Reculer",
+        "followUp": 31,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 13,
+      "trigger": "SHORT",
+      "text": "Vous renverser votre gourde sur vous",
+      "firstChoice": {
+        "text": "Entrer dans la maison",
+        "followUp": 15,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Continuer d'investiguer",
+        "followUp": 14,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 12,
+      "trigger": "SHORT",
+      "text": "Vous remarquez que l'incendie se rapproche de plus en plus",
+      "firstChoice": {
+        "text": "Utiliser votre gourde",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Continuer d'investiger",
+        "followUp": 14,
+        "icon": "EYE"
+      }
+    },
+    {
+      "id": 11,
+      "trigger": "MEDIUM",
+      "text": "'AAH...OH.., je... de..dans...  mon fils est au premier étage... je ne sais quoi faire...!'",
+      "firstChoice": {
+        "text": "Entrer dans la maison",
+        "followUp": 2,
+        "icon": "ENTER"
+      },
+      "secondChoice": {
+        "text": "Evaluer les environs",
+        "followUp": 12,
+        "icon": "EYE"
+      }
+    },
+    {
       "id": 5,
-      "trigger": "MEDIUM",
-      "text": "Avec une éponge humide, vous mettez de l'eau sur la porte",
+      "trigger": "SHORT",
+      "text": "Vous arrivez devant une maison, le rez-de-chaussé est prise au feu. Un peu plus loin, vous voyez une femme térrifiée",
       "firstChoice": {
-        "text": "Je mets un linge humide sous la porte",
-        "followUp": 8,
-        "color": "RED",
+        "text": "Entrer dans la maison",
+        "followUp": 2,
         "icon": "UP"
       },
       "secondChoice": {
-        "text": "J'attends qu'on vienne me chercher",
-        "followUp": 9,
-        "color": "GREEN",
+        "text": "Lui parler",
+        "followUp": 11,
         "icon": "DOWN"
       }
-    }, {
-      "id": 6,
-      "trigger": "LONG",
-      "text": "<font color=#FF0000>Vous devez rester calme. De plus les pompiers ont d'autres informations à vous demander.</font> Avec une éponge humide, vous mettez de l'eau sur la porte",
+    },
+    {
+      "id": 39,
+      "trigger": "SHORT",
+      "text": "Vous remarquez que l'incendie se rapproche de plus en plus",
       "firstChoice": {
-        "text": "Continuer",
-        "followUp": 0,
-        "color": "RED",
+        "text": "Fuir",
+        "followUp": 36,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Continuer d'investiger",
+        "followUp": 14,
+        "icon": "EYE"
+      },
+      "thirdChoice": {
+        "text": "Évacuer la dame",
+        "followUp": 4,
+        "icon": "UP"
+      }
+
+    },
+    {
+      "id": 38,
+      "trigger": "MEDIUM",
+      "text": "'AAH...OH.., je... de..dans...  mon fils est au premier étage... je ne sais quoi faire...!'",
+      "firstChoice": {
+        "text": "Entrer dans la maison",
+        "followUp": 2,
+        "icon": "ENTER"
+      },
+      "secondChoice": {
+        "text": "Evaluer les environs",
+        "followUp": 39,
+        "icon": "EYE"
+      }
+    },
+    {
+      "id": 37,
+      "trigger": "SHORT",
+      "text": "Vous arrivez devant une maison, le rez-de-chaussé est prise au feu. Un peu plus loin, vous voyez une femme térrifiée",
+      "firstChoice": {
+        "text": "Entrer dans la maison",
+        "followUp": 2,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Lui parler",
+        "followUp": 38,
+        "icon": "DOWN"
+      }
+    },
+    {
+      "id": 6,
+      "trigger": "SHORT",
+      "text": "Vous remplissez votre gourde d'eau, l'incendie continue de se propager",
+      "firstChoice": {
+        "text": "Venir en aide",
+        "followUp": 5,
         "icon": "HAND"
       },
       "secondChoice": {
-        "text": "Continuer",
-        "followUp": 0,
-        "color": "GREEN",
+        "text": "Fuir",
+        "followUp": 36,
         "icon": "EXIT"
       }
-    }, {
+    },
+    {
       "id": 7,
-      "trigger": "MEDIUM",
-      "text": "<font color=#008000>Garder son calme dans une situation d'incendie est essentiel.</font> Avec une éponge humide, vous mettez de l'eau sur la porte",
+      "trigger": "SHORT",
+      "text": "Vous vous éloignez du lieu à tout allure et retournez vers la source d'eau",
       "firstChoice": {
-        "text": "Continuer",
-        "followUp": 0,
-        "color": "RED",
+        "text": "Remplir votre gourde",
+        "followUp": 6,
         "icon": "EYE"
       },
       "secondChoice": {
-        "text": "Continuer",
-        "followUp": 0,
-        "color": "GREEN",
+        "text": "Appeler les secours",
+        "followUp": 5,
         "icon": "EXIT"
       }
-    }, {
+    },
+    {
       "id": 8,
       "trigger": "SHORT",
-      "text": "<font color=#008000>Votre porte est tout ce qui vous protège, faites de votre mieux pour qu'elle dure le plus possible.</font> Vous êtes à l'abri dans votre appartement. ",
+      "text": "Dans votre progression, vous appercevez de la fumée tout autour du lieu d'où le cri provenait",
       "firstChoice": {
-        "text": "Je préviens les pompiers.",
-        "followUp": 1,
-        "color": "RED",
-        "icon": "ENTER"
+        "text": "Rebrousser chemin",
+        "followUp": 7,
+        "icon": "EXIT"
       },
       "secondChoice": {
-        "text": "J'attends qu'on vienne me chercher.",
-        "followUp": 10,
-        "color": "GREEN",
-        "icon": "EXIT"
+        "text": "Poursuivre",
+        "followUp": 37,
+        "icon": "ENTER"
       }
-    }, {
+    },
+    {
       "id": 9,
-      "trigger": "FAILURE",
-      "text": "[NE JAMAIS] Même si vous n'avez que votre smoking à 500$ sous la main, il ne vaut certainement pas plus que votre vie. Calfeutrez la porte !"
-    }, {
-      "id": 10,
-      "trigger": "SHORT",
-      "text": "<font color=#FF0000>Les pompiers ont besoin de savoir où vous êtes et que vous avez besoin d'aide. Prévenez-les !</font>",
+      "trigger": "LONG",
+      "text": "Vous appréciez le paysage, l'odeur de la nature, le son de l'eau qui s'écoule. Lorsque soudain, vous entendez un cri.",
       "firstChoice": {
-        "text": "Je préviens les pompiers.",
-        "followUp": 1,
-        "color": "RED",
-        "icon": "ENTER"
+        "text": "Investiguer",
+        "followUp": 8,
+        "icon": "EYE"
       },
       "secondChoice": {
-        "text": "Je préviens les pompiers.",
-        "followUp": 1,
-        "color": "GREEN",
+        "text": "Fuir",
+        "followUp": 2,
         "icon": "EXIT"
       }
-    }, {
-      "id": 11,
+    },
+    {
+      "id": 10,
       "start": true,
       "trigger": "SHORT",
-      "text": "Je suis dans mon appartement. L'alarme incendie sonne. De la fumée passe sous ma porte. La poignée de ma porte est chaude.",
+      "text": "En vous promenant dans les bois de votre campagne, vous entendez un coup de tonerre!",
       "firstChoice": {
-        "text": "J'ouvre la porte",
-        "followUp": 2,
-        "color": "RED",
-        "icon": "SLEEP"
+        "text": "Se rapprocher",
+        "followUp": 9,
+        "icon": "EYE"
       },
       "secondChoice": {
-        "text": "Je reste dans mon appartement",
-        "followUp": 3,
-        "color": "GREEN",
-        "icon": "STANDUP"
+        "text": "Se reposer",
+        "followUp": 35,
+        "icon": "SLEEP"
       }
     }
   ]
