@@ -109,12 +109,6 @@
         "followUp": 1,
         "color": "RED",
         "icon": "ENTER"
-      },
-      "secondChoice": {
-        "text": "Je préviens les pompiers.",
-        "followUp": 1,
-        "color": "GREEN",
-        "icon": "EXIT"
       }
     }, {
       "id": 11,

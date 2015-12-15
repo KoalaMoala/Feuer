@@ -36,6 +36,7 @@ public class BranchingStoryActivity extends Activity {
 
 	private int levelId;
 	private long startTime;
+    private boolean validScore;
 	private Scenario scenario;
 	private Difficulty difficulty;
 	private TextView situationView;
@@ -143,6 +144,7 @@ public class BranchingStoryActivity extends Activity {
 		this.displayEndingContainer(false);
 		this.updateIntefaceFromSituation(s);
 		this.startTime =  elapsedRealtime();
+        this.validScore = true;
 	}
 
 	// ============================================================
@@ -157,6 +159,7 @@ public class BranchingStoryActivity extends Activity {
 	private void updateIntefaceFromSituation(Situation s) {
 		this.animatedCountdown.cancelCountdown();
 		this.situationView.setText(Html.fromHtml(s.getDescription()));
+        if(s.getDescription().contains("#FF0000")){ validScore = false; }
 		int choicesCount = s.getChoicesCount();
 
 		if(0 < choicesCount) {
@@ -194,9 +197,16 @@ public class BranchingStoryActivity extends Activity {
 					badChoice.start();
 				break;
 			default:
-				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
-				Preferences.updateLevelScore(levelId, score, getApplicationContext());
-				Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
+                if(validScore)
+                {
+                    float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
+                    Preferences.updateLevelScore(levelId, score, getApplicationContext());
+                    Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Vous n'avez pas pris que des bonnes décisions, pas de score cette fois-ci !" , Toast.LENGTH_SHORT).show();
+                }
 				this.backgroundPlayer.playVideo("SUCCESS");
 				if(Preferences.getSoundSetting(getBaseContext()))
 					goodChoice.start();
