@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 import ca.uqac.keepitcool.R;
@@ -20,7 +21,7 @@ public class ScoreDialog extends FragmentDialog {
 
     LinearLayout score_01, score_02, score_03, score_04, score_05;
     TextView score_text_01, score_text_02, score_text_03, score_text_04,  score_text_05;
-    HashMap<String, Float> scores;
+    LinkedHashMap<String, Float> scores;
     TreeMap<String, Float> scoresSorted;
 
     @Override
@@ -41,7 +42,7 @@ public class ScoreDialog extends FragmentDialog {
         score_05 = (LinearLayout) view.findViewById(R.id.score_05);
 
         frame = (FrameLayout) view.findViewById(R.id.frame);
-        scores = new HashMap<>();
+        scores = new LinkedHashMap<>();
         scoresSorted = new TreeMap<>();
 
         //get all scores

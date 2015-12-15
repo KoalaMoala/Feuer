@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
                 String sAux = "\nCheck out this beautiful app to get a better understanding on how to handle fire incidents.\n\n";
                 i.putExtra(Intent.EXTRA_TEXT, sAux);
-                
+
                 if(soundActivated) {
                     button2.start();
                 }
