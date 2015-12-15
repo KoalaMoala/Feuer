@@ -132,12 +132,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 i.setType("text/plain");
                 i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
                 String sAux = "\nCheck out this beautiful app to get a better understanding on how to handle fire incidents.\n\n";
-                sAux = sAux + "<Insert cool URL here>\n\n";
                 i.putExtra(Intent.EXTRA_TEXT, sAux);
-
-                Toast t = Toast.makeText(getApplicationContext(), sAux, Toast.LENGTH_SHORT);
-                t.show();
-
+                
                 if(soundActivated) {
                     button2.start();
                 }
