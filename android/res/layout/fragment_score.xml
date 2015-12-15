@@ -43,7 +43,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=""
+                    android:text="Pas encore de score à mettre ici !"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -69,7 +69,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=""
+                    android:text="Pas encore de score à mettre ici !"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -95,7 +95,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=""
+                    android:text="Pas encore de score à mettre ici !"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -121,7 +121,7 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=""
+                    android:text="Pas encore de score à mettre ici !"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -147,18 +147,11 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
-                    android:text=""
+                    android:text="Pas encore de score à mettre ici !"
                     android:textColor="#000000"
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="15dp"
-                android:background="#b6b6b6" />
         </LinearLayout>
     </FrameLayout>
 </FrameLayout>

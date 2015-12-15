@@ -35,7 +35,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_margin="15dp"
-                    android:src="@drawable/level_01_completed" />
+                    android:src="@drawable/level_01" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -177,115 +177,113 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="15dp"
-                android:background="#b6b6b6" />
-
             <LinearLayout
+                android:id="@+id/level_04"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="fill_horizontal"
-                android:gravity="center"
-                android:layoutAnimation="@anim/layout_controller_fade_in"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layoutAnimation="@anim/layout_controller_push_up_in"
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:id="@+id/placeholder_01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:paddingTop="15dp">
-
-                    <ImageView
-                        android:id="@+id/ph1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:contentDescription="@string/app_name"
-                        android:gravity="center"
-                        android:src="@drawable/placeholder" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Placeholder_01"
-                        android:textColor="#000000"
-                        android:textSize="10sp" />
-                </LinearLayout>
+                <ImageView
+                    android:contentDescription="@string/menu_level_01"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/level_04" />
 
                 <LinearLayout
-                    android:id="@+id/placeholder_02"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:paddingTop="15dp">
-
-                    <ImageView
-                        android:id="@+id/ph2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/app_name"
-                        android:gravity="center"
-                        android:src="@drawable/placeholder"
-                        />
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/level_04_name"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Placeholder_02"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/menu_level_01"
                         android:textColor="#000000"
-                        android:textSize="10sp" />
-                </LinearLayout>
+                        android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/placeholder_03"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_weight="1"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:orientation="vertical"
-                    android:paddingTop="15dp">
-
-                    <ImageView
-                        android:id="@+id/ph3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/app_name"
-                        android:gravity="center"
-                        android:src="@drawable/placeholder" />
-
-                    <TextView
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="Placeholder_03"
-                        android:textColor="#000000"
-                        android:textSize="10sp" />
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="-9dp"
+                        android:layoutAnimation="@anim/layout_controller_push_up_in">
+
+                        <TextView
+                            android:id="@+id/level_04_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="@string/menu_level_01_desc"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/level_05"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:layoutAnimation="@anim/layout_controller_push_up_in"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:contentDescription="@string/menu_level_01"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_margin="15dp"
+                    android:src="@drawable/level_05" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/level_05_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="36dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:text="@string/menu_level_01"
+                        android:textColor="#000000"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="-9dp"
+                        android:layoutAnimation="@anim/layout_controller_push_up_in">
+
+                        <TextView
+                            android:id="@+id/level_05_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="20dp"
+                            android:text="@string/menu_level_01_desc"
+                            android:textColor="#000000"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
         </LinearLayout>
     </FrameLayout>
 </FrameLayout>

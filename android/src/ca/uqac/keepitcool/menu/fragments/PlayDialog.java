@@ -35,9 +35,9 @@ public class PlayDialog extends FragmentDialog {
         level_01 = (LinearLayout) view.findViewById(R.id.level_01);
         level_02 = (LinearLayout) view.findViewById(R.id.level_02);
         level_03 = (LinearLayout) view.findViewById(R.id.level_03);
-        placeholder_01 = (LinearLayout) view.findViewById(R.id.placeholder_01);
-        placeholder_02 = (LinearLayout) view.findViewById(R.id.placeholder_02);
-        placeholder_03 = (LinearLayout) view.findViewById(R.id.placeholder_03);
+        //placeholder_01 = (LinearLayout) view.findViewById(R.id.placeholder_01);
+        //placeholder_02 = (LinearLayout) view.findViewById(R.id.placeholder_02);
+        //placeholder_03 = (LinearLayout) view.findViewById(R.id.placeholder_03);
         frame = (FrameLayout) view.findViewById(R.id.frame);
 
         TextView nameView1 = (TextView) view.findViewById(R.id.level_01_name);
@@ -85,6 +85,7 @@ public class PlayDialog extends FragmentDialog {
             }
         });
 
+        /*
         placeholder_01.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +108,7 @@ public class PlayDialog extends FragmentDialog {
                 Intent intent = new Intent(getActivity(), BranchingStoryActivity.class);
                 startActivity(intent);
             }
-        });
+        })*/
 
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return view;
