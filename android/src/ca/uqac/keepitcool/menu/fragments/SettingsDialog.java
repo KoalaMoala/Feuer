@@ -87,7 +87,6 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         soundIsOn = !soundIsOn;
         if(soundIsOn) {
             Preferences.updateSoundSetting(true, getActivity().getApplicationContext());
-
         } else {
             Preferences.updateSoundSetting(false, getActivity().getApplicationContext());
         }

@@ -26,12 +26,11 @@ import ca.uqac.keepitcool.quizz.Preferences;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
-    public static final String PREFS_NAME = "MyPrefsFile";
-
     private CircularRevealView revealView;
     private View selectedView;
     private int backgroundColor;
     private ImageView playButton;
+    private boolean soundActivated;
 
     private MediaPlayer menuTheme;
     private MediaPlayer button1;
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         score = (LinearLayout) findViewById(R.id.rate);
         share = (LinearLayout) findViewById(R.id.share);
 
+        soundActivated = Preferences.getSoundSetting(getBaseContext());
         Display mdisp = getWindowManager().getDefaultDisplay();
         Point mdispSize = new Point();
         mdisp.getSize(mdispSize);
@@ -76,9 +76,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showPlayDialog();
-                        if(Preferences.getSoundSetting(getBaseContext()))
+                        if(soundActivated) {
                             button1.start();
+                        }
+                        showPlayDialog();
                     }
                 }, 50);
             }
@@ -95,9 +96,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showSettingsDialog();
-                        if(Preferences.getSoundSetting(getBaseContext()))
+                        if(soundActivated) {
                             button2.start();
+                        }
+                        showSettingsDialog();
                     }
                 }, 50);
             }
@@ -114,9 +116,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showScoreDialog();
-                        if(Preferences.getSoundSetting(getBaseContext()))
+                        if(soundActivated) {
                             button2.start();
+                        }
+                        showScoreDialog();
                     }
                 }, 50);
             }
@@ -135,9 +138,11 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 Toast t = Toast.makeText(getApplicationContext(), sAux, Toast.LENGTH_SHORT);
                 t.show();
 
-                startActivity(Intent.createChooser(i, "Choose one"));
-                if(Preferences.getSoundSetting(getBaseContext()))
+                if(soundActivated) {
                     button2.start();
+                }
+                startActivity(Intent.createChooser(i, "Choose one"));
+
             }
         });
 
@@ -145,14 +150,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         menuTheme.setLooping(true);
         button1 = MediaPlayer.create(MainActivity.this, R.raw.bouton1);
         button2 = MediaPlayer.create(MainActivity.this, R.raw.button6);
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
-
-        if(Preferences.getSoundSetting(getBaseContext()))
-            menuTheme.start();
     }
 
     private Point getLocationInView(View src, View target) {
@@ -181,6 +178,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         FragmentManager fm = getFragmentManager();
         SettingsDialog settingsDialog = new SettingsDialog();
         settingsDialog.show(fm, "fragment_settings");
+
     }
 
     private void showScoreDialog() {
@@ -191,6 +189,12 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     @Override
     public void onDismiss(final DialogInterface dialog) {
+        if(soundActivated  && !menuTheme.isPlaying()) {
+            menuTheme.start();
+        } else if(!soundActivated && menuTheme.isPlaying()) {
+            menuTheme.pause();
+        }
+
         View v = playButton;
         final Point p = getLocationInView(revealView, v);
         handler = new Handler();
@@ -207,15 +211,15 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 layout.setVisibility(View.VISIBLE);
             }
         }, 500);
-
-        if(!Preferences.getSoundSetting(getBaseContext()) && menuTheme.isPlaying())
-            menuTheme.pause();
-        else if (Preferences.getSoundSetting(getBaseContext()) && !menuTheme.isPlaying())
-            menuTheme.start();
-
     }
 
-
+    @Override
+    public void onStart(){
+        if(soundActivated) {
+            menuTheme.start();
+        }
+        super.onStart();
+    }
 
     @Override
     public void onPause(){
@@ -225,9 +229,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     @Override
      public void onResume(){
-        super.onResume();
-        if(Preferences.getSoundSetting(getBaseContext()))
+        if(soundActivated) {
             menuTheme.start();
+        }
+        super.onResume();
     }
-
 }
