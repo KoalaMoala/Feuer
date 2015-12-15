@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import ca.uqac.keepitcool.menu.fragments.PlayDialog;
 import ca.uqac.keepitcool.menu.fragments.ScoreDialog;
 import ca.uqac.keepitcool.menu.fragments.SettingsDialog;
 import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
+import ca.uqac.keepitcool.quizz.Preferences;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     private View selectedView;
     private int backgroundColor;
     private ImageView playButton;
+
+    private MediaPlayer menuTheme;
+    private MediaPlayer button1;
+    private MediaPlayer button2;
 
     RelativeLayout layout;
     LinearLayout settings, score, share;
@@ -71,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                     @Override
                     public void run() {
                         showPlayDialog();
+                        if(Preferences.getSoundSetting(getBaseContext()))
+                            button1.start();
                     }
                 }, 50);
             }
@@ -88,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                     @Override
                     public void run() {
                         showSettingsDialog();
+                        if(Preferences.getSoundSetting(getBaseContext()))
+                            button2.start();
                     }
                 }, 50);
             }
@@ -105,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                     @Override
                     public void run() {
                         showScoreDialog();
+                        if(Preferences.getSoundSetting(getBaseContext()))
+                            button2.start();
                     }
                 }, 50);
             }
@@ -124,8 +136,23 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 t.show();
 
                 startActivity(Intent.createChooser(i, "Choose one"));
+                if(Preferences.getSoundSetting(getBaseContext()))
+                    button2.start();
             }
         });
+
+        menuTheme = MediaPlayer.create(MainActivity.this, R.raw.menu2);
+        menuTheme.setLooping(true);
+        button1 = MediaPlayer.create(MainActivity.this, R.raw.bouton1);
+        button2 = MediaPlayer.create(MainActivity.this, R.raw.button6);
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+
+        if(Preferences.getSoundSetting(getBaseContext()))
+            menuTheme.start();
     }
 
     private Point getLocationInView(View src, View target) {
@@ -180,5 +207,27 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 layout.setVisibility(View.VISIBLE);
             }
         }, 500);
+
+        if(!Preferences.getSoundSetting(getBaseContext()) && menuTheme.isPlaying())
+            menuTheme.pause();
+        else if (Preferences.getSoundSetting(getBaseContext()) && !menuTheme.isPlaying())
+            menuTheme.start();
+
     }
+
+
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        menuTheme.pause();
+    }
+
+    @Override
+     public void onResume(){
+        super.onResume();
+        if(Preferences.getSoundSetting(getBaseContext()))
+            menuTheme.start();
+    }
+
 }

@@ -3,8 +3,8 @@ package ca.uqac.keepitcool.quizz;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -40,6 +40,12 @@ public class BranchingStoryActivity extends Activity {
 	private AnimatedCountdown animatedCountdown;
 	private List<DynamicButton> dynamicButtons;
 	private LinearLayout endingContainer, firstRow, secondRow;
+
+	private MediaPlayer song1;
+	private MediaPlayer fire;
+	private  MediaPlayer badChoice;
+	private  MediaPlayer goodChoice;
+	private  MediaPlayer tictac;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +89,44 @@ public class BranchingStoryActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		if(this.levelId == 2)
+			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition5_1);
+		else
+			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition6);
+		song1.setLooping(true);
+
+		fire = MediaPlayer.create(BranchingStoryActivity.this, R.raw.fire2);
+		fire.setLooping(true);
+
+		badChoice = MediaPlayer.create(BranchingStoryActivity.this, R.raw.badbutton);
+		goodChoice = MediaPlayer.create(BranchingStoryActivity.this, R.raw.goodending);
+		tictac  = MediaPlayer.create(BranchingStoryActivity.this, R.raw.horloge_tictac);
+	}
+
+	@Override
+	public void onStart(){
+		super.onStart();
+
+		if(Preferences.getSoundSetting(getBaseContext())) {
+			song1.start();
+			fire.start();
+		}
+	}
+
+	@Override
+	public void onPause(){
+		super.onPause();
+		song1.pause();
+		fire.pause();
+	}
+
+	@Override
+	public void onResume(){
+		super.onResume();
+		if(Preferences.getSoundSetting(getBaseContext())) {
+			song1.start();
+			fire.start();
+		}
 	}
 
 	// ============================================================
@@ -109,7 +153,7 @@ public class BranchingStoryActivity extends Activity {
 
 	private void updateIntefaceFromSituation(Situation s) {
 		this.animatedCountdown.cancelCountdown();
-		this.situationView.setText(Html.fromHtml(s.getDescription()));
+		this.situationView.setText(s.getDescription());
 		int choicesCount = s.getChoicesCount();
 
 		if(0 < choicesCount) {
@@ -137,15 +181,21 @@ public class BranchingStoryActivity extends Activity {
 			case "RAN_OUT_OF_TIME":
 				this.situationView.setText(getResources().getString(R.string.time_run_out));
 				this.backgroundPlayer.playVideo("RAN_OUT_OF_TIME");
+				if(Preferences.getSoundSetting(getBaseContext()))
+					tictac.start();
 				break;
 			case "FAILURE":
 				this.backgroundPlayer.playVideo("FAILURE");
+				if(Preferences.getSoundSetting(getBaseContext()))
+					badChoice.start();
 				break;
 			default:
 				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
 				Preferences.updateLevelScore(levelId, score, getApplicationContext());
 				Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
 				this.backgroundPlayer.playVideo("SUCCESS");
+				if(Preferences.getSoundSetting(getBaseContext()))
+					goodChoice.start();
 				break;
 		}
 		this.displayEndingContainer(true);

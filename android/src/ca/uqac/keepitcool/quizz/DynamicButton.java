@@ -1,8 +1,10 @@
 package ca.uqac.keepitcool.quizz;
 
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.view.View;
 
+import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.quizz.scenario.Choice;
 import ca.uqac.keepitcool.quizz.utils.FancyColor;
 import ca.uqac.keepitcool.quizz.utils.UserDecision;
@@ -13,10 +15,13 @@ public class DynamicButton implements View.OnClickListener {
     private final FancyButton control;
     private UserDecision userDecision;
 
+    private MediaPlayer buttonChoice1;
+
     public DynamicButton(FancyButton control, BranchingStoryActivity parent) {
         this.control = control;
         this.parent = parent;
         this.control.setOnClickListener(this);
+        buttonChoice1 = MediaPlayer.create(parent, R.raw.goodbutton);
     }
 
     public void update(Choice choice, FancyColor color) {
@@ -34,5 +39,7 @@ public class DynamicButton implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         this.parent.handleUserChoice(this.userDecision);
+        if(Preferences.getSoundSetting(parent.getBaseContext()))
+            buttonChoice1.start();
     }
 }
