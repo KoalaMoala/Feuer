@@ -93,7 +93,7 @@ public class BranchingStoryActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		if(this.levelId == 2)
+		if(this.levelId % 2 == 0)
 			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition5_1);
 		else
 			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition6);

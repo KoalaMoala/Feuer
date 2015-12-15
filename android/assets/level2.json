@@ -1,7 +1,7 @@
 {
   "description": {
-    "name": "Alerte incendie naturelle",
-    "shortDescription": "Un coup de foudre s'abat dans la région."
+    "name": "Feu de forêt",
+    "shortDescription": "Votre sortie camping ne se déroulera pas comme prévu."
   },
   "scenario": [
     {

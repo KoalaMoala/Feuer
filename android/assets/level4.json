@@ -1,0 +1,270 @@
+{
+  "description" : {
+    "name" : "Cuisine qui dérape",
+    "shortDescription" : "Un feu se déclare dans ma cuisine"
+  },
+  "scenario" : [
+    {
+      "id": 1,
+      "trigger": "SUCCESS",
+      "text": "Prévenir les pompiers de votre présence est essentiel afin qu'ils viennent à votre secours."
+    }, {
+      "id": 2,
+      "trigger": "FAILURE",
+      "text": "<font color=#FF0000> Non! il faut absolument connaître se numéro : 911!! </font>"
+    }, {
+      "id": 3,
+      "trigger": "MEDIUM",
+      "text": "Le numéro est ...",
+      "firstChoice": {
+        "text": "911",
+        "followUp": 1,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "119",
+        "followUp": 2,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "191",
+        "followUp": 2,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "111",
+        "followUp": 2,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 4,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Les pompiers ne savent pas nécessairement que votre immeuble est en danger </font> Vous décidez tout de même d'appeler le numéro d'urgence. Le numéro d'urgence est ...",
+      "firstChoice": {
+        "text": "911",
+        "followUp": 1,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "119",
+        "followUp": 2,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "191",
+        "followUp": 2,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "111",
+        "followUp": 2,
+        "icon": "DOWN"
+        }
+      }, {
+      "id": 5,
+      "trigger": "MEDIUM",
+      "text": "Arrivez à l'extérieur vous ...",
+      "firstChoice": {
+        "text": "Vous quittez immédiatement l'immeuble",
+        "followUp": 3,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous attendez que tout se règle",
+        "followUp": 4,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous allez vous promenez",
+        "followUp": 4,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "Vous attendez en espérant que rien ne brûle",
+        "followUp": 4,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 6,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Il ne faut pas jamais rester dans un lieu exposé au danger</font> Vous décidez tout de même de soritr dehors. Arrivez dehors,",
+      "firstChoice": {
+        "text": "Vous quittez immédiatement l'immeuble",
+        "followUp": 3,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous attendez que tout se règle",
+        "followUp": 4,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous allez vous promenez",
+        "followUp": 4,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "Vous attendez en espérant que rien ne brûle",
+        "followUp": 4,
+        "icon": "DOWN"
+      }        
+    },{
+      "id": 7,
+      "trigger": "MEDIUM",
+      "text": "Que faites vous ensuite",
+      "firstChoice": {
+        "text": "Vous quittez immédiatement l'immeuble",
+        "followUp": 5,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous attendez que quelqu'un vienne l'éteindre",
+        "followUp": 6,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous rappelez votre ami pour continuer la conversation",
+        "followUp": 6,
+        "icon": "UP"
+      }
+    },{
+      "id": 8,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Il ne faut pas faire n'importe quoi vous risquerez d'aggraver la situation </font> Vous commencez à ramper pour vous dirigez à l'extérieur. Vous arrivez à l'ascenseur",
+      "firstChoice": {
+        "text": "Vous quittez immédiatement l'immeuble",
+        "followUp": 5,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous attendez que quelqu'un vienne l'éteindre",
+        "followUp": 6,
+        "icon": "STANDUP"        
+      },
+      "thirdChoice": {
+        "text": "Vous rappelez votre ami pour continuer la conversation",
+        "followUp": 6,
+        "icon": "UP"
+      }
+    },{
+      "id": 9,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000> Avoir un extincteur chez soi peut être utile</fonte> L'extincteur est introuvable, vos enfants l'ont caché",
+      "firstChoice": {
+        "text": "Vous déclenchez l'alarme incendie",
+        "followUp": 7,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous essayez d'arrêter le feu d'un quelconque manière",
+        "followUp": 8,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous commencez à chercher un peu partout",
+        "followUp": 8,
+        "icon": "UP"
+      }     
+    },{
+      "id": 10,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Il ne faut jamais laisser un feu dans son appartement </fonte> Vous décidez tout de même de le chercher. L'extincteur est introuvable.",
+      "firstChoice": {
+        "text": "Vous déclenchez l'alarme incendie",
+        "followUp": 7,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous essayez d'arrêter le feu d'un quelconque manière",
+        "followUp": 8,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous commencez à chercher un peu partout",
+        "followUp": 8,
+        "icon": "UP"
+      }     
+    },{
+      "id": 11,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000> Toujours vérifié lorsqu'il y a une odeur de fumée</fonte> Votre cuisine est en feu",
+      "firstChoice": {
+        "text": "Vous cherchez un extincteur",
+        "followUp": 9,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Faire comme si de rien était quelqu'un d'autre l'éteindra",
+        "followUp": 10,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous continuez a parlé avec votre ami",
+        "followUp": 10,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "Vous appelez pour commander une pizza",
+        "followUp": 10,
+        "icon": "DOWN"
+      }
+    },{
+     "id": 12,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Toujours vérifié la porte car plusieurs dangers peuvent se caché derrières </fonte> Ouuf! la porte n'est pas chaude. Vous ...",
+      "firstChoice": {
+        "text": "Vous cherchez un extincteur",
+        "followUp": 9,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Faire comme si de rien était quelqu'un d'autre l'éteindra",
+        "followUp": 10,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous continuez a parlé avec votre ami",
+        "followUp": 10,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "Vous appelez pour commander une pizza",
+        "followUp": 10,
+        "icon": "DOWN"
+      } 
+    },{
+      "id": 13,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000> Surveiller la nourriture pendant la cuisson est important</fonte> Un ami vous appel sur votre cellulaire. Vous allez plus loin pour parler. Vous senter une odeur de fumée.",
+      "firstChoice": {
+        "text": "Vous allez voir d'où viens l'odeur",
+        "followUp": 11,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous continuez a parlé avec votre ami",
+        "followUp": 12,
+        "icon": "STANDUP"
+      }
+    },{
+      "id": 14,
+      "trigger": "FAILURE",
+      "text": "Plus de 50% des morts dans un incendie surviennent à cause de la fumée et pas à cause du feu"     
+    },{
+      "id": 15,
+      "start": true,
+      "trigger": "MEDIUM",
+      "text": "Vous mettez votre aliments a frire. Que faites vous?",
+      "firstChoice": {
+        "text": "Je reste à proximité et je vérifie régulièrement l'état de la cuisson",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Je vais au salon regarder la télé en attendant",
+        "followUp": 14,
+        "icon": "STANDUP"
+      }
+    }
+  ]
+}

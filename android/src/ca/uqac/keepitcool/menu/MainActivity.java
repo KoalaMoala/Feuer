@@ -185,6 +185,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     @Override
     public void onDismiss(final DialogInterface dialog) {
+        soundActivated = Preferences.getSoundSetting(getBaseContext());
         if(soundActivated  && !menuTheme.isPlaying()) {
             menuTheme.start();
         } else if(!soundActivated && menuTheme.isPlaying()) {
@@ -207,6 +208,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 layout.setVisibility(View.VISIBLE);
             }
         }, 500);
+
     }
 
     @Override

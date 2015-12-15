@@ -1,0 +1,362 @@
+{
+  "description" : {
+    "name" : "Un feu dans ma résidence 7",
+    "shortDescription" : "Cuisine qui dérape"
+  },
+  "scenario" : [
+    {
+      "id": 1,
+      "trigger": "SUCCESS",
+      "text": "Essayer d'appelez à l'aide"
+    }, {
+      "id": 2,
+      "trigger": "FAILURE",
+      "text": "<font color=#FF0000> Dans ce cas il faut chercher à se protéger </font> On va chercher à prendre un lieu où d'autre personne pourrait nous apercevoir comme au balcon"
+    }, {
+      "id": 3,
+      "trigger": "MEDIUM",
+      "text": "Les flammes ont atteins l'intérieur de votre habitat mais à l'extérieur il n'y a pas de flammes",
+      "firstChoice": {
+        "text": "Vous allez sur le balcon",
+        "followUp": 1,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous prenez un tapis pour éteindre les flammes",
+        "followUp": 2,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous prenez un sceau d'eau",
+        "followUp": 2,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "Vous cherchez une pièce où il n'y a pas de flammes",
+        "followUp": 2,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 4,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Il faut toujours au porte ou fenêtre que l'on ouvre elles peuvent  laisser passer les flammes </font> Vous n'avez pas de chance les flammes atteins l'intérieur de votre habitat mais à l'extérieur il n'y a pas de flammes",
+      "firstChoice": {
+        "text": "Vous allez sur le balcon",
+        "followUp": 1,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous prenez un tapis pour éteindre les flammes",
+        "followUp": 2,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous prenez un sceau d'eau",
+        "followUp": 2,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "Vous cherchez une pièce où il n'y a pas de flammes",
+        "followUp": 2,
+        "icon": "DOWN"
+        }
+      }, {
+      "id": 5,
+      "trigger": "MEDIUM",
+      "text": "Votre pièce est dégagée",
+      "firstChoice": {
+        "text": "Restez près de la fenêtre si jamais les flammes viennent à l'intérieur",
+        "followUp": 3,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous laissez la fenêtre ouverte et vous contiuez vos activités",
+        "followUp": 4,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous fermez la fenêtre",
+        "followUp": 4,
+        "icon": "UP"
+      }
+    }, {
+      "id": 6,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Avec toutes cette fumée vous n'allez plus réussir à respirer</font> Pour survire pour décidez d'ouvrir votre pièce. Votre pièce est dégagée",
+      "firstChoice": {
+        "text": "Restez près de la fenêtre si jamais les flammes viennent à l'intérieur",
+        "followUp": 3,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous laissez la fenêtre ouverte et vous contiuez vos activités",
+        "followUp": 4,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "Vous fermez la fenêtre",
+        "followUp": 4,
+        "icon": "UP"
+      }      
+    },{
+      "id": 7,
+      "trigger": "MEDIUM",
+      "text": "Il y a beaucoup trop de fumée qui est rentrée chez vous",
+      "firstChoice": {
+        "text": "Vous ouvrez une fenêtre",
+        "followUp": 5,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous pouvez tenir à toutes cette fumée",
+        "followUp": 6,
+        "icon": "STANDUP"
+      }
+    },{
+      "id": 8,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> La fumée peu crée des intoxiations </font> Il y a beaucoup trop de fumée qui est rentrée chez vous",
+      "firstChoice": {
+        "text": "Vous ouvrez une fenêtre",
+        "followUp": 5,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous pouvez tenir à toutes cette fumée",
+        "followUp": 6,
+        "icon": "STANDUP"        
+      }
+    },{
+      "id": 9,
+      "trigger": "MEDIUM",
+      "text": "Vous avez oublié une issue. De la fumée est rentrée chez vous",
+      "firstChoice": {
+        "text": "Vous respirez à travers un linge humide",
+        "followUp": 7,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "un peu de fumée ne va pas causer de problèmes",
+        "followUp": 8,
+        "icon": "STANDUP"
+      }     
+    },{
+      "id": 10,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000>L'oxygène est très important. Il faut chercher à préserver l'oxygène de la pièce en bloquant la fumée pour qu'elle ne rentre pas à l'intérieur  </fonte> Vous avez oublié une issue. De la fumée est rentrée chez vous",
+      "firstChoice": {
+        "text": "Vous respirez à travers un linge humide",
+        "followUp": 7,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous respirez à travers un linge humide",
+        "followUp": 8,
+        "icon": "STANDUP"
+      }    
+    },{
+      "id": 11,
+      "trigger": "MEDIUM",
+      "text": "Pendant que les secours arrivent, vous...",
+      "firstChoice": {
+        "text": "Bloquez les espaces vides pour empêcher la fumée de rentrée",
+        "followUp": 9,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "regardez la télé",
+        "followUp": 10,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "allez éteindre la feu par vos propre moyen",
+        "followUp": 10,
+        "icon": "UP"
+      }
+    },{
+     "id": 12,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> C'est numéro que vous devez absolument connaître 911! </fonte> Vous appelez se numéro. Pendant que les secours arrivent, vous...",
+      "firstChoice": {
+        "text": "Bloquez les espaces vides pour empêcher la fumée de rentrée",
+        "followUp": 9,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "regardez la télé",
+        "followUp": 10,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "allez éteindre la feu par vos propre moyen",
+        "followUp": 10,
+        "icon": "UP"
+      }
+    },{
+      "id": 13,
+      "trigger": "MEDIUM",
+      "text": "Vous retournez à votre appartement. Vous décidez de téléphoner au numéros des urgences. Le numéro est ...",
+      "firstChoice": {
+        "text": "911",
+        "followUp": 11,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "18",
+        "followUp": 12,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "19",
+        "followUp": 12,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "191",
+        "followUp": 12,
+        "icon": "DOWN"
+      } 
+    },{
+      "id": 14,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Des dangers peuvent toujours se cachez derrières la porte </fonte>Vous vous dites que rentré est un meilleur décision. Et vous appelez les numéros d'urgence",
+      "firstChoice": {
+        "text": "911",
+        "followUp": 11,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "18",
+        "followUp": 12,
+        "icon": "STANDUP"
+      },
+      "thirdChoice": {
+        "text": "19",
+        "followUp": 12,
+        "icon": "UP"
+      },
+      "fourthChoice": {
+        "text": "191",
+        "followUp": 12,
+        "icon": "DOWN"
+      } 
+    },{
+      "id": 15,
+      "trigger": "MEDIUM",
+      "text": "Pendant que vous rampiez votre chemin est bloqué",
+      "firstChoice": {
+        "text": "Vous rebroussez chemin",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous tentez d'éteindre les flammes",
+        "followUp": 14,
+        "icon": "STANDUP"
+      } 
+    },{
+      "id": 16,
+      "trigger": "MEDIUM",
+      "text": "<font color=#000000> Il est déconseillé d'aller tête baissé dans la fumée </fonte> Vous commencez à ramper pour vous dirigez à l'extérieur. Pendant que vous rampiez votre chemin est bloqué",
+      "firstChoice": {
+        "text": "Vous rebroussez chemin",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous tentez d'éteindre les flammes",
+        "followUp": 14,
+        "icon": "STANDUP"
+      } 
+    },{
+      "id": 17,
+      "trigger": "MEDIUM",
+      "text": "Des dangers peuvent toujours se cachez derrières la porte Vous voyez de la fumée.",
+      "firstChoice": {
+        "text": "Vous décidez de vous déplacez en rampant",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous allez à travers la fumée en vous masquant votre nez.",
+        "followUp": 14,
+        "icon": "STANDUP"
+      } 
+    },{
+      "id": 18,
+      "trigger": "MEDIUM",
+      "text": "<font color=#000000> Des dangers peuvent toujours se cachez derrières la porte </fonte> Il n'y a pas de flammes ni d'objets obstruant votre passage. Vous voyez de la fumée, vous ...",
+      "firstChoice": {
+        "text": "Vous décidez de vous déplacez en rampant",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous allez à travers la fumée en vous masquant votre nez.",
+        "followUp": 14,
+        "icon": "STANDUP"
+      } 
+    },{
+      "id": 11,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000> Vérifié la porte est un moyen de prévention vis à vis des dangers futur </fonte> la porte n'est pas chaude. Vous ...",
+      "firstChoice": {
+        "text": "Ouvez lentement pour vous assurez s'il n'y a pas de danger",
+        "followUp": 9,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Ouvre pour sortir dehors",
+        "followUp": 10,
+        "icon": "STANDUP"
+      }
+    },{
+     "id": 12,
+      "trigger": "MEDIUM",
+      "text": "<font color=#FF0000> Toujours vérifié la porte car plusieurs dangers peuvent se caché derrières </fonte> Ouuf! la porte n'est pas chaude. Vous ...",
+      "firstChoice": {
+        "text": "Ouvez lentement pour vous assurez s'il n'y a pas de danger",
+        "followUp": 9,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Ouvre pour sortir dehors",
+        "followUp": 10,
+        "icon": "STANDUP"
+      } 
+    },{
+      "id": 13,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000> Ne perdez pas de temps à prendre vos effets personnels </fonte> Arrivez devant une porte fermée. Vous ...",
+      "firstChoice": {
+        "text": "Vérifiez si la porte n'est pas chaude",
+        "followUp": 11,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous l'ouvez rapidement",
+        "followUp": 12,
+        "icon": "STANDUP"
+      }
+    },{
+      "id": 14,
+      "trigger": "FAILURE",
+      "text": "Il faut toujours faire attention aux systèmes d'alarmes"     
+    },{
+      "id": 15,
+      "start": true,
+      "trigger": "MEDIUM",
+      "text": "Vous entendez le système d'alarmes incendies",
+      "firstChoice": {
+        "text": "Vous vous précipitez pour sortir de chez vous",
+        "followUp": 13,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous continuez à regardez la télévision",
+        "followUp": 14,
+        "icon": "STANDUP"
+      }
+    }
+  ]
+}
