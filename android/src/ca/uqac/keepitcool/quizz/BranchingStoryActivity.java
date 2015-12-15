@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -153,7 +154,7 @@ public class BranchingStoryActivity extends Activity {
 
 	private void updateIntefaceFromSituation(Situation s) {
 		this.animatedCountdown.cancelCountdown();
-		this.situationView.setText(s.getDescription());
+		this.situationView.setText(Html.fromHtml(s.getDescription()));
 		int choicesCount = s.getChoicesCount();
 
 		if(0 < choicesCount) {
