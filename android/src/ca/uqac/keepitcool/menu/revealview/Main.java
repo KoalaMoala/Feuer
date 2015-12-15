@@ -1,8 +1,9 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.menu.revealview;
 
 import android.content.Context;
 import android.content.Intent;
 
+import ca.uqac.keepitcool.menu.MainActivity;
 import de.robv.android.xposed.IXposedHookLoadPackage;
 import de.robv.android.xposed.IXposedHookZygoteInit;
 import de.robv.android.xposed.XC_MethodHook;

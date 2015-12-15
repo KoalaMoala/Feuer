@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.menu.fragments;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 
 import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
 
 public abstract class FragmentDialog extends DialogFragment {
 

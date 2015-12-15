@@ -148,7 +148,7 @@
         </RelativeLayout>
     </ScrollView>
 
-    <ca.uqac.keepitcool.menu.CircularRevealView
+    <ca.uqac.keepitcool.menu.revealview.CircularRevealView
         android:id="@+id/reveal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

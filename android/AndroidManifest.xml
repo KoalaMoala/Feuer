@@ -27,14 +27,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".myfirstgame.Game" android:label="@string/app_name" android:screenOrientation="landscape" />
-
         <activity android:name=".quizz.BranchingStoryActivity" android:label="@string/app_name" android:screenOrientation="landscape" />
-
-        <activity
-            android:name=".AndroidLauncher" android:label="@string/app_name"
-            android:screenOrientation="landscape" android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
-        </activity>
 
     </application>
 

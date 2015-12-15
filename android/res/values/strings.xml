@@ -28,8 +28,6 @@
     <!-- INGAME BUTTONS -->
     <string name="button_restart">Restart</string>
     <string name="button_confirm">Return to menu</string>
-    <string name="button_yes">YES</string>
-    <string name="button_no">NO</string>
     <string name="time_run_out">In case of emergency, every second counts. Good habits can save your life while certain behaviours can put your life at risk.</string>
 
     <!-- DIFFICULTY ARRAYS (LABELS & VALUES) -->

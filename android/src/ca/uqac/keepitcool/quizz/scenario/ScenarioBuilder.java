@@ -2,7 +2,6 @@ package ca.uqac.keepitcool.quizz.scenario;
 
 import android.content.res.AssetManager;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -13,7 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import ca.uqac.keepitcool.quizz.UserDecision;
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
+import ca.uqac.keepitcool.quizz.utils.Icon;
+import ca.uqac.keepitcool.quizz.utils.Trigger;
+import ca.uqac.keepitcool.quizz.utils.UserDecision;
 
 public class ScenarioBuilder {
 
@@ -26,28 +28,28 @@ public class ScenarioBuilder {
                 .addSituation(4, Trigger.FAILURE, "Lorsqu'une alarme incendie sonne, il est capital d'évacuer le bâtiment en raison de la propagation du feu et de la fumée");
 
         scenario.addSituation(5, Trigger.MEDIUM, "Vous arrivez devant la porte des escaliers, vous vous trouvez actuellement au 1er étage")
-                .addChoiceToSituation(5, UserDecision.FIRST, "Monter", 2, FancyColor.RED, Icon.UP)
-                .addChoiceToSituation(5, UserDecision.SECOND, "Descendre", 1, FancyColor.GREEN, Icon.DOWN);
+                .addChoiceToSituation(5, UserDecision.FIRST, "Monter", 2, Icon.UP)
+                .addChoiceToSituation(5, UserDecision.SECOND, "Descendre", 1, Icon.DOWN);
 
         scenario.addSituation(6, Trigger.LONG, "Le feu ne semble pas se propager rapidement mais de multiples meubles brûlent. Vous ne voyez pas de source d'eau à proximité mais apercevez une pile de serviettes pliées")
-                .addChoiceToSituation(6, UserDecision.FIRST, "Etouffer le feu", 3, FancyColor.RED, Icon.HAND)
-                .addChoiceToSituation(6, UserDecision.SECOND, "Se diriger vers la sortie", 5, FancyColor.GREEN, Icon.EXIT);
+                .addChoiceToSituation(6, UserDecision.FIRST, "Etouffer le feu", 3, Icon.HAND)
+                .addChoiceToSituation(6, UserDecision.SECOND, "Se diriger vers la sortie", 5, Icon.EXIT);
 
         scenario.addSituation(7, Trigger.MEDIUM, "La fumée obstrue votre vision mais vous arrivez à voir que personne ne se trouve dans la pièce")
-                .addChoiceToSituation(7, UserDecision.FIRST, "Evaluer l'incendie", 6, FancyColor.RED, Icon.EYE)
-                .addChoiceToSituation(7, UserDecision.SECOND, "Se diriger vers la sortie", 5, FancyColor.GREEN, Icon.EXIT);
+                .addChoiceToSituation(7, UserDecision.FIRST, "Evaluer l'incendie", 6, Icon.EYE)
+                .addChoiceToSituation(7, UserDecision.SECOND, "Se diriger vers la sortie", 5, Icon.EXIT);
 
         scenario.addSituation(8, Trigger.SHORT, "Vous progressez dans l'étage et au détour d'un couloir, vous voyez de la fumée s'échapper de sous une porte")
-                .addChoiceToSituation(8, UserDecision.FIRST, "Ouvrir la porte", 7, FancyColor.RED, Icon.ENTER)
-                .addChoiceToSituation(8, UserDecision.SECOND, "Se diriger vers la sortie", 5, FancyColor.GREEN, Icon.EXIT);
+                .addChoiceToSituation(8, UserDecision.FIRST, "Ouvrir la porte", 7, Icon.ENTER)
+                .addChoiceToSituation(8, UserDecision.SECOND, "Se diriger vers la sortie", 5, Icon.EXIT);
 
         scenario.addSituation(9, Trigger.MEDIUM, "Vous êtes dans le couloir et ne voyez rien d'alarmant")
-                .addChoiceToSituation(9, UserDecision.FIRST, "Investiger", 8, FancyColor.RED, Icon.EYE)
-                .addChoiceToSituation(9, UserDecision.SECOND, "Se diriger vers la sortie", 5, FancyColor.GREEN, Icon.EXIT);
+                .addChoiceToSituation(9, UserDecision.FIRST, "Investiger", 8, Icon.EYE)
+                .addChoiceToSituation(9, UserDecision.SECOND, "Se diriger vers la sortie", 5, Icon.EXIT);
 
         scenario.addStartingSituation(10, Trigger.SHORT, "Vous êtes réveillé par une alarme incendie au milieu de la nuit")
-                .addChoiceToSituation(10, UserDecision.FIRST, "Se rendormir", 4, FancyColor.RED, Icon.SLEEP)
-                .addChoiceToSituation(10, UserDecision.SECOND, "Se lever", 9, FancyColor.GREEN, Icon.STANDUP);
+                .addChoiceToSituation(10, UserDecision.FIRST, "Se rendormir", 4, Icon.SLEEP)
+                .addChoiceToSituation(10, UserDecision.SECOND, "Se lever", 9, Icon.STANDUP);
 
         return scenario;
     }
@@ -98,19 +100,37 @@ public class ScenarioBuilder {
         FancyColor color = null;
         Icon icon = null;
 
-        JsonObject firstChoice = elem.get("firstChoice").getAsJsonObject();
-        text = firstChoice.get("text").getAsString();
-        followUp = firstChoice.get("followUp").getAsInt();
-        color = FancyColor.valueOf(firstChoice.get("color").getAsString());
-        icon = Icon.valueOf(firstChoice.get("icon").getAsString());
-        s.setFirstChoice(text, followUp, color, icon);
+        if(elem.has("firstChoice")) {
+            JsonObject firstChoice = elem.get("firstChoice").getAsJsonObject();
+            text = firstChoice.get("text").getAsString();
+            followUp = firstChoice.get("followUp").getAsInt();
+            icon = Icon.valueOf(firstChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.FIRST, text, followUp, icon);
+        }
 
-        JsonObject secondChoice = elem.getAsJsonObject("secondChoice");
-        text = secondChoice.get("text").getAsString();
-        followUp = secondChoice.get("followUp").getAsInt();
-        color = FancyColor.valueOf(secondChoice.get("color").getAsString());
-        icon = Icon.valueOf(secondChoice.get("icon").getAsString());
-        s.setSecondChoice(text, followUp, color, icon);
+        if(elem.has("secondChoice")) {
+            JsonObject secondChoice = elem.getAsJsonObject("secondChoice");
+            text = secondChoice.get("text").getAsString();
+            followUp = secondChoice.get("followUp").getAsInt();
+            icon = Icon.valueOf(secondChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.SECOND, text, followUp, icon);
+        }
+
+        if(elem.has("thirdChoice")) {
+            JsonObject thirdChoice = elem.getAsJsonObject("thirdChoice");
+            text = thirdChoice.get("text").getAsString();
+            followUp = thirdChoice.get("followUp").getAsInt();
+            icon = Icon.valueOf(thirdChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.THIRD, text, followUp, icon);
+        }
+
+        if(elem.has("fourthChoice")) {
+            JsonObject fourthChoice = elem.getAsJsonObject("fourthChoice");
+            text = fourthChoice.get("text").getAsString();
+            followUp = fourthChoice.get("followUp").getAsInt();
+            icon = Icon.valueOf(fourthChoice.get("icon").getAsString());
+            s.addChoice(UserDecision.FOURTH, text, followUp, icon);
+        }
 
         return s;
     }

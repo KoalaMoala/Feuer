@@ -28,8 +28,6 @@
     <!-- INGAME BUTTONS -->
     <string name="button_restart">Réessayer</string>
     <string name="button_confirm">Retourner au menu</string>
-    <string name="button_yes">OUI</string>
-    <string name="button_no">NON</string>
     <string name="time_run_out">Dans une situation d\'urgence, chaque seconde compte. Les bons réflexes peuvent sauver votre vie alors certains comportement peut mettre votre vie en danger.</string>
 
     <!-- DIFFICULTY ARRAYS (LABELS & VALUES) -->

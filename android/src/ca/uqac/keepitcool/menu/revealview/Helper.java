@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.menu;
+package ca.uqac.keepitcool.menu.revealview;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
