@@ -23,7 +23,7 @@
     <string name="menu_settings_sound_on">Le son est ACTIVÉ</string>
     <string name="menu_settings_sound_off">Le son est DÉSACTIVÉ</string>
     <string name="menu_settings_reset_progression">Ré-initialiser</string>
-    <string name="menu_settings_reset_progression_description">[ATTENTION] Vous perdrez toute votre progression, et recommencerze à zéro</string>
+    <string name="menu_settings_reset_progression_description">[ATTENTION] Vous perdrez toute votre progression, et recommencerez à zéro</string>
 
     <!-- INGAME BUTTONS -->
     <string name="button_restart">Réessayer</string>

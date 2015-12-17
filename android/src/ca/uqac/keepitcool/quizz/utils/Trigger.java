@@ -21,6 +21,8 @@ public enum Trigger {
         switch (difficulty) {
             case EASY:
                 return this.easyCountdown;
+            case MEDIUM:
+                return this.hardCountdown;
             case HARD:
                 return this.hardCountdown;
             default:

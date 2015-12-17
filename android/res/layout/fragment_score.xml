@@ -50,6 +50,7 @@
 
             <LinearLayout
                 android:id="@+id/score_02"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
@@ -76,6 +77,7 @@
 
             <LinearLayout
                 android:id="@+id/score_03"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
@@ -102,6 +104,7 @@
 
             <LinearLayout
                 android:id="@+id/score_04"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
@@ -128,6 +131,7 @@
 
             <LinearLayout
                 android:id="@+id/score_05"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"

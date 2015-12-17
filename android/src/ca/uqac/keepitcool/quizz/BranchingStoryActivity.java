@@ -1,9 +1,10 @@
 package ca.uqac.keepitcool.quizz;
 
+import static android.os.SystemClock.elapsedRealtime;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -16,13 +17,15 @@ import android.widget.VideoView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.os.SystemClock.elapsedRealtime;
-
-import ca.uqac.keepitcool.quizz.utils.FancyColor;
-import ca.uqac.keepitcool.quizz.utils.UserDecision;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.quizz.dynamics.AnimatedCountdown;
+import ca.uqac.keepitcool.quizz.dynamics.BackgroundPlayer;
+import ca.uqac.keepitcool.quizz.dynamics.DynamicButton;
+import ca.uqac.keepitcool.quizz.dynamics.SoundPlayer;
+import ca.uqac.keepitcool.quizz.utils.FancyColor;
+import ca.uqac.keepitcool.quizz.utils.UserDecision;
 import ca.uqac.keepitcool.menu.MainActivity;
 import ca.uqac.keepitcool.quizz.scenario.Choice;
 import ca.uqac.keepitcool.quizz.utils.Difficulty;
@@ -30,7 +33,7 @@ import ca.uqac.keepitcool.quizz.scenario.Scenario;
 import ca.uqac.keepitcool.quizz.scenario.ScenarioBuilder;
 import ca.uqac.keepitcool.quizz.scenario.Situation;
 
-public class BranchingStoryActivity extends Activity {
+public class BranchingStoryActivity extends Activity implements DialogInterface.OnDismissListener {
 
 	private int levelId;
 	private long startTime;
@@ -43,11 +46,6 @@ public class BranchingStoryActivity extends Activity {
 	private List<DynamicButton> dynamicButtons;
 	private LinearLayout endingContainer, firstRow, secondRow;
 
-	private MediaPlayer song1;
-	private MediaPlayer fire;
-	private MediaPlayer badChoice;
-	private MediaPlayer goodChoice;
-	private MediaPlayer tictac;
 	private boolean soundActivated;
 
 	@Override
@@ -93,45 +91,12 @@ public class BranchingStoryActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		if(this.levelId % 2 == 0)
-			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition5_1);
-		else
-			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition6);
-		song1.setLooping(true);
-
-		fire = MediaPlayer.create(BranchingStoryActivity.this, R.raw.fire2);
-		fire.setLooping(true);
-
-		badChoice = MediaPlayer.create(BranchingStoryActivity.this, R.raw.badbutton);
-		goodChoice = MediaPlayer.create(BranchingStoryActivity.this, R.raw.goodending);
-		tictac  = MediaPlayer.create(BranchingStoryActivity.this, R.raw.horloge_tictac);
 	}
 
 	@Override
-	public void onStart(){
-		super.onStart();
-		if(soundActivated) {
-			song1.start();
-			fire.start();
-		}
-	}
-
-	@Override
-	public void onPause(){
-		super.onPause();
-		if(soundActivated) {
-			song1.pause();
-			fire.pause();
-		}
-	}
-
-	@Override
-	public void onResume(){
-		super.onResume();
-		if(soundActivated) {
-			song1.start();
-			fire.start();
-		}
+	public void onDismiss(final DialogInterface dialog) {
+		this.animatedCountdown.cancelCountdown();
+		SoundPlayer.reset();
 	}
 
 	// ============================================================
@@ -153,6 +118,7 @@ public class BranchingStoryActivity extends Activity {
 	// ============================================================
 
 	public void handleUserChoice(UserDecision userDecision) {
+		SoundPlayer.playSound(R.raw.button, getBaseContext());
 		Situation s = scenario.getNextSituation(userDecision);
 		updateIntefaceFromSituation(s);
 	}
@@ -183,36 +149,30 @@ public class BranchingStoryActivity extends Activity {
 		}
 	}
 
-	void updateEndingControls(String failureCause) {
+	public void updateEndingControls(String failureCause) {
 		switch (failureCause) {
 			case "RAN_OUT_OF_TIME":
 				this.situationView.setText(getResources().getString(R.string.time_run_out));
 				this.backgroundPlayer.playVideo("RAN_OUT_OF_TIME");
-				if(soundActivated) {
-					badChoice.start();
-				}
 				break;
 			case "FAILURE":
 				this.backgroundPlayer.playVideo("FAILURE");
 				if(soundActivated) {
-					badChoice.start();
+					SoundPlayer.playSound(R.raw.ending_fire, getBaseContext());
 				}
 				break;
 			default:
-				if(validScore)
-				{
+				if(validScore) {
 					float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
 					Preferences.updateLevelScore(levelId, score, getApplicationContext());
 					Toast.makeText(getApplicationContext(), "Score : " + score , Toast.LENGTH_SHORT).show();
 				}
-				else
-				{
+				else {
 					Toast.makeText(getApplicationContext(), "Vous avez pris de mauvaises décisions, vous n'aurez pas de score cette fois-ci !", Toast.LENGTH_LONG).show();
 				}
-
 				this.backgroundPlayer.playVideo("SUCCESS");
 				if (soundActivated) {
-					goodChoice.start();
+					SoundPlayer.playSound(R.raw.ending_success, getBaseContext());
 				}
 				break;
 		}

@@ -7,22 +7,22 @@
     {
       "id": 1,
       "trigger": "SUCCESS",
-      "text": "Vous vous échappez de cette fournaise"
+      "text": "Vous avez réussi à vous échapper de cette fournaise"
     },
     {
       "id": 2,
       "trigger": "FAILURE",
-      "text": "Sans préparation, l'homme composé principalement de carbone, prend feu très facilement. Ne jouez pas au héros sans savoir faire!"
+      "text": "Sans préparation ou équipement spécialisé, vous pouvez prendre feu très facilement. Ne jouez pas au héros si vous ne savez pas ce que vous faites!"
     },
     {
       "id": 3,
       "trigger": "FAILURE",
-      "text": "La fumée est un gaz très redoutable et toxique pour l'homme. Il ne faut pas se déplacer sans savoir où aller dans une situation d'urgence!"
+      "text": "La composition de la fumée est très redoutable et toxique pour l'homme. Il ne faut pas se déplacer sans savoir où aller dans une situation d'urgence!"
     },
     {
       "id": 4,
       "trigger": "SUCCESS",
-      "text": "Vous parvenez à convaincre la dame de partir avec vous. Le tonerre peut être une cause d'incendie naturelle"
+      "text": "Vous parvenez à convaincre la dame de partir avec vous. Le tonnerre  peut être une cause d'incendie naturelle"
     },
     {
       "id": 22,
@@ -32,7 +32,7 @@
     {
       "id": 23,
       "trigger": "FAILURE",
-      "text": "Avec votre jambe blessé, vous n'arrivez pas à faire un pas. Avant d'entrer dans une maison en feu, prévoyez une sortie de secours"
+      "text": "Avec votre jambe blessée, vous n'arrivez pas à faire un pas. Avant d'entrer dans une maison en feu, prévoyez une sortie de secours"
     },
     {
       "id": 34,
@@ -42,12 +42,12 @@
     {
       "id": 35,
       "trigger": "FAILURE",
-      "text": "Dans une atmosphère sèche, un coup de tonerre peut facilement générer un feu de bois"
+      "text": "Dans une atmosphère sèche, un coup de tonnerre  peut facilement générer un feu de bois"
     },
     {
       "id": 36,
       "trigger": "SUCCESS",
-      "text": "Vous avez quitté les lieux."
+      "text": "Vous avez quitté les lieux"
     },
     {
       "id": 17,
@@ -82,7 +82,7 @@
     {
       "id": 21,
       "trigger": "SHORT",
-      "text": "Après une chute de 5 mètres, vous vous blessez à la jambe droite. Le nourisson est sain et sauf mais le feu de bois se propage",
+      "text": "Après une chute de 5 mètres, vous vous blessez à la jambe droite. Le nourrisson  est sain et sauf mais le feu de bois se propage",
       "firstChoice": {
         "text": "Confier l'enfant",
         "followUp": 22,
@@ -97,7 +97,7 @@
     {
       "id": 24,
       "trigger": "SHORT",
-      "text": "Vous entrez dans l'autre chambre, les meubles sont en feu. Vous appercevez une fenêtre décorée",
+      "text": "Vous entrez dans l'autre chambre, les meubles sont en feu. Vous apercevez une fenêtre décorée",
       "firstChoice": {
         "text": "Sauter",
         "followUp": 21,
@@ -112,7 +112,7 @@
     {
       "id": 20,
       "trigger": "SHORT",
-      "text": "Vous trouvez un nourisson en pleur, vous le prenez avec vous. Vous voyez une fenêtre sans ornements",
+      "text": "Vous trouvez un nourrisson en pleurs, vous le prenez avec vous. Vous voyez une fenêtre sans ornements",
       "firstChoice": {
         "text": "Sauter",
         "followUp": 26,
@@ -127,7 +127,7 @@
     {
       "id": 26,
       "trigger": "SHORT",
-      "text": "Vous sauter par la fenêtre et vous vous blessé à la jambe gauche, la porte d'entrée s'écroule, le feu de bois devient alarmant",
+      "text": "Vous sautez par la fenêtre et vous vous blessez à la jambe gauche. La porte d'entrée s'écroule, le feu de bois devient alarmant",
       "firstChoice": {
         "text": "S'enfuir",
         "followUp": 23,
@@ -142,7 +142,7 @@
     {
       "id": 25,
       "trigger": "SHORT",
-      "text": "Vous entrez dans une chambre, les meubles sont en feu. Vous appercevez une fenêtre décorée",
+      "text": "Vous entrez dans une chambre, les meubles sont en feu. Vous apercevez une fenêtre décorée",
       "firstChoice": {
         "text": "Sauter",
         "followUp": 26,
@@ -202,7 +202,7 @@
     {
       "id": 14,
       "trigger": "MEDIUM",
-      "text": "Vous appercevez un matelas derrière la maison",
+      "text": "Vous apercevez un matelas derrière la maison",
       "firstChoice": {
         "text": "Entrer dans la maison",
         "followUp": 15,
@@ -277,7 +277,7 @@
     {
       "id": 31,
       "trigger": "SHORT",
-      "text": "Vous prenez la porte gauche. Vous trouvez un nourisson en pleur, vous le prenez, vous voyez une fenêtre sans ornements",
+      "text": "Vous prenez la porte gauche. Vous trouvez un nourrisson en pleurs, vous le prenez, vous voyez une fenêtre sans ornements",
       "firstChoice": {
         "text": "Sauter",
         "followUp": 26,
@@ -367,7 +367,7 @@
     {
       "id": 5,
       "trigger": "SHORT",
-      "text": "Vous arrivez devant une maison, le rez-de-chaussé est prise au feu. Un peu plus loin, vous voyez une femme térrifiée",
+      "text": "Vous arrivez devant une maison, le rez-de-chaussée est prise au feu. Un peu plus loin, vous voyez une femme terrifiée",
       "firstChoice": {
         "text": "Entrer dans la maison",
         "followUp": 2,
@@ -382,7 +382,7 @@
     {
       "id": 39,
       "trigger": "SHORT",
-      "text": "Vous remarquez que l'incendie se rapproche de plus en plus",
+      "text": "Vous remarquez que les flammes se rapprochent de plus en plus",
       "firstChoice": {
         "text": "Fuir",
         "followUp": 36,
@@ -418,7 +418,7 @@
     {
       "id": 37,
       "trigger": "SHORT",
-      "text": "Vous arrivez devant une maison, le rez-de-chaussé est prise au feu. Un peu plus loin, vous voyez une femme térrifiée",
+      "text": "Vous arrivez devant une maison, le rez-de-chaussée est prise au feu. Un peu plus loin, vous voyez une femme terrifiée",
       "firstChoice": {
         "text": "Entrer dans la maison",
         "followUp": 2,
@@ -463,7 +463,7 @@
     {
       "id": 8,
       "trigger": "SHORT",
-      "text": "Dans votre progression, vous appercevez de la fumée tout autour du lieu d'où le cri provenait",
+      "text": "Dans votre progression, vous apercevez de la fumée tout autour du lieu d'où le cri provenait",
       "firstChoice": {
         "text": "Rebrousser chemin",
         "followUp": 7,
@@ -478,7 +478,7 @@
     {
       "id": 9,
       "trigger": "LONG",
-      "text": "Vous appréciez le paysage, l'odeur de la nature, le son de l'eau qui s'écoule. Lorsque soudain, vous entendez un cri.",
+      "text": "Vous appréciez le paysage, l'odeur de la nature, le son de l'eau qui s'écoule. Lorsque soudain, vous entendez un cri",
       "firstChoice": {
         "text": "Investiguer",
         "followUp": 8,
@@ -494,7 +494,7 @@
       "id": 10,
       "start": true,
       "trigger": "SHORT",
-      "text": "En vous promenant dans les bois de votre campagne, vous entendez un coup de tonerre!",
+      "text": "En vous promenant dans les bois de votre campagne, vous entendez un coup de tonnerre!",
       "firstChoice": {
         "text": "Se rapprocher",
         "followUp": 9,

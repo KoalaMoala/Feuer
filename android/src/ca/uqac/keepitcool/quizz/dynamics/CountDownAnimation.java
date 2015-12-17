@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ca.uqac.keepitcool.quizz;
+package ca.uqac.keepitcool.quizz.dynamics;
 
 import android.os.Handler;
 import android.view.View;

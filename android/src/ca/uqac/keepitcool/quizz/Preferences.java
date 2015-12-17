@@ -10,8 +10,11 @@ public class Preferences {
 
     private final static String difficultyKey = "difficulty";
     private final static String soundKey = "sound";
-    private final static String nameKey = "name";
     private final static String scoreKey = "scoreLevel";
+
+    // ============================================================
+    //                      DIFFICULTY SETTINGS
+    // ============================================================
 
     public static void updateDifficultySetting(Difficulty difficulty, Context context) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -36,6 +39,10 @@ public class Preferences {
         }
     }
 
+    // ============================================================
+    //                        SOUND SETTINGS
+    // ============================================================
+
     public static void updateSoundSetting(boolean soundActivated, Context context) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         prefs.edit().putBoolean(soundKey, soundActivated).apply();
@@ -43,8 +50,12 @@ public class Preferences {
 
     public static boolean getSoundSetting(Context context) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getBoolean(soundKey, true);
+        return prefs.getBoolean(soundKey, false);
     }
+
+    // ============================================================
+    //                        SCORE PER LEVEL
+    // ============================================================
 
     public static void updateLevelScore(int levelID, float score, Context context) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -59,15 +70,5 @@ public class Preferences {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String levelKey = scoreKey + levelID;
         return prefs.getFloat(levelKey, 0);
-    }
-
-    public static void updateNameSetting(String alias, Context context) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        prefs.edit().putString(nameKey, alias).apply();
-    }
-
-    public static String getNameSetting(Context context) {
-        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
-        return prefs.getString(nameKey, "DefaultUsername");
     }
 }

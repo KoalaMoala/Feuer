@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.quizz;
+package ca.uqac.keepitcool.quizz.dynamics;
 
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -6,7 +6,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.TextView;
 
-import ca.uqac.keepitcool.quizz.CountDownAnimation.CountDownListener;
+import ca.uqac.keepitcool.quizz.BranchingStoryActivity;
+import ca.uqac.keepitcool.quizz.dynamics.CountDownAnimation.CountDownListener;
 
 public class AnimatedCountdown implements CountDownListener {
 
@@ -18,6 +19,10 @@ public class AnimatedCountdown implements CountDownListener {
         this.countdownView = countdownView;
         this.parent = parent;
     }
+
+    // ============================================================
+    //                       ANIMATION START
+    // ============================================================
 
     public void startCountdown(String style, int duration) {
         this.countDownAnimation = new CountDownAnimation(this.countdownView, duration);
@@ -45,6 +50,10 @@ public class AnimatedCountdown implements CountDownListener {
         }
         this.countDownAnimation.start();
     }
+
+    // ============================================================
+    //                         ANIMATION END
+    // ============================================================
 
     public void cancelCountdown() {
         if(null != this.countDownAnimation) {

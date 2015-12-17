@@ -15,19 +15,27 @@ public class Scenario {
         this.scenario = new HashMap<Integer,Situation>();
     }
 
+    // ============================================================
+    //                   BUILD SCENARIO FROM FILE
+    // ============================================================
+
     Scenario addStartingSituation(int key, Situation s) {
         this.scenario.put(key, s);
         this.currentSituation = key;
         return this;
     }
 
-    Scenario addStartingSituation(Integer key, Trigger trigger, String text) {
-        return this.addStartingSituation(key, new Situation(trigger,text));
-    }
-
     Scenario addSituation(Integer key, Situation s) {
         this.scenario.put(key, s);
         return this;
+    }
+
+    // ============================================================
+    //               BUILD SCENARIO PROGRAMMATICALLY
+    // ============================================================
+
+    Scenario addStartingSituation(Integer key, Trigger trigger, String text) {
+        return this.addStartingSituation(key, new Situation(trigger,text));
     }
 
     Scenario addSituation(Integer key, Trigger trigger, String text) {
@@ -38,6 +46,10 @@ public class Scenario {
         this.scenario.get(key).addChoice(userDecision, label, followUp, icon);
         return this;
     }
+
+    // ============================================================
+    //                      SITUATION RETRIEVAL
+    // ============================================================
 
     public Situation getStartingSituation() {
         return this.scenario.get(this.currentSituation);

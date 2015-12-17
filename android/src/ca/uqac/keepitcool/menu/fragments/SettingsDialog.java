@@ -18,17 +18,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import ca.uqac.keepitcool.R;
+import ca.uqac.keepitcool.menu.MainActivity;
 import ca.uqac.keepitcool.quizz.Preferences;
 import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
+import ca.uqac.keepitcool.quizz.dynamics.SoundPlayer;
 import ca.uqac.keepitcool.quizz.utils.Difficulty;
 
 public class SettingsDialog extends FragmentDialog implements OnItemSelectedListener {
 
-    boolean soundIsOn;
+    boolean soundIsOn, init = true;
     LinearLayout toggleSound, reset, difficultyContainer;
     ImageView toggleSoundImage, difficultyImage;
     TextView toggleSoundLabel, toggleSoundDescription;
     Spinner difficultySpinner;
+    private MainActivity parent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +56,9 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         this.toggleSound.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!soundIsOn) {
+                    SoundPlayer.playSound(R.raw.beep, getContextFromActivity());
+                }
                 toggleSound();
             }
         });
@@ -67,6 +73,10 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         this.reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(soundIsOn) {
+                    SoundPlayer.playSound(R.raw.beep, getContextFromActivity());
+                }
+
                 //Delete progress & settings
                 Context context = getActivity().getApplicationContext();
                 final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -79,6 +89,7 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
             }
         });
 
+        this.init = false;
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         return view;
     }
@@ -90,6 +101,7 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         } else {
             Preferences.updateSoundSetting(false, getActivity().getApplicationContext());
         }
+        this.parent.updateSound(soundIsOn);
         setupSoundToggle();
     }
 
@@ -134,9 +146,11 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
         }
     }
 
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        if(soundIsOn) {
+            SoundPlayer.playSound(R.raw.beep, getContextFromActivity());
+        }
         String selected = getResources().getStringArray(R.array.difficulty_array_values)[parent.getSelectedItemPosition()];
         Preferences.updateDifficultySetting(Difficulty.valueOf(selected.toUpperCase()), getContextFromActivity());
         toggleDifficulty(selected, getContextFromActivity());
@@ -149,5 +163,9 @@ public class SettingsDialog extends FragmentDialog implements OnItemSelectedList
 
     private Context getContextFromActivity() {
         return this.getActivity().getApplicationContext();
+    }
+
+    public void setParent(MainActivity parent) {
+        this.parent = parent;
     }
 }

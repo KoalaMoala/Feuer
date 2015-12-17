@@ -23,6 +23,10 @@ public enum FancyColor {
         this.focusColor = focusColor;
     }
 
+    // ============================================================
+    //                         BASIC GETTERS
+    // ============================================================
+
     public String getDefaultColor() {
         return this.defaultColor;
     }
@@ -30,6 +34,10 @@ public enum FancyColor {
     public String getFocusColor() {
         return this.focusColor;
     }
+
+    // ============================================================
+    //                       GET RANDOM COLOR
+    // ============================================================
 
     public static FancyColor getRandomColor() {
         FancyColor[] constants = FancyColor.class.getEnumConstants();

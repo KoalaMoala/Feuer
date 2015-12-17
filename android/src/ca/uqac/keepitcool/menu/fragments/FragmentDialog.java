@@ -13,6 +13,9 @@ import android.widget.FrameLayout;
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
 
+/**
+ * Abstract base class for fragments
+ */
 public abstract class FragmentDialog extends DialogFragment {
 
     FrameLayout frame;

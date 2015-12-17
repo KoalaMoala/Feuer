@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +14,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import ca.uqac.keepitcool.R;
 import ca.uqac.keepitcool.menu.fragments.PlayDialog;
@@ -23,6 +21,7 @@ import ca.uqac.keepitcool.menu.fragments.ScoreDialog;
 import ca.uqac.keepitcool.menu.fragments.SettingsDialog;
 import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
 import ca.uqac.keepitcool.quizz.Preferences;
+import ca.uqac.keepitcool.quizz.dynamics.SoundPlayer;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
 
@@ -31,10 +30,6 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
     private int backgroundColor;
     private ImageView playButton;
     private boolean soundActivated;
-
-    private MediaPlayer menuTheme;
-    private MediaPlayer button1;
-    private MediaPlayer button2;
 
     RelativeLayout layout;
     LinearLayout settings, score, share;
@@ -58,16 +53,21 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         score = (LinearLayout) findViewById(R.id.rate);
         share = (LinearLayout) findViewById(R.id.share);
 
-        soundActivated = Preferences.getSoundSetting(getBaseContext());
+        // Basic attributes
+        soundActivated = Preferences.getSoundSetting(getApplicationContext());
         Display mdisp = getWindowManager().getDefaultDisplay();
         Point mdispSize = new Point();
         mdisp.getSize(mdispSize);
         maxX = mdispSize.x;
         maxY = mdispSize.y;
 
+        // Load "PlayDialog" fragment if playButton is pressed
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(soundActivated) {
+                    SoundPlayer.playSound(R.raw.button, getBaseContext());
+                }
                 final int color = Color.parseColor("#00bcd4");
                 final Point p = getLocationInView(revealView, v);
                 revealView.reveal(p.x, p.y, color, v.getHeight() / 2, 440, null);
@@ -76,18 +76,19 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(soundActivated) {
-                            button1.start();
-                        }
                         showPlayDialog();
                     }
                 }, 50);
             }
         });
 
+        // Load "SettingsDialog" fragment if settings button is pressed
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(soundActivated) {
+                    SoundPlayer.playSound(R.raw.button, getBaseContext());
+                }
                 final int color = Color.parseColor("#6234E2");
                 final Point p = getLocationInView(revealView, v);
                 revealView.reveal(p.x / 2, p.y / 2, color, v.getHeight() / 2, 440, null);
@@ -96,18 +97,19 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(soundActivated) {
-                            button2.start();
-                        }
                         showSettingsDialog();
                     }
                 }, 50);
             }
         });
 
+        // Load "ScoreDialog" fragment if score button is pressed
         score.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(soundActivated) {
+                    SoundPlayer.playSound(R.raw.button, getBaseContext());
+                }
                 final int color = Color.parseColor("#007F46");
                 final Point p = getLocationInView(revealView, v);
                 revealView.reveal(p.x / 2, p.y / 2, color, v.getHeight() / 2, 440, null);
@@ -116,36 +118,76 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if(soundActivated) {
-                            button2.start();
-                        }
                         showScoreDialog();
                     }
                 }, 50);
             }
         });
 
+        // Spread awareness about the app trough social sharing
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(soundActivated) {
+                    SoundPlayer.playSound(R.raw.button, getBaseContext());
+                }
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
                 i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
-                String sAux = "\nCheck out this beautiful app to get a better understanding on how to handle fire incidents.\n\n";
+                String sAux = "\nCheck out KEEP IT COOL. This is a beautiful app to get a better understanding on how to handle fire incidents.\n\n";
                 i.putExtra(Intent.EXTRA_TEXT, sAux);
-
-                if(soundActivated) {
-                    button2.start();
-                }
                 startActivity(Intent.createChooser(i, "Choose one"));
-
             }
         });
+    }
 
-        menuTheme = MediaPlayer.create(MainActivity.this, R.raw.menu2);
-        menuTheme.setLooping(true);
-        button1 = MediaPlayer.create(MainActivity.this, R.raw.bouton1);
-        button2 = MediaPlayer.create(MainActivity.this, R.raw.button6);
+    // ==============================================================
+    //                        FRAGMENT HANDLING
+    // ==============================================================
+
+    private void showPlayDialog() {
+        FragmentManager fm = getFragmentManager();
+        PlayDialog playDialog = new PlayDialog();
+        playDialog.show(fm, "fragment_play");
+    }
+
+    private void showSettingsDialog() {
+        FragmentManager fm = getFragmentManager();
+        SettingsDialog settingsDialog = new SettingsDialog();
+        settingsDialog.show(fm, "fragment_settings");
+        settingsDialog.setParent(this);
+
+    }
+
+    private void showScoreDialog() {
+        FragmentManager fm = getFragmentManager();
+        ScoreDialog scoreDialog = new ScoreDialog();
+        scoreDialog.show(fm, "fragment_score");
+    }
+
+    // ===================================================
+    //                        UTILS
+    // ===================================================
+
+    @Override
+    public void onDismiss(final DialogInterface dialog) {
+
+        View v = playButton;
+        final Point p = getLocationInView(revealView, v);
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                revealView.hide(p.x, p.y, backgroundColor, 0, 330, null);
+            }
+        }, 300);
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                layout.setVisibility(View.VISIBLE);
+            }
+        }, 500);
     }
 
     private Point getLocationInView(View src, View target) {
@@ -164,72 +206,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         revealView.reveal(p.x, p.y, color, playButton.getHeight() / 2, 440, null);
     }
 
-    private void showPlayDialog() {
-        FragmentManager fm = getFragmentManager();
-        PlayDialog playDialog = new PlayDialog();
-        playDialog.show(fm, "fragment_play");
-    }
-
-    private void showSettingsDialog() {
-        FragmentManager fm = getFragmentManager();
-        SettingsDialog settingsDialog = new SettingsDialog();
-        settingsDialog.show(fm, "fragment_settings");
-
-    }
-
-    private void showScoreDialog() {
-        FragmentManager fm = getFragmentManager();
-        ScoreDialog scoreDialog = new ScoreDialog();
-        scoreDialog.show(fm, "fragment_score");
-    }
-
-    @Override
-    public void onDismiss(final DialogInterface dialog) {
-        soundActivated = Preferences.getSoundSetting(getBaseContext());
-        if(soundActivated  && !menuTheme.isPlaying()) {
-            menuTheme.start();
-        } else if(!soundActivated && menuTheme.isPlaying()) {
-            menuTheme.pause();
-        }
-
-        View v = playButton;
-        final Point p = getLocationInView(revealView, v);
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                revealView.hide(p.x, p.y, backgroundColor, 0, 330, null);
-            }
-        }, 300);
-        handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                layout.setVisibility(View.VISIBLE);
-            }
-        }, 500);
-
-    }
-
-    @Override
-    public void onStart(){
-        if(soundActivated) {
-            menuTheme.start();
-        }
-        super.onStart();
-    }
-
-    @Override
-    public void onPause(){
-        super.onPause();
-        menuTheme.pause();
-    }
-
-    @Override
-     public void onResume(){
-        if(soundActivated) {
-            menuTheme.start();
-        }
-        super.onResume();
+    public void updateSound(boolean soundIsOn) {
+        this.soundActivated = soundIsOn;
     }
 }

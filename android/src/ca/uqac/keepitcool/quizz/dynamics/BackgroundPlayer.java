@@ -1,4 +1,4 @@
-package ca.uqac.keepitcool.quizz;
+package ca.uqac.keepitcool.quizz.dynamics;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -15,7 +15,7 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
     private final Resources resources;
     private final VideoView videoView;
     private final String packageName;
-    private int currentSource;
+    private boolean failureLoop;
 
     public BackgroundPlayer(VideoView videoView, String packageName, Context applicationContext) {
         this.videoView = videoView;
@@ -23,7 +23,12 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
         this.resources = applicationContext.getResources();
         this.videoView.setOnPreparedListener(this);
         this.videoView.setOnCompletionListener(this);
+        this.failureLoop = false;
     }
+
+    // ============================================================
+    //                         LOADING VIDEO
+    // ============================================================
 
     public void playVideo(String type) {
         int assetID = this.getRandomVideoFromType(type);
@@ -36,11 +41,14 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
     }
 
     private void loadVideo(int asset) {
-        this.currentSource = asset;
         this.videoView.stopPlayback();
-        this.videoView.setVideoURI(this.getUriFromAsset(this.currentSource));
+        this.videoView.setVideoURI(this.getUriFromAsset(asset));
         this.videoView.start();
     }
+
+    // ============================================================
+    //                  RANDOM VIDEO FROM CATEGORY
+    // ============================================================
 
     private int getRandomVideoFromType(String type) {
         TypedArray videos = null;
@@ -49,9 +57,11 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
                 videos = resources.obtainTypedArray(R.array.VIDEO_SUCCESS);
                 break;
             case "FAILURE":
+                this.failureLoop = true;
                 videos = resources.obtainTypedArray(R.array.VIDEO_FAILURE);
                 break;
             case "FAILURE_LOOP":
+                this.failureLoop = false;
                 videos = resources.obtainTypedArray(R.array.VIDEO_FAILURE_LOOP);
                 break;
             case "RAN_OUT_OF_TIME":
@@ -67,10 +77,13 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
         return videos.getResourceId(rndInt, 0);
     }
 
+    // ============================================================
+    //                     MEDIAPLAYER OVERRIDES
+    // ============================================================
+
     @Override
     public void onCompletion(MediaPlayer mp) {
-        //TODO: figure out a better way to handle this
-        if(this.currentSource == R.raw.firespread_06 || this.currentSource == R.raw.firespread_02 || this.currentSource == R.raw.firespread_12) {
+        if(failureLoop) {
             playVideo("FAILURE_LOOP");
         } else {
             mp.setLooping(true);
@@ -79,11 +92,6 @@ public class BackgroundPlayer implements MediaPlayer.OnPreparedListener, MediaPl
 
     @Override
     public void onPrepared(MediaPlayer mp) {
-        //TODO: figure out a better way to handle this
-        if(this.currentSource == R.raw.firespread_06 || this.currentSource == R.raw.firespread_02 || this.currentSource == R.raw.firespread_12) {
-            mp.setLooping(true);
-        } else {
-            mp.setLooping(true);
-        }
+        mp.setLooping(true);
     }
 }
