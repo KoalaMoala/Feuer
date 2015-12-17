@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -21,15 +22,19 @@ import ca.uqac.keepitcool.menu.fragments.PlayDialog;
 import ca.uqac.keepitcool.menu.fragments.ScoreDialog;
 import ca.uqac.keepitcool.menu.fragments.SettingsDialog;
 import ca.uqac.keepitcool.menu.revealview.CircularRevealView;
+import ca.uqac.keepitcool.quizz.Preferences;
 
 public class MainActivity extends AppCompatActivity implements DialogInterface.OnDismissListener {
-
-    public static final String PREFS_NAME = "MyPrefsFile";
 
     private CircularRevealView revealView;
     private View selectedView;
     private int backgroundColor;
     private ImageView playButton;
+    private boolean soundActivated;
+
+    private MediaPlayer menuTheme;
+    private MediaPlayer button1;
+    private MediaPlayer button2;
 
     RelativeLayout layout;
     LinearLayout settings, score, share;
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         score = (LinearLayout) findViewById(R.id.rate);
         share = (LinearLayout) findViewById(R.id.share);
 
+        soundActivated = Preferences.getSoundSetting(getBaseContext());
         Display mdisp = getWindowManager().getDefaultDisplay();
         Point mdispSize = new Point();
         mdisp.getSize(mdispSize);
@@ -70,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if(soundActivated) {
+                            button1.start();
+                        }
                         showPlayDialog();
                     }
                 }, 50);
@@ -87,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if(soundActivated) {
+                            button2.start();
+                        }
                         showSettingsDialog();
                     }
                 }, 50);
@@ -104,6 +116,9 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if(soundActivated) {
+                            button2.start();
+                        }
                         showScoreDialog();
                     }
                 }, 50);
@@ -117,15 +132,20 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 i.setType("text/plain");
                 i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.app_name));
                 String sAux = "\nCheck out this beautiful app to get a better understanding on how to handle fire incidents.\n\n";
-                sAux = sAux + "<Insert cool URL here>\n\n";
                 i.putExtra(Intent.EXTRA_TEXT, sAux);
 
-                Toast t = Toast.makeText(getApplicationContext(), sAux, Toast.LENGTH_SHORT);
-                t.show();
-
+                if(soundActivated) {
+                    button2.start();
+                }
                 startActivity(Intent.createChooser(i, "Choose one"));
+
             }
         });
+
+        menuTheme = MediaPlayer.create(MainActivity.this, R.raw.menu2);
+        menuTheme.setLooping(true);
+        button1 = MediaPlayer.create(MainActivity.this, R.raw.bouton1);
+        button2 = MediaPlayer.create(MainActivity.this, R.raw.button6);
     }
 
     private Point getLocationInView(View src, View target) {
@@ -154,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
         FragmentManager fm = getFragmentManager();
         SettingsDialog settingsDialog = new SettingsDialog();
         settingsDialog.show(fm, "fragment_settings");
+
     }
 
     private void showScoreDialog() {
@@ -164,6 +185,13 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
 
     @Override
     public void onDismiss(final DialogInterface dialog) {
+        soundActivated = Preferences.getSoundSetting(getBaseContext());
+        if(soundActivated  && !menuTheme.isPlaying()) {
+            menuTheme.start();
+        } else if(!soundActivated && menuTheme.isPlaying()) {
+            menuTheme.pause();
+        }
+
         View v = playButton;
         final Point p = getLocationInView(revealView, v);
         handler = new Handler();
@@ -180,5 +208,28 @@ public class MainActivity extends AppCompatActivity implements DialogInterface.O
                 layout.setVisibility(View.VISIBLE);
             }
         }, 500);
+
+    }
+
+    @Override
+    public void onStart(){
+        if(soundActivated) {
+            menuTheme.start();
+        }
+        super.onStart();
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        menuTheme.pause();
+    }
+
+    @Override
+     public void onResume(){
+        if(soundActivated) {
+            menuTheme.start();
+        }
+        super.onResume();
     }
 }

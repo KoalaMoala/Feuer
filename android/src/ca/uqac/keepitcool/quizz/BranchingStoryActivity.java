@@ -3,7 +3,9 @@ package ca.uqac.keepitcool.quizz;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -32,6 +34,7 @@ public class BranchingStoryActivity extends Activity {
 
 	private int levelId;
 	private long startTime;
+    private boolean validScore;
 	private Scenario scenario;
 	private Difficulty difficulty;
 	private TextView situationView;
@@ -39,6 +42,13 @@ public class BranchingStoryActivity extends Activity {
 	private AnimatedCountdown animatedCountdown;
 	private List<DynamicButton> dynamicButtons;
 	private LinearLayout endingContainer, firstRow, secondRow;
+
+	private MediaPlayer song1;
+	private MediaPlayer fire;
+	private MediaPlayer badChoice;
+	private MediaPlayer goodChoice;
+	private MediaPlayer tictac;
+	private boolean soundActivated;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +60,7 @@ public class BranchingStoryActivity extends Activity {
 		this.firstRow = (LinearLayout) findViewById(R.id.firstRow);
 		this.secondRow = (LinearLayout) findViewById(R.id.secondRow);
 
+		this.soundActivated = Preferences.getSoundSetting(getBaseContext());
 		this.difficulty = Preferences.getDifficultySetting(getApplicationContext());
 		this.backgroundPlayer = new BackgroundPlayer((VideoView)findViewById(R.id.videoView), getPackageName(), getApplicationContext());
 		this.animatedCountdown = new AnimatedCountdown((TextView) findViewById(R.id.textView), this);
@@ -82,6 +93,45 @@ public class BranchingStoryActivity extends Activity {
 				startActivity(intent);
 			}
 		});
+		if(this.levelId % 2 == 0)
+			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition5_1);
+		else
+			song1 = MediaPlayer.create(BranchingStoryActivity.this, R.raw.composition6);
+		song1.setLooping(true);
+
+		fire = MediaPlayer.create(BranchingStoryActivity.this, R.raw.fire2);
+		fire.setLooping(true);
+
+		badChoice = MediaPlayer.create(BranchingStoryActivity.this, R.raw.badbutton);
+		goodChoice = MediaPlayer.create(BranchingStoryActivity.this, R.raw.goodending);
+		tictac  = MediaPlayer.create(BranchingStoryActivity.this, R.raw.horloge_tictac);
+	}
+
+	@Override
+	public void onStart(){
+		super.onStart();
+		if(soundActivated) {
+			song1.start();
+			fire.start();
+		}
+	}
+
+	@Override
+	public void onPause(){
+		super.onPause();
+		if(soundActivated) {
+			song1.pause();
+			fire.pause();
+		}
+	}
+
+	@Override
+	public void onResume(){
+		super.onResume();
+		if(soundActivated) {
+			song1.start();
+			fire.start();
+		}
 	}
 
 	// ============================================================
@@ -95,6 +145,7 @@ public class BranchingStoryActivity extends Activity {
 		this.displayEndingContainer(false);
 		this.updateIntefaceFromSituation(s);
 		this.startTime =  elapsedRealtime();
+        this.validScore = true;
 	}
 
 	// ============================================================
@@ -108,7 +159,8 @@ public class BranchingStoryActivity extends Activity {
 
 	private void updateIntefaceFromSituation(Situation s) {
 		this.animatedCountdown.cancelCountdown();
-		this.situationView.setText(s.getDescription());
+		this.situationView.setText(Html.fromHtml(s.getDescription()));
+        if(s.getDescription().contains("#FF0000")){ validScore = false; }
 		int choicesCount = s.getChoicesCount();
 
 		if(0 < choicesCount) {
@@ -116,7 +168,7 @@ public class BranchingStoryActivity extends Activity {
 			List<FancyColor> colors = FancyColor.getRandomColors(choicesCount);
 			for(int count=0; count < choicesCount; count++) {
 				DynamicButton current = this.dynamicButtons.get(count);
-				current.update(choices.get(count), colors.get(count));
+				current.update(choices.get(count), colors.get(count), choicesCount);
 				current.setVisibility(View.VISIBLE);
 			}
 			for(int undefinedChoices=choicesCount; undefinedChoices < 4; undefinedChoices++) {
@@ -136,15 +188,32 @@ public class BranchingStoryActivity extends Activity {
 			case "RAN_OUT_OF_TIME":
 				this.situationView.setText(getResources().getString(R.string.time_run_out));
 				this.backgroundPlayer.playVideo("RAN_OUT_OF_TIME");
+				if(soundActivated) {
+					badChoice.start();
+				}
 				break;
 			case "FAILURE":
 				this.backgroundPlayer.playVideo("FAILURE");
+				if(soundActivated) {
+					badChoice.start();
+				}
 				break;
 			default:
-				float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
-				Preferences.updateLevelScore(levelId, score, getApplicationContext());
-				Toast.makeText(getApplicationContext(), "score : " + score , Toast.LENGTH_SHORT).show();
+				if(validScore)
+				{
+					float score = ( (float) (elapsedRealtime() - this.startTime) ) /  (float) 1000;
+					Preferences.updateLevelScore(levelId, score, getApplicationContext());
+					Toast.makeText(getApplicationContext(), "Score : " + score , Toast.LENGTH_SHORT).show();
+				}
+				else
+				{
+					Toast.makeText(getApplicationContext(), "Vous avez pris de mauvaises décisions, vous n'aurez pas de score cette fois-ci !", Toast.LENGTH_LONG).show();
+				}
+
 				this.backgroundPlayer.playVideo("SUCCESS");
+				if (soundActivated) {
+					goodChoice.start();
+				}
 				break;
 		}
 		this.displayEndingContainer(true);

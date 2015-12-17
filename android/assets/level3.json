@@ -1,0 +1,147 @@
+{
+  "description" : {
+    "name" : "Pris au piège",
+    "shortDescription" : "Que faire en cas d'incendie dans mon immeuble ?"
+  },
+  "scenario" : [
+    {
+      "id": 1,
+      "trigger": "SUCCESS",
+      "text": "Prévenir les pompiers de votre présence est essentiel afin qu'ils viennent à votre secours."
+    }, {
+      "id": 2,
+      "trigger": "FAILURE",
+      "text": "[NE JAMAIS] Ouvrir une porte dont la poignée est chaude dans une situation d'incendie."
+    }, {
+      "id": 3,
+      "trigger": "MEDIUM",
+      "text": "Que dois-je faire en premier ?",
+      "firstChoice": {
+        "text": "Je préviens les pompiers",
+        "followUp": 4,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Je protège la porte",
+        "followUp": 5,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 4,
+      "trigger": "MEDIUM",
+      "text": "Les pompiers vous expliquent au téléphone que vous devez humidifier la porte",
+      "firstChoice": {
+        "text": "Je leur raccroche au nez et je me précipite vers la porte",
+        "followUp": 6,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "Vous écoutez calmement leurs instructions",
+        "followUp": 7,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 5,
+      "trigger": "MEDIUM",
+      "text": "Avec une éponge humide, vous mettez de l'eau sur la porte",
+      "firstChoice": {
+        "text": "Je mets un linge humide sous la porte",
+        "followUp": 8,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "J'attends qu'on vienne me chercher",
+        "followUp": 9,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 6,
+      "trigger": "LONG",
+      "text": "<font color=#FF0000>Vous devez rester calme. De plus les pompiers ont d'autres informations à vous demander.</font> Avec une éponge humide, vous mettez de l'eau sur la porte",
+      "firstChoice": {
+        "text": "Humidifier la porte",
+        "followUp": 11,
+        "icon": "HAND"
+      }
+    }, {
+      "id": 7,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000>Garder son calme dans une situation d'incendie est essentiel.</font> Avec une éponge humide, vous mettez de l'eau sur la porte",
+      "firstChoice": {
+        "text": "Humidifier la porte",
+        "followUp": 11,
+        "icon": "EYE"
+      }
+    }, {
+      "id": 8,
+      "trigger": "SHORT",
+      "text": "<font color=#008000>Votre porte est tout ce qui vous protège, faites de votre mieux pour qu'elle dure le plus possible.</font> Vous êtes à l'abri dans votre appartement. ",
+      "firstChoice": {
+        "text": "Je préviens les pompiers.",
+        "followUp": 1,
+        "icon": "ENTER"
+      },
+      "secondChoice": {
+        "text": "J'attends qu'on vienne me chercher.",
+        "followUp": 10,
+        "icon": "EXIT"
+      }
+    }, {
+      "id": 9,
+      "trigger": "FAILURE",
+      "text": "[NE JAMAIS] Même si vous n'avez que votre smoking à 500$ sous la main, il ne vaut certainement pas plus que votre vie. Calfeutrez la porte !"
+    }, {
+      "id": 10,
+      "trigger": "SHORT",
+      "text": "<font color=#FF0000>Les pompiers ont besoin de savoir où vous êtes et que vous avez besoin d'aide. Prévenez-les !</font>",
+      "firstChoice": {
+        "text": "Je préviens les pompiers.",
+        "followUp": 1,
+        "icon": "ENTER"
+      }
+    }, {
+      "id": 11,
+      "trigger": "SHORT",
+      "text": "Avec une éponge humide, vous mettez de l'eau sur la porte",
+      "firstChoice": {
+        "text": "Je mets un linge humide sous la porte",
+        "followUp": 12,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "J'attends qu'on vienne me chercher",
+        "followUp": 9,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 12,
+      "trigger": "MEDIUM",
+      "text": "<font color=#008000>Votre porte est tout ce qui vous protège, faites de votre mieux pour qu'elle dure le plus possible.</font> Vous êtes à l'abri dans votre appartement. ",
+      "firstChoice": {
+        "text": "Je rappelle les pompiers pour leur dire où je suis.",
+        "followUp": 1,
+        "icon": "UP"
+      },
+      "secondChoice": {
+        "text": "J'attends qu'on vienne me chercher",
+        "followUp": 9,
+        "icon": "DOWN"
+      }
+    }, {
+      "id": 13,
+      "start": true,
+      "trigger": "SHORT",
+      "text": "Je suis dans mon appartement. L'alarme incendie sonne. De la fumée passe sous ma porte. La poignée de ma porte est chaude.",
+      "firstChoice": {
+        "text": "J'ouvre la porte",
+        "followUp": 2,
+        "icon": "SLEEP"
+      },
+      "secondChoice": {
+        "text": "Je reste dans mon appartement",
+        "followUp": 3,
+        "icon": "STANDUP"
+      }
+    }
+  ]
+}

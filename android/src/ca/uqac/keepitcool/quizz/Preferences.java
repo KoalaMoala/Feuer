@@ -49,7 +49,8 @@ public class Preferences {
     public static void updateLevelScore(int levelID, float score, Context context) {
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String levelKey = scoreKey + levelID;
-        if(score < getLevelScore(levelID, context)) {
+        float currentScore = getLevelScore(levelID, context);
+        if(score < currentScore || currentScore == 0) {
             prefs.edit().putFloat(levelKey, score).apply();
         }
     }
