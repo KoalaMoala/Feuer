@@ -4,7 +4,7 @@
 
 ###### Membres de l'équipe ######
 
-- AMELOS Nicolas
+- AMELOT Nicolas
 - [GAGNAIRE Romain](mailto://romgagnaire@gmail.com)
 - GANESHALINGAM Anujan
 - MI YOU Tevainui
